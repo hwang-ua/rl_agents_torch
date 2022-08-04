@@ -1,0 +1,73 @@
+{
+    "config_class": "IQLOfflineConfig",
+    "fixed_parameters": {
+        "exp_name": "test/four_room/iql_offline/test_linear_action0",
+        "env_name": "FourRoom",
+        "evaluation_criteria": "steps",
+        "discount": 0.99,
+
+        "agent_name": "IQLOffline",
+        "state_norm_coef": 0,
+
+        "rep_fn_config": {
+            "rep_type": "one_hot",
+            "range": [11, 11],
+            "in_dim": 2,
+            "train_params": true
+        },
+        "policy_fn_config": {
+            "policy_type": "policy-discrete",
+            "network_type": "fc",
+            "in_dim": [2],
+            "hidden_units": [],
+            "load_params": false,
+            "train_params": true
+        },
+        "critic_fn_config": {
+            "network_type": "fc",
+            "in_dim": [2],
+            "hidden_units": [],
+            "load_params": false,
+            "train_params": true
+        },
+        "val_fn_config": {
+            "network_type": "fc",
+            "in_dim": [2],
+            "hidden_units": [],
+            "load_params": false,
+            "train_params": true
+        },
+
+        "update_network": true,
+        "use_target_network": true,
+        "target_network_update_freq": 1,
+        "polyak": 0.995,
+        "batch_size": 32,
+        "optimizer_type": "Adam",
+
+        "replay": true,
+        "memory_size": 0,
+
+        "max_steps": 200000,
+        "log_interval": 1000,
+        "eval_interval": 1000,
+        "eval_episodes": 0,
+        "save_interval": 0,
+        "timeout": 30,
+        "stats_queue_size": 5,
+        "tensorboard_logs": false,
+        "save_params": true,
+        "visualize": false,
+        "evaluate_overestimation": true,
+        "evaluate_rep_rank": true,
+        "evaluate_action_value": true,
+
+        "offline_data_path": {
+            "optimal": "data/dataset/four_room/transitions_action0/train_5k/{}_run.pkl"
+        },
+        "evalset_path": {"dataEps50": "data/dataset/four_room/transitions_50k/eps50/0_run.pkl"}
+    },
+    "sweep_parameters": {
+        "learning_rate": [0.003, 0.001, 0.0003, 0.0001, 3e-5, 1e-5]
+    }
+}

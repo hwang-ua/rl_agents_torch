@@ -1,0 +1,66 @@
+2022-08-04 13:47:56,189 | exp_name: test/four_room/iql_offline/test
+2022-08-04 13:47:56,189 | data_root: /home/han/Projects/iql_torch/data/output
+2022-08-04 13:47:56,190 | run: 0
+2022-08-04 13:47:56,190 | param_setting: 3
+2022-08-04 13:47:56,190 | log_observations: False
+2022-08-04 13:47:56,190 | tensorboard_logs: False
+2022-08-04 13:47:56,190 | batch_size: 32
+2022-08-04 13:47:56,190 | replay_with_len: False
+2022-08-04 13:47:56,190 | memory_size: 0
+2022-08-04 13:47:56,190 | evaluation_criteria: steps
+2022-08-04 13:47:56,190 | checkpoints: False
+2022-08-04 13:47:56,190 | warm_up_step: 0
+2022-08-04 13:47:56,190 | device: cpu
+2022-08-04 13:47:56,190 | env_name: FourRoom
+2022-08-04 13:47:56,190 | state_dim: (2,)
+2022-08-04 13:47:56,190 | action_dim: 4
+2022-08-04 13:47:56,190 | max_steps: 200000
+2022-08-04 13:47:56,190 | log_interval: 1000
+2022-08-04 13:47:56,190 | save_interval: 0
+2022-08-04 13:47:56,190 | eval_interval: 1000
+2022-08-04 13:47:56,190 | num_eval_episodes: 5
+2022-08-04 13:47:56,190 | timeout: 30
+2022-08-04 13:47:56,190 | stats_queue_size: 5
+2022-08-04 13:47:56,190 | tensorboard_interval: 100
+2022-08-04 13:47:56,190 | state_norm_coef: 0
+2022-08-04 13:47:56,190 | reward_norm_coef: 1.0
+2022-08-04 13:47:56,190 | early_cut_off: False
+2022-08-04 13:47:56,190 | testset_paths: None
+2022-08-04 13:47:56,190 | tester_fn_config: {}
+2022-08-04 13:47:56,190 | evalset_path: {'dataEps50': 'data/dataset/four_room/transitions_50k/eps50/0_run.pkl'}
+2022-08-04 13:47:56,190 | true_value_paths: None
+2022-08-04 13:47:56,191 | visualize: False
+2022-08-04 13:47:56,191 | evaluate_overestimation: False
+2022-08-04 13:47:56,191 | evaluate_feature_mdp: False
+2022-08-04 13:47:56,191 | evaluate_action_value: True
+2022-08-04 13:47:56,191 | polyak: 0.995
+2022-08-04 13:47:56,191 | agent: IQLOffline
+2022-08-04 13:47:56,191 | target_network_update_freq: 1
+2022-08-04 13:47:56,191 | awac_lambda: 1
+2022-08-04 13:47:56,191 | awac_remove_const: False
+2022-08-04 13:47:56,191 | load_offline_data: True
+2022-08-04 13:47:56,191 | clip_grad_param: 100
+2022-08-04 13:47:56,191 | expectile: 0.7
+2022-08-04 13:47:56,191 | temperature: 3
+2022-08-04 13:47:56,191 | discount: 0.99
+2022-08-04 13:47:56,191 | agent_name: IQLOffline
+2022-08-04 13:47:56,191 | rep_fn_config: {'rep_type': 'identity', 'out_dim': 2}
+2022-08-04 13:47:56,191 | policy_fn_config: {'policy_type': 'policy-discrete', 'network_type': 'fc', 'in_dim': [2], 'hidden_units': [64, 64], 'load_params': False, 'train_params': True}
+2022-08-04 13:47:56,191 | critic_fn_config: {'network_type': 'fc', 'in_dim': [2], 'hidden_units': [64, 64], 'load_params': False, 'train_params': True}
+2022-08-04 13:47:56,191 | val_fn_config: {'network_type': 'fc', 'in_dim': [2], 'hidden_units': [64, 64], 'load_params': False, 'train_params': True}
+2022-08-04 13:47:56,191 | update_network: True
+2022-08-04 13:47:56,191 | use_target_network: True
+2022-08-04 13:47:56,191 | optimizer_type: Adam
+2022-08-04 13:47:56,191 | replay: True
+2022-08-04 13:47:56,191 | eval_episodes: 0
+2022-08-04 13:47:56,191 | save_params: True
+2022-08-04 13:47:56,191 | offline_data_path: {'optimal': 'data/dataset/four_room/transitions_50k/train_5k/{}_run.pkl'}
+2022-08-04 13:47:56,191 | learning_rate: 0.0001
+2022-08-04 13:47:56,191 | cumulative: 6
+2022-08-04 13:47:56,191 | id: 3
+2022-08-04 13:47:56,191 | seed: 0
+2022-08-04 13:47:56,191 | rep_fn: <function NetFactory.get_rep_fn.<locals>.<lambda> at 0x7f5092f77ee0>
+2022-08-04 13:47:57,255 | TRAIN LOG: steps 0, episodes   0, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 22966.88 steps/s
+2022-08-04 13:47:57,300 | TEST LOG: steps 0, episodes   0, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 22966.88 steps/s
+2022-08-04 13:48:01,120 | TRAIN LOG: steps 1000, episodes  33, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 261.79 steps/s
+2022-08-04 13:48:01,165 | TEST LOG: steps 1000, episodes  33, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 261.79 steps/s
