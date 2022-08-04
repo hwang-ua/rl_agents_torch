@@ -431,7 +431,7 @@ class Agent:
         action_list = [">", "<", "V", "A"]
         for idx, s in enumerate(states):
             template[s[0], s[1]] = qs[idx].max()
-            policy[s[0], s[1]] = action_list[qs[idx].argmax()]
+            policy[s[0], s[1]] = action_list[self.policy(s, 0)]
         img = axs.imshow(template, cmap="Blues", vmin=qs.min(), vmax=qs.max())
         axs.set_title("Action{}".format(self.eval_env.action_explaination))
         for obs in obstacles:

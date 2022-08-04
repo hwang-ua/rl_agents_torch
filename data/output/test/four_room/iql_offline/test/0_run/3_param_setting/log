@@ -1,66 +1,164 @@
-2022-08-04 13:47:56,189 | exp_name: test/four_room/iql_offline/test
-2022-08-04 13:47:56,189 | data_root: /home/han/Projects/iql_torch/data/output
-2022-08-04 13:47:56,190 | run: 0
-2022-08-04 13:47:56,190 | param_setting: 3
-2022-08-04 13:47:56,190 | log_observations: False
-2022-08-04 13:47:56,190 | tensorboard_logs: False
-2022-08-04 13:47:56,190 | batch_size: 32
-2022-08-04 13:47:56,190 | replay_with_len: False
-2022-08-04 13:47:56,190 | memory_size: 0
-2022-08-04 13:47:56,190 | evaluation_criteria: steps
-2022-08-04 13:47:56,190 | checkpoints: False
-2022-08-04 13:47:56,190 | warm_up_step: 0
-2022-08-04 13:47:56,190 | device: cpu
-2022-08-04 13:47:56,190 | env_name: FourRoom
-2022-08-04 13:47:56,190 | state_dim: (2,)
-2022-08-04 13:47:56,190 | action_dim: 4
-2022-08-04 13:47:56,190 | max_steps: 200000
-2022-08-04 13:47:56,190 | log_interval: 1000
-2022-08-04 13:47:56,190 | save_interval: 0
-2022-08-04 13:47:56,190 | eval_interval: 1000
-2022-08-04 13:47:56,190 | num_eval_episodes: 5
-2022-08-04 13:47:56,190 | timeout: 30
-2022-08-04 13:47:56,190 | stats_queue_size: 5
-2022-08-04 13:47:56,190 | tensorboard_interval: 100
-2022-08-04 13:47:56,190 | state_norm_coef: 0
-2022-08-04 13:47:56,190 | reward_norm_coef: 1.0
-2022-08-04 13:47:56,190 | early_cut_off: False
-2022-08-04 13:47:56,190 | testset_paths: None
-2022-08-04 13:47:56,190 | tester_fn_config: {}
-2022-08-04 13:47:56,190 | evalset_path: {'dataEps50': 'data/dataset/four_room/transitions_50k/eps50/0_run.pkl'}
-2022-08-04 13:47:56,190 | true_value_paths: None
-2022-08-04 13:47:56,191 | visualize: False
-2022-08-04 13:47:56,191 | evaluate_overestimation: False
-2022-08-04 13:47:56,191 | evaluate_feature_mdp: False
-2022-08-04 13:47:56,191 | evaluate_action_value: True
-2022-08-04 13:47:56,191 | polyak: 0.995
-2022-08-04 13:47:56,191 | agent: IQLOffline
-2022-08-04 13:47:56,191 | target_network_update_freq: 1
-2022-08-04 13:47:56,191 | awac_lambda: 1
-2022-08-04 13:47:56,191 | awac_remove_const: False
-2022-08-04 13:47:56,191 | load_offline_data: True
-2022-08-04 13:47:56,191 | clip_grad_param: 100
-2022-08-04 13:47:56,191 | expectile: 0.7
-2022-08-04 13:47:56,191 | temperature: 3
-2022-08-04 13:47:56,191 | discount: 0.99
-2022-08-04 13:47:56,191 | agent_name: IQLOffline
-2022-08-04 13:47:56,191 | rep_fn_config: {'rep_type': 'identity', 'out_dim': 2}
-2022-08-04 13:47:56,191 | policy_fn_config: {'policy_type': 'policy-discrete', 'network_type': 'fc', 'in_dim': [2], 'hidden_units': [64, 64], 'load_params': False, 'train_params': True}
-2022-08-04 13:47:56,191 | critic_fn_config: {'network_type': 'fc', 'in_dim': [2], 'hidden_units': [64, 64], 'load_params': False, 'train_params': True}
-2022-08-04 13:47:56,191 | val_fn_config: {'network_type': 'fc', 'in_dim': [2], 'hidden_units': [64, 64], 'load_params': False, 'train_params': True}
-2022-08-04 13:47:56,191 | update_network: True
-2022-08-04 13:47:56,191 | use_target_network: True
-2022-08-04 13:47:56,191 | optimizer_type: Adam
-2022-08-04 13:47:56,191 | replay: True
-2022-08-04 13:47:56,191 | eval_episodes: 0
-2022-08-04 13:47:56,191 | save_params: True
-2022-08-04 13:47:56,191 | offline_data_path: {'optimal': 'data/dataset/four_room/transitions_50k/train_5k/{}_run.pkl'}
-2022-08-04 13:47:56,191 | learning_rate: 0.0001
-2022-08-04 13:47:56,191 | cumulative: 6
-2022-08-04 13:47:56,191 | id: 3
-2022-08-04 13:47:56,191 | seed: 0
-2022-08-04 13:47:56,191 | rep_fn: <function NetFactory.get_rep_fn.<locals>.<lambda> at 0x7f5092f77ee0>
-2022-08-04 13:47:57,255 | TRAIN LOG: steps 0, episodes   0, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 22966.88 steps/s
-2022-08-04 13:47:57,300 | TEST LOG: steps 0, episodes   0, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 22966.88 steps/s
-2022-08-04 13:48:01,120 | TRAIN LOG: steps 1000, episodes  33, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 261.79 steps/s
-2022-08-04 13:48:01,165 | TEST LOG: steps 1000, episodes  33, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 261.79 steps/s
+2022-08-04 17:22:53,050 | exp_name: test/four_room/iql_offline/test
+2022-08-04 17:22:53,050 | data_root: /home/han/Projects/iql_torch/data/output
+2022-08-04 17:22:53,050 | run: 0
+2022-08-04 17:22:53,050 | param_setting: 3
+2022-08-04 17:22:53,050 | log_observations: False
+2022-08-04 17:22:53,050 | tensorboard_logs: False
+2022-08-04 17:22:53,050 | batch_size: 32
+2022-08-04 17:22:53,050 | replay_with_len: False
+2022-08-04 17:22:53,051 | memory_size: 0
+2022-08-04 17:22:53,051 | evaluation_criteria: steps
+2022-08-04 17:22:53,051 | checkpoints: False
+2022-08-04 17:22:53,051 | warm_up_step: 0
+2022-08-04 17:22:53,051 | device: cpu
+2022-08-04 17:22:53,051 | env_name: FourRoom
+2022-08-04 17:22:53,051 | state_dim: (2,)
+2022-08-04 17:22:53,051 | action_dim: 4
+2022-08-04 17:22:53,051 | max_steps: 200000
+2022-08-04 17:22:53,051 | log_interval: 1000
+2022-08-04 17:22:53,051 | save_interval: 0
+2022-08-04 17:22:53,051 | eval_interval: 1000
+2022-08-04 17:22:53,051 | num_eval_episodes: 5
+2022-08-04 17:22:53,051 | timeout: 30
+2022-08-04 17:22:53,051 | stats_queue_size: 5
+2022-08-04 17:22:53,051 | tensorboard_interval: 100
+2022-08-04 17:22:53,051 | state_norm_coef: 0
+2022-08-04 17:22:53,051 | reward_norm_coef: 1.0
+2022-08-04 17:22:53,051 | early_cut_off: False
+2022-08-04 17:22:53,051 | testset_paths: None
+2022-08-04 17:22:53,051 | tester_fn_config: {}
+2022-08-04 17:22:53,051 | evalset_path: {'dataEps50': 'data/dataset/four_room/transitions_50k/eps50/0_run.pkl'}
+2022-08-04 17:22:53,051 | true_value_paths: None
+2022-08-04 17:22:53,051 | visualize: False
+2022-08-04 17:22:53,051 | evaluate_overestimation: False
+2022-08-04 17:22:53,051 | evaluate_feature_mdp: False
+2022-08-04 17:22:53,051 | evaluate_action_value: True
+2022-08-04 17:22:53,051 | polyak: 0.995
+2022-08-04 17:22:53,051 | agent: IQLOffline
+2022-08-04 17:22:53,051 | target_network_update_freq: 1
+2022-08-04 17:22:53,051 | awac_lambda: 1
+2022-08-04 17:22:53,052 | awac_remove_const: False
+2022-08-04 17:22:53,052 | load_offline_data: True
+2022-08-04 17:22:53,052 | clip_grad_param: 100
+2022-08-04 17:22:53,052 | expectile: 0.7
+2022-08-04 17:22:53,052 | temperature: 3
+2022-08-04 17:22:53,052 | discount: 0.99
+2022-08-04 17:22:53,052 | agent_name: IQLOffline
+2022-08-04 17:22:53,052 | rep_fn_config: {'rep_type': 'identity', 'out_dim': 2}
+2022-08-04 17:22:53,052 | policy_fn_config: {'policy_type': 'policy-discrete', 'network_type': 'fc', 'in_dim': [2], 'hidden_units': [64, 64], 'load_params': False, 'train_params': True}
+2022-08-04 17:22:53,052 | critic_fn_config: {'network_type': 'fc', 'in_dim': [2], 'hidden_units': [64, 64], 'load_params': False, 'train_params': True}
+2022-08-04 17:22:53,052 | val_fn_config: {'network_type': 'fc', 'in_dim': [2], 'hidden_units': [64, 64], 'load_params': False, 'train_params': True}
+2022-08-04 17:22:53,052 | update_network: True
+2022-08-04 17:22:53,052 | use_target_network: True
+2022-08-04 17:22:53,052 | optimizer_type: Adam
+2022-08-04 17:22:53,052 | replay: True
+2022-08-04 17:22:53,052 | eval_episodes: 0
+2022-08-04 17:22:53,052 | save_params: True
+2022-08-04 17:22:53,052 | offline_data_path: {'optimal': 'data/dataset/four_room/transitions_50k/train_5k/{}_run.pkl'}
+2022-08-04 17:22:53,052 | learning_rate: 0.0001
+2022-08-04 17:22:53,052 | cumulative: 6
+2022-08-04 17:22:53,052 | id: 3
+2022-08-04 17:22:53,052 | seed: 0
+2022-08-04 17:22:53,052 | rep_fn: <function NetFactory.get_rep_fn.<locals>.<lambda> at 0x7f48ff499ee0>
+2022-08-04 17:22:53,925 | TRAIN LOG: steps 0, episodes   0, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 28056.67 steps/s
+2022-08-04 17:22:53,963 | TEST LOG: steps 0, episodes   0, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 28056.67 steps/s
+2022-08-04 17:22:57,155 | TRAIN LOG: steps 1000, episodes  33, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 313.39 steps/s
+2022-08-04 17:22:57,193 | TEST LOG: steps 1000, episodes  33, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 313.39 steps/s
+2022-08-04 17:23:01,111 | TRAIN LOG: steps 2000, episodes  66, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 255.25 steps/s
+2022-08-04 17:23:01,143 | TEST LOG: steps 2000, episodes  66, returns 24.60/30.00/3.00/30.00/5 (mean/median/min/max/num), 255.25 steps/s
+2022-08-04 17:23:04,849 | TRAIN LOG: steps 3000, episodes 100, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 269.85 steps/s
+2022-08-04 17:23:04,882 | TEST LOG: steps 3000, episodes 100, returns 24.60/30.00/3.00/30.00/5 (mean/median/min/max/num), 269.85 steps/s
+2022-08-04 17:23:08,949 | TRAIN LOG: steps 4000, episodes 133, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 245.94 steps/s
+2022-08-04 17:23:08,982 | TEST LOG: steps 4000, episodes 133, returns 24.80/30.00/13.00/30.00/5 (mean/median/min/max/num), 245.94 steps/s
+2022-08-04 17:23:12,811 | TRAIN LOG: steps 5000, episodes 166, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 261.19 steps/s
+2022-08-04 17:23:12,830 | TEST LOG: steps 5000, episodes 166, returns 14.20/14.00/4.00/30.00/5 (mean/median/min/max/num), 261.19 steps/s
+2022-08-04 17:23:16,736 | TRAIN LOG: steps 6000, episodes 200, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 256.00 steps/s
+2022-08-04 17:23:16,763 | TEST LOG: steps 6000, episodes 200, returns 19.60/23.00/4.00/30.00/5 (mean/median/min/max/num), 256.00 steps/s
+2022-08-04 17:23:20,568 | TRAIN LOG: steps 7000, episodes 233, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 262.85 steps/s
+2022-08-04 17:23:20,595 | TEST LOG: steps 7000, episodes 233, returns 19.80/16.00/11.00/30.00/5 (mean/median/min/max/num), 262.85 steps/s
+2022-08-04 17:23:24,463 | TRAIN LOG: steps 8000, episodes 266, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 258.56 steps/s
+2022-08-04 17:23:24,486 | TEST LOG: steps 8000, episodes 266, returns 16.80/20.00/4.00/30.00/5 (mean/median/min/max/num), 258.56 steps/s
+2022-08-04 17:23:28,317 | TRAIN LOG: steps 9000, episodes 300, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 261.06 steps/s
+2022-08-04 17:23:28,333 | TEST LOG: steps 9000, episodes 300, returns 12.00/10.00/1.00/30.00/5 (mean/median/min/max/num), 261.06 steps/s
+2022-08-04 17:23:32,181 | TRAIN LOG: steps 10000, episodes 333, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 259.88 steps/s
+2022-08-04 17:23:32,204 | TEST LOG: steps 10000, episodes 333, returns 16.80/15.00/8.00/30.00/5 (mean/median/min/max/num), 259.88 steps/s
+2022-08-04 17:23:36,587 | TRAIN LOG: steps 11000, episodes 366, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 228.14 steps/s
+2022-08-04 17:23:36,622 | TEST LOG: steps 11000, episodes 366, returns 20.20/19.00/8.00/30.00/5 (mean/median/min/max/num), 228.14 steps/s
+2022-08-04 17:23:41,717 | TRAIN LOG: steps 12000, episodes 400, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 196.26 steps/s
+2022-08-04 17:23:41,742 | TEST LOG: steps 12000, episodes 400, returns 14.60/9.00/2.00/30.00/5 (mean/median/min/max/num), 196.26 steps/s
+2022-08-04 17:23:46,660 | TRAIN LOG: steps 13000, episodes 433, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 203.34 steps/s
+2022-08-04 17:23:46,685 | TEST LOG: steps 13000, episodes 433, returns 14.20/17.00/2.00/30.00/5 (mean/median/min/max/num), 203.34 steps/s
+2022-08-04 17:23:51,594 | TRAIN LOG: steps 14000, episodes 466, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 203.71 steps/s
+2022-08-04 17:23:51,607 | TEST LOG: steps 14000, episodes 466, returns 7.20/4.00/1.00/16.00/5 (mean/median/min/max/num), 203.71 steps/s
+2022-08-04 17:23:56,485 | TRAIN LOG: steps 15000, episodes 500, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 205.01 steps/s
+2022-08-04 17:23:56,499 | TEST LOG: steps 15000, episodes 500, returns 8.80/7.00/2.00/16.00/5 (mean/median/min/max/num), 205.01 steps/s
+2022-08-04 17:24:01,522 | TRAIN LOG: steps 16000, episodes 533, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 199.11 steps/s
+2022-08-04 17:24:01,546 | TEST LOG: steps 16000, episodes 533, returns 12.80/10.00/5.00/30.00/5 (mean/median/min/max/num), 199.11 steps/s
+2022-08-04 17:24:06,649 | TRAIN LOG: steps 17000, episodes 566, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 195.97 steps/s
+2022-08-04 17:24:06,674 | TEST LOG: steps 17000, episodes 566, returns 15.40/11.00/2.00/30.00/5 (mean/median/min/max/num), 195.97 steps/s
+2022-08-04 17:24:11,546 | TRAIN LOG: steps 18000, episodes 600, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 205.29 steps/s
+2022-08-04 17:24:11,567 | TEST LOG: steps 18000, episodes 600, returns 12.40/8.00/4.00/30.00/5 (mean/median/min/max/num), 205.29 steps/s
+2022-08-04 17:24:16,464 | TRAIN LOG: steps 19000, episodes 633, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 204.23 steps/s
+2022-08-04 17:24:16,490 | TEST LOG: steps 19000, episodes 633, returns 15.60/12.00/8.00/30.00/5 (mean/median/min/max/num), 204.23 steps/s
+2022-08-04 17:24:21,698 | TRAIN LOG: steps 20000, episodes 666, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 192.06 steps/s
+2022-08-04 17:24:21,719 | TEST LOG: steps 20000, episodes 666, returns 11.20/12.00/5.00/19.00/5 (mean/median/min/max/num), 192.06 steps/s
+2022-08-04 17:24:27,046 | TRAIN LOG: steps 21000, episodes 700, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 187.73 steps/s
+2022-08-04 17:24:27,080 | TEST LOG: steps 21000, episodes 700, returns 21.40/30.00/3.00/30.00/5 (mean/median/min/max/num), 187.73 steps/s
+2022-08-04 17:24:32,546 | TRAIN LOG: steps 22000, episodes 733, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 182.96 steps/s
+2022-08-04 17:24:32,567 | TEST LOG: steps 22000, episodes 733, returns 10.60/9.00/5.00/25.00/5 (mean/median/min/max/num), 182.96 steps/s
+2022-08-04 17:24:37,451 | TRAIN LOG: steps 23000, episodes 766, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 204.74 steps/s
+2022-08-04 17:24:37,470 | TEST LOG: steps 23000, episodes 766, returns 11.00/10.00/4.00/19.00/5 (mean/median/min/max/num), 204.74 steps/s
+2022-08-04 17:24:42,366 | TRAIN LOG: steps 24000, episodes 800, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 204.26 steps/s
+2022-08-04 17:24:42,398 | TEST LOG: steps 24000, episodes 800, returns 18.60/16.00/3.00/30.00/5 (mean/median/min/max/num), 204.26 steps/s
+2022-08-04 17:24:47,421 | TRAIN LOG: steps 25000, episodes 833, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 199.09 steps/s
+2022-08-04 17:24:47,436 | TEST LOG: steps 25000, episodes 833, returns 9.00/8.00/3.00/18.00/5 (mean/median/min/max/num), 199.09 steps/s
+2022-08-04 17:24:52,966 | TRAIN LOG: steps 26000, episodes 866, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 180.83 steps/s
+2022-08-04 17:24:53,000 | TEST LOG: steps 26000, episodes 866, returns 18.20/18.00/3.00/30.00/5 (mean/median/min/max/num), 180.83 steps/s
+2022-08-04 17:24:58,072 | TRAIN LOG: steps 27000, episodes 900, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 197.17 steps/s
+2022-08-04 17:24:58,106 | TEST LOG: steps 27000, episodes 900, returns 18.40/19.00/6.00/30.00/5 (mean/median/min/max/num), 197.17 steps/s
+2022-08-04 17:25:03,089 | TRAIN LOG: steps 28000, episodes 933, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 200.67 steps/s
+2022-08-04 17:25:03,112 | TEST LOG: steps 28000, episodes 933, returns 11.40/11.00/5.00/17.00/5 (mean/median/min/max/num), 200.67 steps/s
+2022-08-04 17:25:08,339 | TRAIN LOG: steps 29000, episodes 966, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 191.35 steps/s
+2022-08-04 17:25:08,371 | TEST LOG: steps 29000, episodes 966, returns 14.60/12.00/3.00/30.00/5 (mean/median/min/max/num), 191.35 steps/s
+2022-08-04 17:25:13,234 | TRAIN LOG: steps 30000, episodes 1000, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 205.63 steps/s
+2022-08-04 17:25:13,262 | TEST LOG: steps 30000, episodes 1000, returns 15.80/17.00/13.00/17.00/5 (mean/median/min/max/num), 205.63 steps/s
+2022-08-04 17:25:18,049 | TRAIN LOG: steps 31000, episodes 1033, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 208.90 steps/s
+2022-08-04 17:25:18,079 | TEST LOG: steps 31000, episodes 1033, returns 16.60/13.00/10.00/30.00/5 (mean/median/min/max/num), 208.90 steps/s
+2022-08-04 17:25:23,160 | TRAIN LOG: steps 32000, episodes 1066, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 196.82 steps/s
+2022-08-04 17:25:23,183 | TEST LOG: steps 32000, episodes 1066, returns 13.40/11.00/2.00/30.00/5 (mean/median/min/max/num), 196.82 steps/s
+2022-08-04 17:25:28,795 | TRAIN LOG: steps 33000, episodes 1100, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 178.17 steps/s
+2022-08-04 17:25:28,821 | TEST LOG: steps 33000, episodes 1100, returns 15.40/12.00/6.00/28.00/5 (mean/median/min/max/num), 178.17 steps/s
+2022-08-04 17:25:33,904 | TRAIN LOG: steps 34000, episodes 1133, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 196.74 steps/s
+2022-08-04 17:25:33,930 | TEST LOG: steps 34000, episodes 1133, returns 14.20/11.00/5.00/30.00/5 (mean/median/min/max/num), 196.74 steps/s
+2022-08-04 17:25:38,874 | TRAIN LOG: steps 35000, episodes 1166, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 202.25 steps/s
+2022-08-04 17:25:38,890 | TEST LOG: steps 35000, episodes 1166, returns 8.80/9.00/3.00/12.00/5 (mean/median/min/max/num), 202.25 steps/s
+2022-08-04 17:25:43,870 | TRAIN LOG: steps 36000, episodes 1200, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 200.80 steps/s
+2022-08-04 17:25:43,886 | TEST LOG: steps 36000, episodes 1200, returns 8.60/9.00/1.00/17.00/5 (mean/median/min/max/num), 200.80 steps/s
+2022-08-04 17:25:49,150 | TRAIN LOG: steps 37000, episodes 1233, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 189.98 steps/s
+2022-08-04 17:25:49,169 | TEST LOG: steps 37000, episodes 1233, returns 10.80/9.00/7.00/17.00/5 (mean/median/min/max/num), 189.98 steps/s
+2022-08-04 17:25:54,198 | TRAIN LOG: steps 38000, episodes 1266, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 198.87 steps/s
+2022-08-04 17:25:54,228 | TEST LOG: steps 38000, episodes 1266, returns 16.00/15.00/1.00/30.00/5 (mean/median/min/max/num), 198.87 steps/s
+2022-08-04 17:25:59,506 | TRAIN LOG: steps 39000, episodes 1300, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 189.49 steps/s
+2022-08-04 17:25:59,514 | TEST LOG: steps 39000, episodes 1300, returns 4.60/4.00/2.00/10.00/5 (mean/median/min/max/num), 189.49 steps/s
+2022-08-04 17:26:04,455 | TRAIN LOG: steps 40000, episodes 1333, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 202.44 steps/s
+2022-08-04 17:26:04,466 | TEST LOG: steps 40000, episodes 1333, returns 6.60/5.00/4.00/13.00/5 (mean/median/min/max/num), 202.44 steps/s
+2022-08-04 17:26:09,347 | TRAIN LOG: steps 41000, episodes 1366, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 204.90 steps/s
+2022-08-04 17:26:09,376 | TEST LOG: steps 41000, episodes 1366, returns 16.40/16.00/3.00/30.00/5 (mean/median/min/max/num), 204.90 steps/s
+2022-08-04 17:26:14,216 | TRAIN LOG: steps 42000, episodes 1400, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 206.60 steps/s
+2022-08-04 17:26:14,228 | TEST LOG: steps 42000, episodes 1400, returns 7.00/5.00/1.00/18.00/5 (mean/median/min/max/num), 206.60 steps/s
+2022-08-04 17:26:19,192 | TRAIN LOG: steps 43000, episodes 1433, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 201.46 steps/s
+2022-08-04 17:26:19,205 | TEST LOG: steps 43000, episodes 1433, returns 7.40/6.00/3.00/14.00/5 (mean/median/min/max/num), 201.46 steps/s
+2022-08-04 17:26:24,175 | TRAIN LOG: steps 44000, episodes 1466, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 201.19 steps/s
+2022-08-04 17:26:24,188 | TEST LOG: steps 44000, episodes 1466, returns 6.80/7.00/2.00/11.00/5 (mean/median/min/max/num), 201.19 steps/s
+2022-08-04 17:26:29,047 | TRAIN LOG: steps 45000, episodes 1500, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 205.80 steps/s
+2022-08-04 17:26:29,067 | TEST LOG: steps 45000, episodes 1500, returns 11.20/11.00/4.00/16.00/5 (mean/median/min/max/num), 205.80 steps/s
+2022-08-04 17:26:33,998 | TRAIN LOG: steps 46000, episodes 1533, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 202.81 steps/s
+2022-08-04 17:26:34,023 | TEST LOG: steps 46000, episodes 1533, returns 14.20/11.00/5.00/30.00/5 (mean/median/min/max/num), 202.81 steps/s
+2022-08-04 17:26:39,024 | TRAIN LOG: steps 47000, episodes 1566, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 199.99 steps/s
+2022-08-04 17:26:39,037 | TEST LOG: steps 47000, episodes 1566, returns 6.80/4.00/2.00/17.00/5 (mean/median/min/max/num), 199.99 steps/s
+2022-08-04 17:26:44,002 | TRAIN LOG: steps 48000, episodes 1600, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 201.41 steps/s
+2022-08-04 17:26:44,016 | TEST LOG: steps 48000, episodes 1600, returns 7.80/7.00/5.00/11.00/5 (mean/median/min/max/num), 201.41 steps/s
+2022-08-04 17:26:48,982 | TRAIN LOG: steps 49000, episodes 1633, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 201.41 steps/s
+2022-08-04 17:26:48,998 | TEST LOG: steps 49000, episodes 1633, returns 9.40/5.00/3.00/27.00/5 (mean/median/min/max/num), 201.41 steps/s
+2022-08-04 17:26:54,188 | TRAIN LOG: steps 50000, episodes 1666, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 192.67 steps/s
+2022-08-04 17:26:54,208 | TEST LOG: steps 50000, episodes 1666, returns 11.00/10.00/7.00/17.00/5 (mean/median/min/max/num), 192.67 steps/s

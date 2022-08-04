@@ -1,218 +1,568 @@
-2022-08-04 13:25:39,498 | exp_name: test_v7/four_room/iql_offline/test_linear
-2022-08-04 13:25:39,498 | data_root: /home/han/Projects/offline_online (copy)/data/output
-2022-08-04 13:25:39,498 | run: 0
-2022-08-04 13:25:39,498 | param_setting: 3
-2022-08-04 13:25:39,498 | log_observations: False
-2022-08-04 13:25:39,498 | tensorboard_logs: False
-2022-08-04 13:25:39,498 | batch_size: 32
-2022-08-04 13:25:39,499 | replay_with_len: False
-2022-08-04 13:25:39,499 | memory_size: 0
-2022-08-04 13:25:39,499 | evaluation_criteria: steps
-2022-08-04 13:25:39,499 | checkpoints: False
-2022-08-04 13:25:39,499 | warm_up_step: 0
-2022-08-04 13:25:39,499 | device: cpu
-2022-08-04 13:25:39,499 | env_name: FourRoom
-2022-08-04 13:25:39,499 | state_dim: (2,)
-2022-08-04 13:25:39,499 | action_dim: 4
-2022-08-04 13:25:39,499 | max_steps: 200000
-2022-08-04 13:25:39,499 | log_interval: 1000
-2022-08-04 13:25:39,499 | save_interval: 0
-2022-08-04 13:25:39,499 | eval_interval: 1000
-2022-08-04 13:25:39,499 | num_eval_episodes: 5
-2022-08-04 13:25:39,499 | timeout: 30
-2022-08-04 13:25:39,499 | stats_queue_size: 5
-2022-08-04 13:25:39,499 | tensorboard_interval: 100
-2022-08-04 13:25:39,499 | state_norm_coef: 0
-2022-08-04 13:25:39,499 | reward_norm_coef: 1.0
-2022-08-04 13:25:39,499 | early_cut_off: False
-2022-08-04 13:25:39,499 | testset_paths: None
-2022-08-04 13:25:39,499 | tester_fn_config: {}
-2022-08-04 13:25:39,499 | evalset_path: {'dataEps50': 'data/dataset/four_room/transitions_50k/eps50/0_run.pkl'}
-2022-08-04 13:25:39,499 | true_value_paths: None
-2022-08-04 13:25:39,499 | visualize: False
-2022-08-04 13:25:39,499 | evaluate_overestimation: True
-2022-08-04 13:25:39,499 | evaluate_feature_mdp: False
-2022-08-04 13:25:39,500 | evaluate_action_value: True
-2022-08-04 13:25:39,500 | polyak: 0.995
-2022-08-04 13:25:39,500 | agent: IQLOffline
-2022-08-04 13:25:39,500 | target_network_update_freq: 1
-2022-08-04 13:25:39,500 | awac_lambda: 1
-2022-08-04 13:25:39,500 | awac_remove_const: False
-2022-08-04 13:25:39,500 | load_offline_data: True
-2022-08-04 13:25:39,500 | clip_grad_param: 100
-2022-08-04 13:25:39,500 | expectile: 0.7
-2022-08-04 13:25:39,500 | temperature: 3
-2022-08-04 13:25:39,500 | discount: 0.99
-2022-08-04 13:25:39,500 | agent_name: IQLOffline
-2022-08-04 13:25:39,500 | rep_fn_config: {'rep_type': 'one_hot', 'range': [11, 11], 'in_dim': 2, 'train_params': True}
-2022-08-04 13:25:39,500 | policy_fn_config: {'policy_type': 'policy-discrete', 'network_type': 'fc', 'in_dim': [2], 'hidden_units': [], 'load_params': False, 'train_params': True}
-2022-08-04 13:25:39,500 | critic_fn_config: {'network_type': 'fc', 'in_dim': [2], 'hidden_units': [], 'load_params': False, 'train_params': True}
-2022-08-04 13:25:39,500 | val_fn_config: {'network_type': 'fc', 'in_dim': [2], 'hidden_units': [], 'load_params': False, 'train_params': True}
-2022-08-04 13:25:39,500 | update_network: True
-2022-08-04 13:25:39,500 | use_target_network: True
-2022-08-04 13:25:39,500 | optimizer_type: Adam
-2022-08-04 13:25:39,500 | replay: True
-2022-08-04 13:25:39,500 | eval_episodes: 0
-2022-08-04 13:25:39,500 | save_params: True
-2022-08-04 13:25:39,500 | evaluate_rep_rank: True
-2022-08-04 13:25:39,500 | offline_data_path: {'optimal': 'data/dataset/four_room/transitions_50k/train_5k/{}_run.pkl'}
-2022-08-04 13:25:39,500 | learning_rate: 0.0001
-2022-08-04 13:25:39,500 | cumulative: 6
-2022-08-04 13:25:39,500 | id: 3
-2022-08-04 13:25:39,500 | seed: 0
-2022-08-04 13:25:39,501 | rep_fn: <function NetFactory.get_rep_fn.<locals>.<lambda> at 0x7fd9b8d0ca60>
-2022-08-04 13:25:40,826 | TRAIN LOG: steps 0, episodes   0, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 11591.21 steps/s
-2022-08-04 13:25:40,885 | TEST LOG: steps 0, episodes   0, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 11591.21 steps/s
-2022-08-04 13:25:40,928 | TRAIN LOG: steps 0, Overestimation: -0.06042876/-0.21905410/0.19490035 (mean/min/max)
-2022-08-04 13:25:40,928 | TRAIN LOG: steps 0, OverestimationCurrentPi: -0.05223544/-0.21759173/0.17166895 (mean/min/max)
-2022-08-04 13:25:40,933 | TRAIN LOG: steps 0, RepRank: 2.00000000
-2022-08-04 13:25:43,854 | TRAIN LOG: steps 1000, episodes  33, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 336.86 steps/s
-2022-08-04 13:25:43,910 | TEST LOG: steps 1000, episodes  33, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 336.86 steps/s
-2022-08-04 13:25:44,741 | TRAIN LOG: steps 1000, Overestimation: -0.02145571/-0.25004068/0.25109524 (mean/min/max)
-2022-08-04 13:25:44,742 | TRAIN LOG: steps 1000, OverestimationCurrentPi: -0.21714897/-1.08965166/0.19174653 (mean/min/max)
-2022-08-04 13:25:44,743 | TRAIN LOG: steps 1000, RepRank: 2.00000000
-2022-08-04 13:25:47,654 | TRAIN LOG: steps 2000, episodes  66, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 267.16 steps/s
-2022-08-04 13:25:47,710 | TEST LOG: steps 2000, episodes  66, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 267.16 steps/s
-2022-08-04 13:25:48,228 | TRAIN LOG: steps 2000, Overestimation: 0.03401049/-0.24024396/0.37350690 (mean/min/max)
-2022-08-04 13:25:48,229 | TRAIN LOG: steps 2000, OverestimationCurrentPi: -0.01162291/-0.20338750/0.28094774 (mean/min/max)
-2022-08-04 13:25:48,230 | TRAIN LOG: steps 2000, RepRank: 2.00000000
-2022-08-04 13:25:51,174 | TRAIN LOG: steps 3000, episodes 100, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 288.72 steps/s
-2022-08-04 13:25:51,225 | TEST LOG: steps 3000, episodes 100, returns 26.80/30.00/20.00/30.00/5 (mean/median/min/max/num), 288.72 steps/s
-2022-08-04 13:25:51,713 | TRAIN LOG: steps 3000, Overestimation: 0.10273034/-0.19642904/0.51522726 (mean/min/max)
-2022-08-04 13:25:51,713 | TRAIN LOG: steps 3000, OverestimationCurrentPi: -0.22511388/-1.11599712/0.26765999 (mean/min/max)
-2022-08-04 13:25:51,714 | TRAIN LOG: steps 3000, RepRank: 2.00000000
-2022-08-04 13:25:54,597 | TRAIN LOG: steps 4000, episodes 133, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 296.53 steps/s
-2022-08-04 13:25:54,638 | TEST LOG: steps 4000, episodes 133, returns 21.20/30.00/2.00/30.00/5 (mean/median/min/max/num), 296.53 steps/s
-2022-08-04 13:25:55,143 | TRAIN LOG: steps 4000, Overestimation: 0.17869643/-0.14467055/0.65279162 (mean/min/max)
-2022-08-04 13:25:55,143 | TRAIN LOG: steps 4000, OverestimationCurrentPi: -0.00053889/-0.98421168/0.35721791 (mean/min/max)
-2022-08-04 13:25:55,144 | TRAIN LOG: steps 4000, RepRank: 2.00000000
-2022-08-04 13:25:58,367 | TRAIN LOG: steps 5000, episodes 166, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 268.21 steps/s
-2022-08-04 13:25:58,408 | TEST LOG: steps 5000, episodes 166, returns 18.60/18.00/4.00/30.00/5 (mean/median/min/max/num), 268.21 steps/s
-2022-08-04 13:25:59,029 | TRAIN LOG: steps 5000, Overestimation: 0.26060202/-0.08447444/0.78167403 (mean/min/max)
-2022-08-04 13:25:59,029 | TRAIN LOG: steps 5000, OverestimationCurrentPi: -0.09645151/-0.96040822/0.53087586 (mean/min/max)
-2022-08-04 13:25:59,030 | TRAIN LOG: steps 5000, RepRank: 2.00000000
-2022-08-04 13:26:02,882 | TRAIN LOG: steps 6000, episodes 200, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 223.54 steps/s
-2022-08-04 13:26:02,930 | TEST LOG: steps 6000, episodes 200, returns 23.00/30.00/11.00/30.00/5 (mean/median/min/max/num), 223.54 steps/s
-2022-08-04 13:26:03,606 | TRAIN LOG: steps 6000, Overestimation: 0.33865989/-0.03082210/0.88940591 (mean/min/max)
-2022-08-04 13:26:03,607 | TRAIN LOG: steps 6000, OverestimationCurrentPi: 0.09265482/-0.79899103/0.48791409 (mean/min/max)
-2022-08-04 13:26:03,608 | TRAIN LOG: steps 6000, RepRank: 2.00000000
-2022-08-04 13:26:06,770 | TRAIN LOG: steps 7000, episodes 233, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 260.41 steps/s
-2022-08-04 13:26:06,816 | TEST LOG: steps 7000, episodes 233, returns 17.80/17.00/6.00/30.00/5 (mean/median/min/max/num), 260.41 steps/s
-2022-08-04 13:26:07,359 | TRAIN LOG: steps 7000, Overestimation: 0.41378243/0.02879803/0.96722913 (mean/min/max)
-2022-08-04 13:26:07,360 | TRAIN LOG: steps 7000, OverestimationCurrentPi: -0.22211373/-0.91917195/0.47590014 (mean/min/max)
-2022-08-04 13:26:07,361 | TRAIN LOG: steps 7000, RepRank: 2.00000000
-2022-08-04 13:26:10,809 | TRAIN LOG: steps 8000, episodes 266, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 250.49 steps/s
-2022-08-04 13:26:10,868 | TEST LOG: steps 8000, episodes 266, returns 20.60/21.00/3.00/30.00/5 (mean/median/min/max/num), 250.49 steps/s
-2022-08-04 13:26:11,476 | TRAIN LOG: steps 8000, Overestimation: 0.48012327/0.08008878/1.01073503 (mean/min/max)
-2022-08-04 13:26:11,476 | TRAIN LOG: steps 8000, OverestimationCurrentPi: 0.02707829/-0.84893604/0.63659650 (mean/min/max)
-2022-08-04 13:26:11,477 | TRAIN LOG: steps 8000, RepRank: 2.00000000
-2022-08-04 13:26:14,756 | TRAIN LOG: steps 9000, episodes 300, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 257.26 steps/s
-2022-08-04 13:26:14,793 | TEST LOG: steps 9000, episodes 300, returns 17.80/18.00/1.00/30.00/5 (mean/median/min/max/num), 257.26 steps/s
-2022-08-04 13:26:15,307 | TRAIN LOG: steps 9000, Overestimation: 0.53592367/0.12574686/1.01917028 (mean/min/max)
-2022-08-04 13:26:15,307 | TRAIN LOG: steps 9000, OverestimationCurrentPi: -0.09219373/-0.79070623/0.66490531 (mean/min/max)
-2022-08-04 13:26:15,308 | TRAIN LOG: steps 9000, RepRank: 2.00000000
-2022-08-04 13:26:18,415 | TRAIN LOG: steps 10000, episodes 333, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 276.07 steps/s
-2022-08-04 13:26:18,465 | TEST LOG: steps 10000, episodes 333, returns 22.80/30.00/7.00/30.00/5 (mean/median/min/max/num), 276.07 steps/s
-2022-08-04 13:26:19,172 | TRAIN LOG: steps 10000, Overestimation: 0.58353275/0.17107196/1.01344228 (mean/min/max)
-2022-08-04 13:26:19,172 | TRAIN LOG: steps 10000, OverestimationCurrentPi: 0.32498969/-0.75894832/0.70744264 (mean/min/max)
-2022-08-04 13:26:19,174 | TRAIN LOG: steps 10000, RepRank: 2.00000000
-2022-08-04 13:26:22,428 | TRAIN LOG: steps 11000, episodes 366, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 252.34 steps/s
-2022-08-04 13:26:22,480 | TEST LOG: steps 11000, episodes 366, returns 24.40/30.00/12.00/30.00/5 (mean/median/min/max/num), 252.34 steps/s
-2022-08-04 13:26:23,061 | TRAIN LOG: steps 11000, Overestimation: 0.61781628/0.20503424/1.00639260 (mean/min/max)
-2022-08-04 13:26:23,062 | TRAIN LOG: steps 11000, OverestimationCurrentPi: 0.31027277/-0.48316644/0.74038154 (mean/min/max)
-2022-08-04 13:26:23,063 | TRAIN LOG: steps 11000, RepRank: 2.00000000
-2022-08-04 13:26:26,451 | TRAIN LOG: steps 12000, episodes 400, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 251.84 steps/s
-2022-08-04 13:26:26,487 | TEST LOG: steps 12000, episodes 400, returns 17.80/23.00/2.00/30.00/5 (mean/median/min/max/num), 251.84 steps/s
-2022-08-04 13:26:27,049 | TRAIN LOG: steps 12000, Overestimation: 0.64576587/0.23375152/1.00315642 (mean/min/max)
-2022-08-04 13:26:27,050 | TRAIN LOG: steps 12000, OverestimationCurrentPi: 0.28643211/-0.69943817/0.76633298 (mean/min/max)
-2022-08-04 13:26:27,051 | TRAIN LOG: steps 12000, RepRank: 2.00000000
-2022-08-04 13:26:30,325 | TRAIN LOG: steps 13000, episodes 433, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 260.57 steps/s
-2022-08-04 13:26:30,365 | TEST LOG: steps 13000, episodes 433, returns 15.20/13.00/9.00/27.00/5 (mean/median/min/max/num), 260.57 steps/s
-2022-08-04 13:26:31,011 | TRAIN LOG: steps 13000, Overestimation: 0.66607778/0.26283300/1.00124872 (mean/min/max)
-2022-08-04 13:26:31,012 | TRAIN LOG: steps 13000, OverestimationCurrentPi: -0.26898224/-0.67510988/0.00124872 (mean/min/max)
-2022-08-04 13:26:31,013 | TRAIN LOG: steps 13000, RepRank: 2.00000000
-2022-08-04 13:26:34,769 | TRAIN LOG: steps 14000, episodes 466, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 227.05 steps/s
-2022-08-04 13:26:34,822 | TEST LOG: steps 14000, episodes 466, returns 18.20/18.00/3.00/30.00/5 (mean/median/min/max/num), 227.05 steps/s
-2022-08-04 13:26:35,444 | TRAIN LOG: steps 14000, Overestimation: 0.68168134/0.28375000/1.00006080 (mean/min/max)
-2022-08-04 13:26:35,444 | TRAIN LOG: steps 14000, OverestimationCurrentPi: 0.30695331/-0.63768947/0.79576743 (mean/min/max)
-2022-08-04 13:26:35,445 | TRAIN LOG: steps 14000, RepRank: 2.00000000
-2022-08-04 13:26:39,288 | TRAIN LOG: steps 15000, episodes 500, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 223.93 steps/s
-2022-08-04 13:26:39,319 | TEST LOG: steps 15000, episodes 500, returns 15.00/7.00/2.00/30.00/5 (mean/median/min/max/num), 223.93 steps/s
-2022-08-04 13:26:39,890 | TRAIN LOG: steps 15000, Overestimation: 0.69341190/0.30016321/0.99973172 (mean/min/max)
-2022-08-04 13:26:39,890 | TRAIN LOG: steps 15000, OverestimationCurrentPi: 0.50083348/-0.18789469/0.81180036 (mean/min/max)
-2022-08-04 13:26:39,891 | TRAIN LOG: steps 15000, RepRank: 2.00000000
-2022-08-04 13:26:43,134 | TRAIN LOG: steps 16000, episodes 533, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 262.14 steps/s
-2022-08-04 13:26:43,165 | TEST LOG: steps 16000, episodes 533, returns 13.40/9.00/5.00/30.00/5 (mean/median/min/max/num), 262.14 steps/s
-2022-08-04 13:26:43,788 | TRAIN LOG: steps 16000, Overestimation: 0.70285753/0.31682450/1.00348592 (mean/min/max)
-2022-08-04 13:26:43,789 | TRAIN LOG: steps 16000, OverestimationCurrentPi: 0.18122737/-0.54295166/0.78863025 (mean/min/max)
-2022-08-04 13:26:43,790 | TRAIN LOG: steps 16000, RepRank: 2.00000000
-2022-08-04 13:26:47,128 | TRAIN LOG: steps 17000, episodes 566, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 252.35 steps/s
-2022-08-04 13:26:47,167 | TEST LOG: steps 17000, episodes 566, returns 16.60/22.00/2.00/30.00/5 (mean/median/min/max/num), 252.35 steps/s
-2022-08-04 13:26:47,687 | TRAIN LOG: steps 17000, Overestimation: 0.70877589/0.32484126/1.00625610 (mean/min/max)
-2022-08-04 13:26:47,687 | TRAIN LOG: steps 17000, OverestimationCurrentPi: 0.04214205/-0.61469739/0.76956558 (mean/min/max)
-2022-08-04 13:26:47,688 | TRAIN LOG: steps 17000, RepRank: 2.00000000
-2022-08-04 13:26:50,881 | TRAIN LOG: steps 18000, episodes 600, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 269.29 steps/s
-2022-08-04 13:26:50,917 | TEST LOG: steps 18000, episodes 600, returns 10.40/7.00/4.00/20.00/5 (mean/median/min/max/num), 269.29 steps/s
-2022-08-04 13:26:51,557 | TRAIN LOG: steps 18000, Overestimation: 0.71304574/0.33482832/1.00294185 (mean/min/max)
-2022-08-04 13:26:51,558 | TRAIN LOG: steps 18000, OverestimationCurrentPi: -0.19518871/-0.56830136/-0.00004733 (mean/min/max)
-2022-08-04 13:26:51,559 | TRAIN LOG: steps 18000, RepRank: 2.00000000
-2022-08-04 13:26:54,980 | TRAIN LOG: steps 19000, episodes 633, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 246.16 steps/s
-2022-08-04 13:26:55,032 | TEST LOG: steps 19000, episodes 633, returns 18.60/15.00/8.00/29.00/5 (mean/median/min/max/num), 246.16 steps/s
-2022-08-04 13:26:55,597 | TRAIN LOG: steps 19000, Overestimation: 0.71614344/0.34525591/1.00062346 (mean/min/max)
-2022-08-04 13:26:55,598 | TRAIN LOG: steps 19000, OverestimationCurrentPi: -0.18629134/-0.57897108/0.06461504 (mean/min/max)
-2022-08-04 13:26:55,599 | TRAIN LOG: steps 19000, RepRank: 2.00000000
-2022-08-04 13:26:58,842 | TRAIN LOG: steps 20000, episodes 666, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 262.52 steps/s
-2022-08-04 13:26:58,879 | TEST LOG: steps 20000, episodes 666, returns 17.20/14.00/5.00/30.00/5 (mean/median/min/max/num), 262.52 steps/s
-2022-08-04 13:26:59,427 | TRAIN LOG: steps 20000, Overestimation: 0.71791696/0.35177428/1.00009418 (mean/min/max)
-2022-08-04 13:26:59,428 | TRAIN LOG: steps 20000, OverestimationCurrentPi: 0.39438720/-0.51836734/0.82273757 (mean/min/max)
-2022-08-04 13:26:59,429 | TRAIN LOG: steps 20000, RepRank: 2.00000000
-2022-08-04 13:27:02,683 | TRAIN LOG: steps 21000, episodes 700, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 262.88 steps/s
-2022-08-04 13:27:02,727 | TEST LOG: steps 21000, episodes 700, returns 17.60/18.00/3.00/30.00/5 (mean/median/min/max/num), 262.88 steps/s
-2022-08-04 13:27:03,353 | TRAIN LOG: steps 21000, Overestimation: 0.71937815/0.35541064/1.00003088 (mean/min/max)
-2022-08-04 13:27:03,354 | TRAIN LOG: steps 21000, OverestimationCurrentPi: 0.14532846/-0.49089967/0.82303226 (mean/min/max)
-2022-08-04 13:27:03,355 | TRAIN LOG: steps 21000, RepRank: 2.00000000
-2022-08-04 13:27:06,758 | TRAIN LOG: steps 22000, episodes 733, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 248.06 steps/s
-2022-08-04 13:27:06,793 | TEST LOG: steps 22000, episodes 733, returns 17.00/15.00/5.00/30.00/5 (mean/median/min/max/num), 248.06 steps/s
-2022-08-04 13:27:07,444 | TRAIN LOG: steps 22000, Overestimation: 0.72062148/0.35843194/1.00034964 (mean/min/max)
-2022-08-04 13:27:07,445 | TRAIN LOG: steps 22000, OverestimationCurrentPi: 0.33947527/-0.48947239/0.82303822 (mean/min/max)
-2022-08-04 13:27:07,446 | TRAIN LOG: steps 22000, RepRank: 2.00000000
-2022-08-04 13:27:10,587 | TRAIN LOG: steps 23000, episodes 766, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 263.62 steps/s
-2022-08-04 13:27:10,625 | TEST LOG: steps 23000, episodes 766, returns 16.20/15.00/8.00/30.00/5 (mean/median/min/max/num), 263.62 steps/s
-2022-08-04 13:27:11,164 | TRAIN LOG: steps 23000, Overestimation: 0.72131703/0.36112177/1.00015271 (mean/min/max)
-2022-08-04 13:27:11,164 | TRAIN LOG: steps 23000, OverestimationCurrentPi: 0.15213503/-0.52223979/0.82308102 (mean/min/max)
-2022-08-04 13:27:11,165 | TRAIN LOG: steps 23000, RepRank: 2.00000000
-2022-08-04 13:27:14,223 | TRAIN LOG: steps 24000, episodes 800, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 277.98 steps/s
-2022-08-04 13:27:14,254 | TEST LOG: steps 24000, episodes 800, returns 16.20/17.00/11.00/20.00/5 (mean/median/min/max/num), 277.98 steps/s
-2022-08-04 13:27:14,767 | TRAIN LOG: steps 24000, Overestimation: 0.72071232/0.36027098/0.99996090 (mean/min/max)
-2022-08-04 13:27:14,768 | TRAIN LOG: steps 24000, OverestimationCurrentPi: -0.15451413/-0.58511334/-0.00003910 (mean/min/max)
-2022-08-04 13:27:14,769 | TRAIN LOG: steps 24000, RepRank: 2.00000000
-2022-08-04 13:27:17,790 | TRAIN LOG: steps 25000, episodes 833, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 282.83 steps/s
-2022-08-04 13:27:17,808 | TEST LOG: steps 25000, episodes 833, returns 8.40/8.00/3.00/15.00/5 (mean/median/min/max/num), 282.83 steps/s
-2022-08-04 13:27:18,352 | TRAIN LOG: steps 25000, Overestimation: 0.72167477/0.36176932/1.00081253 (mean/min/max)
-2022-08-04 13:27:18,352 | TRAIN LOG: steps 25000, OverestimationCurrentPi: -0.11519477/-0.16810917/-0.00004369 (mean/min/max)
-2022-08-04 13:27:18,353 | TRAIN LOG: steps 25000, RepRank: 2.00000000
-2022-08-04 13:27:21,972 | TRAIN LOG: steps 26000, episodes 866, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 240.17 steps/s
-2022-08-04 13:27:22,018 | TEST LOG: steps 26000, episodes 866, returns 16.80/19.00/3.00/30.00/5 (mean/median/min/max/num), 240.17 steps/s
-2022-08-04 13:27:22,564 | TRAIN LOG: steps 26000, Overestimation: 0.72173639/0.36170602/1.00018978 (mean/min/max)
-2022-08-04 13:27:22,565 | TRAIN LOG: steps 26000, OverestimationCurrentPi: 0.14970080/-0.57485795/0.82344955 (mean/min/max)
-2022-08-04 13:27:22,566 | TRAIN LOG: steps 26000, RepRank: 2.00000000
-2022-08-04 13:27:25,942 | TRAIN LOG: steps 27000, episodes 900, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 254.87 steps/s
-2022-08-04 13:27:25,976 | TEST LOG: steps 27000, episodes 900, returns 14.00/15.00/6.00/23.00/5 (mean/median/min/max/num), 254.87 steps/s
-2022-08-04 13:27:26,573 | TRAIN LOG: steps 27000, Overestimation: 0.72293308/0.36314183/0.99999166 (mean/min/max)
-2022-08-04 13:27:26,574 | TRAIN LOG: steps 27000, OverestimationCurrentPi: -0.11425106/-0.37195703/0.00541798 (mean/min/max)
-2022-08-04 13:27:26,575 | TRAIN LOG: steps 27000, RepRank: 2.00000000
-2022-08-04 13:27:30,506 | TRAIN LOG: steps 28000, episodes 933, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 220.75 steps/s
-2022-08-04 13:27:30,531 | TEST LOG: steps 28000, episodes 933, returns 10.80/11.00/5.00/15.00/5 (mean/median/min/max/num), 220.75 steps/s
-2022-08-04 13:27:31,154 | TRAIN LOG: steps 28000, Overestimation: 0.72242043/0.36188602/0.99991721 (mean/min/max)
-2022-08-04 13:27:31,155 | TRAIN LOG: steps 28000, OverestimationCurrentPi: -0.13044961/-0.44210030/-0.00008279 (mean/min/max)
-2022-08-04 13:27:31,156 | TRAIN LOG: steps 28000, RepRank: 2.00000000
-2022-08-04 13:27:35,686 | TRAIN LOG: steps 29000, episodes 966, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 194.02 steps/s
-2022-08-04 13:27:35,717 | TEST LOG: steps 29000, episodes 966, returns 12.00/14.00/3.00/17.00/5 (mean/median/min/max/num), 194.02 steps/s
-2022-08-04 13:27:36,339 | TRAIN LOG: steps 29000, Overestimation: 0.72236810/0.36266100/0.99996030 (mean/min/max)
-2022-08-04 13:27:36,340 | TRAIN LOG: steps 29000, OverestimationCurrentPi: -0.15388293/-0.47992382/-0.00003970 (mean/min/max)
-2022-08-04 13:27:36,341 | TRAIN LOG: steps 29000, RepRank: 2.00000000
-2022-08-04 13:27:39,549 | TRAIN LOG: steps 30000, episodes 1000, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 260.94 steps/s
-2022-08-04 13:27:39,577 | TEST LOG: steps 30000, episodes 1000, returns 13.20/11.00/8.00/21.00/5 (mean/median/min/max/num), 260.94 steps/s
-2022-08-04 13:27:40,265 | TRAIN LOG: steps 30000, Overestimation: 0.72282855/0.36261433/1.00010121 (mean/min/max)
-2022-08-04 13:27:40,266 | TRAIN LOG: steps 30000, OverestimationCurrentPi: -0.12610798/-0.46876753/0.00814781 (mean/min/max)
-2022-08-04 13:27:40,268 | TRAIN LOG: steps 30000, RepRank: 2.00000000
+2022-08-04 16:10:33,293 | exp_name: test_v7/four_room/iql_offline/test_linear
+2022-08-04 16:10:33,293 | data_root: /home/han/Projects/offline_online/data/output
+2022-08-04 16:10:33,293 | run: 0
+2022-08-04 16:10:33,293 | param_setting: 0
+2022-08-04 16:10:33,293 | log_observations: False
+2022-08-04 16:10:33,293 | tensorboard_logs: False
+2022-08-04 16:10:33,293 | batch_size: 32
+2022-08-04 16:10:33,293 | replay_with_len: False
+2022-08-04 16:10:33,293 | memory_size: 0
+2022-08-04 16:10:33,293 | evaluation_criteria: steps
+2022-08-04 16:10:33,293 | checkpoints: False
+2022-08-04 16:10:33,294 | warm_up_step: 0
+2022-08-04 16:10:33,294 | device: cpu
+2022-08-04 16:10:33,294 | env_name: FourRoom
+2022-08-04 16:10:33,294 | state_dim: (2,)
+2022-08-04 16:10:33,294 | action_dim: 4
+2022-08-04 16:10:33,294 | max_steps: 100000
+2022-08-04 16:10:33,294 | log_interval: 1000
+2022-08-04 16:10:33,294 | save_interval: 0
+2022-08-04 16:10:33,294 | eval_interval: 1000
+2022-08-04 16:10:33,294 | num_eval_episodes: 5
+2022-08-04 16:10:33,294 | timeout: 30
+2022-08-04 16:10:33,294 | stats_queue_size: 5
+2022-08-04 16:10:33,294 | tensorboard_interval: 100
+2022-08-04 16:10:33,294 | state_norm_coef: 0
+2022-08-04 16:10:33,294 | reward_norm_coef: 1.0
+2022-08-04 16:10:33,294 | early_cut_off: False
+2022-08-04 16:10:33,294 | testset_paths: None
+2022-08-04 16:10:33,294 | tester_fn_config: {}
+2022-08-04 16:10:33,295 | evalset_path: {'dataEps50': 'data/dataset/four_room/transitions_50k/eps50/0_run.pkl'}
+2022-08-04 16:10:33,295 | true_value_paths: None
+2022-08-04 16:10:33,295 | visualize: False
+2022-08-04 16:10:33,295 | evaluate_overestimation: True
+2022-08-04 16:10:33,295 | evaluate_feature_mdp: False
+2022-08-04 16:10:33,295 | evaluate_action_value: True
+2022-08-04 16:10:33,295 | polyak: 0.995
+2022-08-04 16:10:33,295 | agent: IQLOffline
+2022-08-04 16:10:33,295 | target_network_update_freq: 1
+2022-08-04 16:10:33,295 | awac_lambda: 1
+2022-08-04 16:10:33,295 | awac_remove_const: False
+2022-08-04 16:10:33,295 | load_offline_data: True
+2022-08-04 16:10:33,295 | clip_grad_param: 100
+2022-08-04 16:10:33,295 | expectile: 0.7
+2022-08-04 16:10:33,295 | temperature: 3
+2022-08-04 16:10:33,295 | discount: 0.99
+2022-08-04 16:10:33,295 | agent_name: IQLOffline
+2022-08-04 16:10:33,295 | rep_fn_config: {'rep_type': 'one_hot', 'range': [11, 11], 'in_dim': 2, 'train_params': True}
+2022-08-04 16:10:33,296 | policy_fn_config: {'policy_type': 'policy-discrete', 'network_type': 'fc', 'in_dim': [121], 'hidden_units': [], 'load_params': False, 'train_params': True}
+2022-08-04 16:10:33,296 | critic_fn_config: {'network_type': 'fc', 'in_dim': [121], 'hidden_units': [], 'load_params': False, 'train_params': True}
+2022-08-04 16:10:33,296 | val_fn_config: {'network_type': 'fc', 'in_dim': [121], 'hidden_units': [], 'load_params': False, 'train_params': True}
+2022-08-04 16:10:33,296 | update_network: True
+2022-08-04 16:10:33,296 | use_target_network: True
+2022-08-04 16:10:33,296 | optimizer_type: Adam
+2022-08-04 16:10:33,296 | replay: True
+2022-08-04 16:10:33,296 | eval_episodes: 0
+2022-08-04 16:10:33,296 | save_params: True
+2022-08-04 16:10:33,296 | evaluate_rep_rank: True
+2022-08-04 16:10:33,296 | offline_data_path: {'optimal': 'data/dataset/four_room/transitions_50k/train_5k/{}_run.pkl'}
+2022-08-04 16:10:33,296 | learning_rate: 0.01
+2022-08-04 16:10:33,296 | cumulative: 1
+2022-08-04 16:10:33,296 | id: 0
+2022-08-04 16:10:33,296 | seed: 0
+2022-08-04 16:10:33,296 | rep_fn: <function NetFactory.get_rep_fn.<locals>.<lambda> at 0x7f0214842790>
+2022-08-04 16:10:34,474 | TRAIN LOG: steps 0, episodes   0, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 19932.06 steps/s
+2022-08-04 16:10:34,525 | TEST LOG: steps 0, episodes   0, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 19932.06 steps/s
+2022-08-04 16:10:34,564 | TRAIN LOG: steps 0, Overestimation: -0.06042876/-0.21905410/0.19490035 (mean/min/max)
+2022-08-04 16:10:34,565 | TRAIN LOG: steps 0, OverestimationCurrentPi: -0.05223544/-0.21759173/0.17166895 (mean/min/max)
+2022-08-04 16:10:35,165 | TRAIN LOG: steps 0, RepRank: 101.00000000
+2022-08-04 16:10:38,476 | TRAIN LOG: steps 1000, episodes  33, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 253.10 steps/s
+2022-08-04 16:10:38,507 | TEST LOG: steps 1000, episodes  33, returns 10.60/8.00/3.00/19.00/5 (mean/median/min/max/num), 253.10 steps/s
+2022-08-04 16:10:39,488 | TRAIN LOG: steps 1000, Overestimation: 0.50064040/0.14904572/1.01580143 (mean/min/max)
+2022-08-04 16:10:39,489 | TRAIN LOG: steps 1000, OverestimationCurrentPi: -0.35281795/-0.44040810/-0.00384486 (mean/min/max)
+2022-08-04 16:10:39,981 | TRAIN LOG: steps 1000, RepRank: 101.00000000
+2022-08-04 16:10:42,614 | TRAIN LOG: steps 2000, episodes  66, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 243.52 steps/s
+2022-08-04 16:10:42,631 | TEST LOG: steps 2000, episodes  66, returns 10.20/10.00/3.00/16.00/5 (mean/median/min/max/num), 243.52 steps/s
+2022-08-04 16:10:43,076 | TRAIN LOG: steps 2000, Overestimation: 0.64918118/0.27424377/1.00728273 (mean/min/max)
+2022-08-04 16:10:43,077 | TRAIN LOG: steps 2000, OverestimationCurrentPi: -0.19038287/-0.26350110/0.00000191 (mean/min/max)
+2022-08-04 16:10:43,597 | TRAIN LOG: steps 2000, RepRank: 101.00000000
+2022-08-04 16:10:46,412 | TRAIN LOG: steps 3000, episodes 100, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 264.48 steps/s
+2022-08-04 16:10:46,429 | TEST LOG: steps 3000, episodes 100, returns 9.40/11.00/3.00/15.00/5 (mean/median/min/max/num), 264.48 steps/s
+2022-08-04 16:10:46,892 | TRAIN LOG: steps 3000, Overestimation: 0.69121682/0.30046183/1.01658630 (mean/min/max)
+2022-08-04 16:10:46,892 | TRAIN LOG: steps 3000, OverestimationCurrentPi: -0.14272491/-0.20902114/0.01278234 (mean/min/max)
+2022-08-04 16:10:47,461 | TRAIN LOG: steps 3000, RepRank: 101.00000000
+2022-08-04 16:10:51,051 | TRAIN LOG: steps 4000, episodes 133, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 216.37 steps/s
+2022-08-04 16:10:51,065 | TEST LOG: steps 4000, episodes 133, returns 8.20/9.00/2.00/15.00/5 (mean/median/min/max/num), 216.37 steps/s
+2022-08-04 16:10:51,519 | TRAIN LOG: steps 4000, Overestimation: 0.69800932/0.30973542/1.00274277 (mean/min/max)
+2022-08-04 16:10:51,519 | TRAIN LOG: steps 4000, OverestimationCurrentPi: -0.13456902/-0.20378154/-0.00118256 (mean/min/max)
+2022-08-04 16:10:52,060 | TRAIN LOG: steps 4000, RepRank: 101.00000000
+2022-08-04 16:10:54,688 | TRAIN LOG: steps 5000, episodes 166, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 275.97 steps/s
+2022-08-04 16:10:54,701 | TEST LOG: steps 5000, episodes 166, returns 7.80/7.00/4.00/14.00/5 (mean/median/min/max/num), 275.97 steps/s
+2022-08-04 16:10:55,233 | TRAIN LOG: steps 5000, Overestimation: 0.70817619/0.32484162/1.01663399 (mean/min/max)
+2022-08-04 16:10:55,233 | TRAIN LOG: steps 5000, OverestimationCurrentPi: -0.13915864/-0.21892517/-0.00223577 (mean/min/max)
+2022-08-04 16:10:55,793 | TRAIN LOG: steps 5000, RepRank: 101.00000000
+2022-08-04 16:10:58,496 | TRAIN LOG: steps 6000, episodes 200, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 263.54 steps/s
+2022-08-04 16:10:58,510 | TEST LOG: steps 6000, episodes 200, returns 7.80/9.00/4.00/11.00/5 (mean/median/min/max/num), 263.54 steps/s
+2022-08-04 16:10:58,974 | TRAIN LOG: steps 6000, Overestimation: 0.71477701/0.34702379/1.03083074 (mean/min/max)
+2022-08-04 16:10:58,975 | TRAIN LOG: steps 6000, OverestimationCurrentPi: -0.13039627/-0.22348761/0.03083074 (mean/min/max)
+2022-08-04 16:10:59,548 | TRAIN LOG: steps 6000, RepRank: 101.00000000
+2022-08-04 16:11:02,296 | TRAIN LOG: steps 7000, episodes 233, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 264.15 steps/s
+2022-08-04 16:11:02,311 | TEST LOG: steps 7000, episodes 233, returns 8.20/9.00/2.00/11.00/5 (mean/median/min/max/num), 264.15 steps/s
+2022-08-04 16:11:02,791 | TRAIN LOG: steps 7000, Overestimation: 0.70554368/0.32520604/1.01318312 (mean/min/max)
+2022-08-04 16:11:02,791 | TRAIN LOG: steps 7000, OverestimationCurrentPi: -0.13388385/-0.19182228/0.01318312 (mean/min/max)
+2022-08-04 16:11:03,400 | TRAIN LOG: steps 7000, RepRank: 101.00000000
+2022-08-04 16:11:06,172 | TRAIN LOG: steps 8000, episodes 266, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 259.01 steps/s
+2022-08-04 16:11:06,181 | TEST LOG: steps 8000, episodes 266, returns 5.60/4.00/2.00/15.00/5 (mean/median/min/max/num), 259.01 steps/s
+2022-08-04 16:11:06,684 | TRAIN LOG: steps 8000, Overestimation: 0.69381390/0.32763326/1.00763345 (mean/min/max)
+2022-08-04 16:11:06,685 | TRAIN LOG: steps 8000, OverestimationCurrentPi: -0.13561158/-0.28266882/0.00763345 (mean/min/max)
+2022-08-04 16:11:07,222 | TRAIN LOG: steps 8000, RepRank: 101.00000000
+2022-08-04 16:11:10,140 | TRAIN LOG: steps 9000, episodes 300, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 252.61 steps/s
+2022-08-04 16:11:10,154 | TEST LOG: steps 9000, episodes 300, returns 8.40/8.00/1.00/15.00/5 (mean/median/min/max/num), 252.61 steps/s
+2022-08-04 16:11:10,630 | TRAIN LOG: steps 9000, Overestimation: 0.71701464/0.34729379/1.02318048 (mean/min/max)
+2022-08-04 16:11:10,630 | TRAIN LOG: steps 9000, OverestimationCurrentPi: -0.11471307/-0.17236350/0.02318048 (mean/min/max)
+2022-08-04 16:11:11,137 | TRAIN LOG: steps 9000, RepRank: 101.00000000
+2022-08-04 16:11:13,924 | TRAIN LOG: steps 10000, episodes 333, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 265.23 steps/s
+2022-08-04 16:11:13,939 | TEST LOG: steps 10000, episodes 333, returns 9.20/7.00/4.00/17.00/5 (mean/median/min/max/num), 265.23 steps/s
+2022-08-04 16:11:14,506 | TRAIN LOG: steps 10000, Overestimation: 0.70832121/0.33172941/1.01260769 (mean/min/max)
+2022-08-04 16:11:14,507 | TRAIN LOG: steps 10000, OverestimationCurrentPi: -0.12645627/-0.19537761/0.01260769 (mean/min/max)
+2022-08-04 16:11:15,056 | TRAIN LOG: steps 10000, RepRank: 101.00000000
+2022-08-04 16:11:17,766 | TRAIN LOG: steps 11000, episodes 366, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 261.35 steps/s
+2022-08-04 16:11:17,788 | TEST LOG: steps 11000, episodes 366, returns 13.60/15.00/8.00/16.00/5 (mean/median/min/max/num), 261.35 steps/s
+2022-08-04 16:11:18,302 | TRAIN LOG: steps 11000, Overestimation: 0.69491952/0.32773083/1.03420770 (mean/min/max)
+2022-08-04 16:11:18,302 | TRAIN LOG: steps 11000, OverestimationCurrentPi: -0.13954590/-0.21100425/-0.00869060 (mean/min/max)
+2022-08-04 16:11:18,863 | TRAIN LOG: steps 11000, RepRank: 101.00000000
+2022-08-04 16:11:22,238 | TRAIN LOG: steps 12000, episodes 400, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 224.73 steps/s
+2022-08-04 16:11:22,257 | TEST LOG: steps 12000, episodes 400, returns 7.60/9.00/2.00/15.00/5 (mean/median/min/max/num), 224.73 steps/s
+2022-08-04 16:11:22,781 | TRAIN LOG: steps 12000, Overestimation: 0.69349762/0.32076925/1.02046704 (mean/min/max)
+2022-08-04 16:11:22,782 | TRAIN LOG: steps 12000, OverestimationCurrentPi: -0.14369437/-0.21015273/-0.01655579 (mean/min/max)
+2022-08-04 16:11:23,335 | TRAIN LOG: steps 12000, RepRank: 101.00000000
+2022-08-04 16:11:27,124 | TRAIN LOG: steps 13000, episodes 433, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 205.49 steps/s
+2022-08-04 16:11:27,135 | TEST LOG: steps 13000, episodes 433, returns 6.60/8.00/2.00/9.00/5 (mean/median/min/max/num), 205.49 steps/s
+2022-08-04 16:11:27,613 | TRAIN LOG: steps 13000, Overestimation: 0.70072565/0.33956033/0.99374092 (mean/min/max)
+2022-08-04 16:11:27,614 | TRAIN LOG: steps 13000, OverestimationCurrentPi: -0.14320609/-0.20158522/-0.01876426 (mean/min/max)
+2022-08-04 16:11:28,152 | TRAIN LOG: steps 13000, RepRank: 101.00000000
+2022-08-04 16:11:31,035 | TRAIN LOG: steps 14000, episodes 466, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 256.46 steps/s
+2022-08-04 16:11:31,057 | TEST LOG: steps 14000, episodes 466, returns 7.20/4.00/3.00/16.00/5 (mean/median/min/max/num), 256.46 steps/s
+2022-08-04 16:11:31,672 | TRAIN LOG: steps 14000, Overestimation: 0.68964754/0.31870162/0.99675310 (mean/min/max)
+2022-08-04 16:11:31,673 | TRAIN LOG: steps 14000, OverestimationCurrentPi: -0.14107448/-0.21195929/-0.00796312 (mean/min/max)
+2022-08-04 16:11:32,215 | TRAIN LOG: steps 14000, RepRank: 101.00000000
+2022-08-04 16:11:35,629 | TRAIN LOG: steps 15000, episodes 500, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 218.75 steps/s
+2022-08-04 16:11:35,646 | TEST LOG: steps 15000, episodes 500, returns 8.00/7.00/2.00/16.00/5 (mean/median/min/max/num), 218.75 steps/s
+2022-08-04 16:11:36,289 | TRAIN LOG: steps 15000, Overestimation: 0.72668603/0.33623660/1.04629314 (mean/min/max)
+2022-08-04 16:11:36,289 | TRAIN LOG: steps 15000, OverestimationCurrentPi: -0.09924054/-0.16234102/0.03009701 (mean/min/max)
+2022-08-04 16:11:36,906 | TRAIN LOG: steps 15000, RepRank: 101.00000000
+2022-08-04 16:11:39,854 | TRAIN LOG: steps 16000, episodes 533, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 237.64 steps/s
+2022-08-04 16:11:39,869 | TEST LOG: steps 16000, episodes 533, returns 9.00/7.00/5.00/15.00/5 (mean/median/min/max/num), 237.64 steps/s
+2022-08-04 16:11:40,354 | TRAIN LOG: steps 16000, Overestimation: 0.70147705/0.32937932/1.01912928 (mean/min/max)
+2022-08-04 16:11:40,355 | TRAIN LOG: steps 16000, OverestimationCurrentPi: -0.14039655/-0.20171575/-0.00076145 (mean/min/max)
+2022-08-04 16:11:41,010 | TRAIN LOG: steps 16000, RepRank: 101.00000000
+2022-08-04 16:11:44,183 | TRAIN LOG: steps 17000, episodes 566, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 231.82 steps/s
+2022-08-04 16:11:44,197 | TEST LOG: steps 17000, episodes 566, returns 6.20/4.00/2.00/16.00/5 (mean/median/min/max/num), 231.82 steps/s
+2022-08-04 16:11:44,841 | TRAIN LOG: steps 17000, Overestimation: 0.70392190/0.31713486/1.00260711 (mean/min/max)
+2022-08-04 16:11:44,842 | TRAIN LOG: steps 17000, OverestimationCurrentPi: -0.11770584/-0.22075020/0.00260711 (mean/min/max)
+2022-08-04 16:11:45,638 | TRAIN LOG: steps 17000, RepRank: 101.00000000
+2022-08-04 16:11:49,831 | TRAIN LOG: steps 18000, episodes 600, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 177.48 steps/s
+2022-08-04 16:11:49,844 | TEST LOG: steps 18000, episodes 600, returns 6.80/7.00/3.00/10.00/5 (mean/median/min/max/num), 177.48 steps/s
+2022-08-04 16:11:50,329 | TRAIN LOG: steps 18000, Overestimation: 0.70221775/0.32348114/0.99682391 (mean/min/max)
+2022-08-04 16:11:50,330 | TRAIN LOG: steps 18000, OverestimationCurrentPi: -0.13447679/-0.21721920/-0.00317609 (mean/min/max)
+2022-08-04 16:11:50,854 | TRAIN LOG: steps 18000, RepRank: 101.00000000
+2022-08-04 16:11:53,532 | TRAIN LOG: steps 19000, episodes 633, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 271.17 steps/s
+2022-08-04 16:11:53,551 | TEST LOG: steps 19000, episodes 633, returns 10.80/11.00/8.00/15.00/5 (mean/median/min/max/num), 271.17 steps/s
+2022-08-04 16:11:54,018 | TRAIN LOG: steps 19000, Overestimation: 0.68630744/0.31565356/1.02043676 (mean/min/max)
+2022-08-04 16:11:54,019 | TRAIN LOG: steps 19000, OverestimationCurrentPi: -0.15287821/-0.21956041/-0.02106327 (mean/min/max)
+2022-08-04 16:11:54,562 | TRAIN LOG: steps 19000, RepRank: 101.00000000
+2022-08-04 16:11:57,214 | TRAIN LOG: steps 20000, episodes 666, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 273.01 steps/s
+2022-08-04 16:11:57,230 | TEST LOG: steps 20000, episodes 666, returns 9.60/11.00/5.00/15.00/5 (mean/median/min/max/num), 273.01 steps/s
+2022-08-04 16:11:57,694 | TRAIN LOG: steps 20000, Overestimation: 0.69848391/0.30910254/1.00517428 (mean/min/max)
+2022-08-04 16:11:57,694 | TRAIN LOG: steps 20000, OverestimationCurrentPi: -0.12608891/-0.18162971/0.00517428 (mean/min/max)
+2022-08-04 16:11:58,232 | TRAIN LOG: steps 20000, RepRank: 101.00000000
+2022-08-04 16:12:00,878 | TRAIN LOG: steps 21000, episodes 700, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 274.16 steps/s
+2022-08-04 16:12:00,897 | TEST LOG: steps 21000, episodes 700, returns 11.80/14.00/3.00/16.00/5 (mean/median/min/max/num), 274.16 steps/s
+2022-08-04 16:12:01,507 | TRAIN LOG: steps 21000, Overestimation: 0.73945373/0.34625626/1.05437577 (mean/min/max)
+2022-08-04 16:12:01,507 | TRAIN LOG: steps 21000, OverestimationCurrentPi: -0.08215507/-0.15614646/0.05437577 (mean/min/max)
+2022-08-04 16:12:02,033 | TRAIN LOG: steps 21000, RepRank: 101.00000000
+2022-08-04 16:12:04,675 | TRAIN LOG: steps 22000, episodes 733, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 264.74 steps/s
+2022-08-04 16:12:04,686 | TEST LOG: steps 22000, episodes 733, returns 7.00/7.00/5.00/9.00/5 (mean/median/min/max/num), 264.74 steps/s
+2022-08-04 16:12:05,145 | TRAIN LOG: steps 22000, Overestimation: 0.71217763/0.32070923/1.02922511 (mean/min/max)
+2022-08-04 16:12:05,146 | TRAIN LOG: steps 22000, OverestimationCurrentPi: -0.12239900/-0.17297419/0.02922511 (mean/min/max)
+2022-08-04 16:12:05,676 | TRAIN LOG: steps 22000, RepRank: 101.00000000
+2022-08-04 16:12:08,293 | TRAIN LOG: steps 23000, episodes 766, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 277.30 steps/s
+2022-08-04 16:12:08,309 | TEST LOG: steps 23000, episodes 766, returns 9.40/8.00/4.00/15.00/5 (mean/median/min/max/num), 277.30 steps/s
+2022-08-04 16:12:08,769 | TRAIN LOG: steps 23000, Overestimation: 0.69768743/0.31292039/1.00040984 (mean/min/max)
+2022-08-04 16:12:08,770 | TRAIN LOG: steps 23000, OverestimationCurrentPi: -0.14144769/-0.20469027/-0.01073396 (mean/min/max)
+2022-08-04 16:12:09,283 | TRAIN LOG: steps 23000, RepRank: 101.00000000
+2022-08-04 16:12:12,000 | TRAIN LOG: steps 24000, episodes 800, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 270.92 steps/s
+2022-08-04 16:12:12,021 | TEST LOG: steps 24000, episodes 800, returns 12.60/14.00/3.00/18.00/5 (mean/median/min/max/num), 270.92 steps/s
+2022-08-04 16:12:12,480 | TRAIN LOG: steps 24000, Overestimation: 0.70031367/0.32408577/0.98844683 (mean/min/max)
+2022-08-04 16:12:12,481 | TRAIN LOG: steps 24000, OverestimationCurrentPi: -0.13047460/-0.21002539/-0.03509569 (mean/min/max)
+2022-08-04 16:12:13,128 | TRAIN LOG: steps 24000, RepRank: 101.00000000
+2022-08-04 16:12:16,042 | TRAIN LOG: steps 25000, episodes 833, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 248.71 steps/s
+2022-08-04 16:12:16,061 | TEST LOG: steps 25000, episodes 833, returns 8.40/8.00/3.00/15.00/5 (mean/median/min/max/num), 248.71 steps/s
+2022-08-04 16:12:16,546 | TRAIN LOG: steps 25000, Overestimation: 0.69945512/0.32925749/1.02365410 (mean/min/max)
+2022-08-04 16:12:16,546 | TRAIN LOG: steps 25000, OverestimationCurrentPi: -0.14531253/-0.20549651/-0.01389265 (mean/min/max)
+2022-08-04 16:12:17,138 | TRAIN LOG: steps 25000, RepRank: 101.00000000
+2022-08-04 16:12:19,920 | TRAIN LOG: steps 26000, episodes 866, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 259.15 steps/s
+2022-08-04 16:12:19,937 | TEST LOG: steps 26000, episodes 866, returns 10.60/14.00/3.00/17.00/5 (mean/median/min/max/num), 259.15 steps/s
+2022-08-04 16:12:20,397 | TRAIN LOG: steps 26000, Overestimation: 0.71154829/0.32065153/1.02191806 (mean/min/max)
+2022-08-04 16:12:20,398 | TRAIN LOG: steps 26000, OverestimationCurrentPi: -0.11081619/-0.21425434/0.02191806 (mean/min/max)
+2022-08-04 16:12:20,900 | TRAIN LOG: steps 26000, RepRank: 101.00000000
+2022-08-04 16:12:23,509 | TRAIN LOG: steps 27000, episodes 900, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 279.97 steps/s
+2022-08-04 16:12:23,529 | TEST LOG: steps 27000, episodes 900, returns 11.80/15.00/6.00/16.00/5 (mean/median/min/max/num), 279.97 steps/s
+2022-08-04 16:12:23,983 | TRAIN LOG: steps 27000, Overestimation: 0.69437630/0.32885760/1.00630379 (mean/min/max)
+2022-08-04 16:12:23,984 | TRAIN LOG: steps 27000, OverestimationCurrentPi: -0.14127816/-0.20318722/-0.02997756 (mean/min/max)
+2022-08-04 16:12:24,501 | TRAIN LOG: steps 27000, RepRank: 101.00000000
+2022-08-04 16:12:27,080 | TRAIN LOG: steps 28000, episodes 933, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 281.62 steps/s
+2022-08-04 16:12:27,096 | TEST LOG: steps 28000, episodes 933, returns 10.20/11.00/5.00/15.00/5 (mean/median/min/max/num), 281.62 steps/s
+2022-08-04 16:12:27,745 | TRAIN LOG: steps 28000, Overestimation: 0.70221824/0.33168417/0.99925995 (mean/min/max)
+2022-08-04 16:12:27,745 | TRAIN LOG: steps 28000, OverestimationCurrentPi: -0.13775285/-0.19777571/-0.00536549 (mean/min/max)
+2022-08-04 16:12:28,255 | TRAIN LOG: steps 28000, RepRank: 101.00000000
+2022-08-04 16:12:30,861 | TRAIN LOG: steps 29000, episodes 966, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 265.65 steps/s
+2022-08-04 16:12:30,876 | TEST LOG: steps 29000, episodes 966, returns 9.20/11.00/3.00/15.00/5 (mean/median/min/max/num), 265.65 steps/s
+2022-08-04 16:12:31,333 | TRAIN LOG: steps 29000, Overestimation: 0.70644890/0.32471746/1.02622890 (mean/min/max)
+2022-08-04 16:12:31,334 | TRAIN LOG: steps 29000, OverestimationCurrentPi: -0.12734216/-0.21069328/-0.00658345 (mean/min/max)
+2022-08-04 16:12:31,839 | TRAIN LOG: steps 29000, RepRank: 101.00000000
+2022-08-04 16:12:34,429 | TRAIN LOG: steps 30000, episodes 1000, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 281.49 steps/s
+2022-08-04 16:12:34,449 | TEST LOG: steps 30000, episodes 1000, returns 12.40/11.00/8.00/17.00/5 (mean/median/min/max/num), 281.49 steps/s
+2022-08-04 16:12:34,940 | TRAIN LOG: steps 30000, Overestimation: 0.71335064/0.33387798/1.01016521 (mean/min/max)
+2022-08-04 16:12:34,941 | TRAIN LOG: steps 30000, OverestimationCurrentPi: -0.11334749/-0.18754142/0.00914276 (mean/min/max)
+2022-08-04 16:12:35,449 | TRAIN LOG: steps 30000, RepRank: 101.00000000
+2022-08-04 16:12:38,043 | TRAIN LOG: steps 31000, episodes 1033, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 278.32 steps/s
+2022-08-04 16:12:38,063 | TEST LOG: steps 31000, episodes 1033, returns 12.40/13.00/9.00/15.00/5 (mean/median/min/max/num), 278.32 steps/s
+2022-08-04 16:12:38,518 | TRAIN LOG: steps 31000, Overestimation: 0.70180875/0.31486928/1.00840759 (mean/min/max)
+2022-08-04 16:12:38,519 | TRAIN LOG: steps 31000, OverestimationCurrentPi: -0.13548298/-0.20546006/0.00397682 (mean/min/max)
+2022-08-04 16:12:39,043 | TRAIN LOG: steps 31000, RepRank: 101.00000000
+2022-08-04 16:12:41,697 | TRAIN LOG: steps 32000, episodes 1066, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 275.20 steps/s
+2022-08-04 16:12:41,711 | TEST LOG: steps 32000, episodes 1066, returns 9.00/11.00/2.00/15.00/5 (mean/median/min/max/num), 275.20 steps/s
+2022-08-04 16:12:42,168 | TRAIN LOG: steps 32000, Overestimation: 0.70484172/0.34498519/0.97729409 (mean/min/max)
+2022-08-04 16:12:42,168 | TRAIN LOG: steps 32000, OverestimationCurrentPi: -0.13029272/-0.19598320/-0.02977067 (mean/min/max)
+2022-08-04 16:12:42,687 | TRAIN LOG: steps 32000, RepRank: 101.00000000
+2022-08-04 16:12:45,286 | TRAIN LOG: steps 33000, episodes 1100, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 279.74 steps/s
+2022-08-04 16:12:45,301 | TEST LOG: steps 33000, episodes 1100, returns 9.20/9.00/6.00/13.00/5 (mean/median/min/max/num), 279.74 steps/s
+2022-08-04 16:12:45,759 | TRAIN LOG: steps 33000, Overestimation: 0.70408384/0.34276801/0.99832326 (mean/min/max)
+2022-08-04 16:12:45,760 | TRAIN LOG: steps 33000, OverestimationCurrentPi: -0.15005669/-0.21532487/-0.03389227 (mean/min/max)
+2022-08-04 16:12:46,349 | TRAIN LOG: steps 33000, RepRank: 101.00000000
+2022-08-04 16:12:49,227 | TRAIN LOG: steps 34000, episodes 1133, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 254.76 steps/s
+2022-08-04 16:12:49,249 | TEST LOG: steps 34000, episodes 1133, returns 11.00/11.00/5.00/16.00/5 (mean/median/min/max/num), 254.76 steps/s
+2022-08-04 16:12:49,731 | TRAIN LOG: steps 34000, Overestimation: 0.69709905/0.33543646/0.99945110 (mean/min/max)
+2022-08-04 16:12:49,732 | TRAIN LOG: steps 34000, OverestimationCurrentPi: -0.14883206/-0.21413132/-0.00508124 (mean/min/max)
+2022-08-04 16:12:50,253 | TRAIN LOG: steps 34000, RepRank: 101.00000000
+2022-08-04 16:12:52,847 | TRAIN LOG: steps 35000, episodes 1166, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 277.93 steps/s
+2022-08-04 16:12:52,859 | TEST LOG: steps 35000, episodes 1166, returns 7.40/7.00/3.00/12.00/5 (mean/median/min/max/num), 277.93 steps/s
+2022-08-04 16:12:53,311 | TRAIN LOG: steps 35000, Overestimation: 0.71047109/0.33361840/0.99378437 (mean/min/max)
+2022-08-04 16:12:53,311 | TRAIN LOG: steps 35000, OverestimationCurrentPi: -0.13707286/-0.19270687/-0.00621563 (mean/min/max)
+2022-08-04 16:12:53,805 | TRAIN LOG: steps 35000, RepRank: 101.00000000
+2022-08-04 16:12:56,396 | TRAIN LOG: steps 36000, episodes 1200, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 282.73 steps/s
+2022-08-04 16:12:56,409 | TEST LOG: steps 36000, episodes 1200, returns 8.00/9.00/1.00/14.00/5 (mean/median/min/max/num), 282.73 steps/s
+2022-08-04 16:12:56,866 | TRAIN LOG: steps 36000, Overestimation: 0.71974257/0.34453171/1.01303983 (mean/min/max)
+2022-08-04 16:12:56,867 | TRAIN LOG: steps 36000, OverestimationCurrentPi: -0.11627501/-0.18274515/0.01153398 (mean/min/max)
+2022-08-04 16:12:57,358 | TRAIN LOG: steps 36000, RepRank: 101.00000000
+2022-08-04 16:12:59,939 | TRAIN LOG: steps 37000, episodes 1233, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 283.37 steps/s
+2022-08-04 16:12:59,955 | TEST LOG: steps 37000, episodes 1233, returns 10.20/9.00/7.00/17.00/5 (mean/median/min/max/num), 283.37 steps/s
+2022-08-04 16:13:00,416 | TRAIN LOG: steps 37000, Overestimation: 0.72942291/0.33912003/1.02185726 (mean/min/max)
+2022-08-04 16:13:00,417 | TRAIN LOG: steps 37000, OverestimationCurrentPi: -0.10518152/-0.16604911/0.00622809 (mean/min/max)
+2022-08-04 16:13:00,915 | TRAIN LOG: steps 37000, RepRank: 101.00000000
+2022-08-04 16:13:03,496 | TRAIN LOG: steps 38000, episodes 1266, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 282.46 steps/s
+2022-08-04 16:13:03,511 | TEST LOG: steps 38000, episodes 1266, returns 9.80/14.00/1.00/15.00/5 (mean/median/min/max/num), 282.46 steps/s
+2022-08-04 16:13:04,208 | TRAIN LOG: steps 38000, Overestimation: 0.71693983/0.33544403/1.01147437 (mean/min/max)
+2022-08-04 16:13:04,208 | TRAIN LOG: steps 38000, OverestimationCurrentPi: -0.10980096/-0.18596708/0.00075436 (mean/min/max)
+2022-08-04 16:13:04,708 | TRAIN LOG: steps 38000, RepRank: 101.00000000
+2022-08-04 16:13:07,290 | TRAIN LOG: steps 39000, episodes 1300, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 264.66 steps/s
+2022-08-04 16:13:07,297 | TEST LOG: steps 39000, episodes 1300, returns 4.20/2.00/2.00/10.00/5 (mean/median/min/max/num), 264.66 steps/s
+2022-08-04 16:13:07,756 | TRAIN LOG: steps 39000, Overestimation: 0.71269501/0.34164971/1.02859235 (mean/min/max)
+2022-08-04 16:13:07,756 | TRAIN LOG: steps 39000, OverestimationCurrentPi: -0.11868621/-0.20232706/0.02859235 (mean/min/max)
+2022-08-04 16:13:08,491 | TRAIN LOG: steps 39000, RepRank: 101.00000000
+2022-08-04 16:13:11,340 | TRAIN LOG: steps 40000, episodes 1333, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 247.39 steps/s
+2022-08-04 16:13:11,349 | TEST LOG: steps 40000, episodes 1333, returns 5.80/5.00/4.00/11.00/5 (mean/median/min/max/num), 247.39 steps/s
+2022-08-04 16:13:11,803 | TRAIN LOG: steps 40000, Overestimation: 0.70116571/0.34401280/0.97019100 (mean/min/max)
+2022-08-04 16:13:11,804 | TRAIN LOG: steps 40000, OverestimationCurrentPi: -0.15133199/-0.19713890/-0.02980900 (mean/min/max)
+2022-08-04 16:13:12,339 | TRAIN LOG: steps 40000, RepRank: 101.00000000
+2022-08-04 16:13:15,006 | TRAIN LOG: steps 41000, episodes 1366, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 273.46 steps/s
+2022-08-04 16:13:15,025 | TEST LOG: steps 41000, episodes 1366, returns 11.60/15.00/3.00/16.00/5 (mean/median/min/max/num), 273.46 steps/s
+2022-08-04 16:13:15,482 | TRAIN LOG: steps 41000, Overestimation: 0.72583239/0.34380484/1.04374123 (mean/min/max)
+2022-08-04 16:13:15,483 | TRAIN LOG: steps 41000, OverestimationCurrentPi: -0.09637522/-0.16531186/0.05052393 (mean/min/max)
+2022-08-04 16:13:15,997 | TRAIN LOG: steps 41000, RepRank: 101.00000000
+2022-08-04 16:13:18,597 | TRAIN LOG: steps 42000, episodes 1400, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 280.03 steps/s
+2022-08-04 16:13:18,608 | TEST LOG: steps 42000, episodes 1400, returns 7.00/5.00/1.00/18.00/5 (mean/median/min/max/num), 280.03 steps/s
+2022-08-04 16:13:19,064 | TRAIN LOG: steps 42000, Overestimation: 0.71043959/0.35168338/1.00324118 (mean/min/max)
+2022-08-04 16:13:19,065 | TRAIN LOG: steps 42000, OverestimationCurrentPi: -0.11710324/-0.19399520/0.00324118 (mean/min/max)
+2022-08-04 16:13:19,672 | TRAIN LOG: steps 42000, RepRank: 101.00000000
+2022-08-04 16:13:22,267 | TRAIN LOG: steps 43000, episodes 1433, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 273.34 steps/s
+2022-08-04 16:13:22,278 | TEST LOG: steps 43000, episodes 1433, returns 6.60/6.00/3.00/11.00/5 (mean/median/min/max/num), 273.34 steps/s
+2022-08-04 16:13:22,740 | TRAIN LOG: steps 43000, Overestimation: 0.71010732/0.34691143/0.98670483 (mean/min/max)
+2022-08-04 16:13:22,741 | TRAIN LOG: steps 43000, OverestimationCurrentPi: -0.13701803/-0.22027939/-0.01882994 (mean/min/max)
+2022-08-04 16:13:23,261 | TRAIN LOG: steps 43000, RepRank: 101.00000000
+2022-08-04 16:13:25,864 | TRAIN LOG: steps 44000, episodes 1466, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 278.83 steps/s
+2022-08-04 16:13:25,876 | TEST LOG: steps 44000, episodes 1466, returns 6.80/7.00/2.00/11.00/5 (mean/median/min/max/num), 278.83 steps/s
+2022-08-04 16:13:26,336 | TRAIN LOG: steps 44000, Overestimation: 0.73361348/0.35915428/1.03771079 (mean/min/max)
+2022-08-04 16:13:26,337 | TRAIN LOG: steps 44000, OverestimationCurrentPi: -0.11044594/-0.16309296/0.03771079 (mean/min/max)
+2022-08-04 16:13:26,856 | TRAIN LOG: steps 44000, RepRank: 101.00000000
+2022-08-04 16:13:29,453 | TRAIN LOG: steps 45000, episodes 1500, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 279.61 steps/s
+2022-08-04 16:13:29,471 | TEST LOG: steps 45000, episodes 1500, returns 11.20/11.00/4.00/16.00/5 (mean/median/min/max/num), 279.61 steps/s
+2022-08-04 16:13:29,934 | TRAIN LOG: steps 45000, Overestimation: 0.72270905/0.35510272/1.01156855 (mean/min/max)
+2022-08-04 16:13:29,934 | TRAIN LOG: steps 45000, OverestimationCurrentPi: -0.11082767/-0.18939840/0.00534916 (mean/min/max)
+2022-08-04 16:13:30,459 | TRAIN LOG: steps 45000, RepRank: 101.00000000
+2022-08-04 16:13:33,059 | TRAIN LOG: steps 46000, episodes 1533, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 278.76 steps/s
+2022-08-04 16:13:33,077 | TEST LOG: steps 46000, episodes 1533, returns 11.00/11.00/5.00/16.00/5 (mean/median/min/max/num), 278.76 steps/s
+2022-08-04 16:13:33,535 | TRAIN LOG: steps 46000, Overestimation: 0.69158050/0.31450033/0.99921811 (mean/min/max)
+2022-08-04 16:13:33,536 | TRAIN LOG: steps 46000, OverestimationCurrentPi: -0.14526287/-0.21253707/-0.00078189 (mean/min/max)
+2022-08-04 16:13:34,075 | TRAIN LOG: steps 46000, RepRank: 101.00000000
+2022-08-04 16:13:36,685 | TRAIN LOG: steps 47000, episodes 1566, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 277.20 steps/s
+2022-08-04 16:13:36,696 | TEST LOG: steps 47000, episodes 1566, returns 6.80/4.00/2.00/17.00/5 (mean/median/min/max/num), 277.20 steps/s
+2022-08-04 16:13:37,156 | TRAIN LOG: steps 47000, Overestimation: 0.71088020/0.32684726/1.02493095 (mean/min/max)
+2022-08-04 16:13:37,157 | TRAIN LOG: steps 47000, OverestimationCurrentPi: -0.11834037/-0.24087703/0.02493095 (mean/min/max)
+2022-08-04 16:13:37,672 | TRAIN LOG: steps 47000, RepRank: 101.00000000
+2022-08-04 16:13:40,293 | TRAIN LOG: steps 48000, episodes 1600, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 278.04 steps/s
+2022-08-04 16:13:40,306 | TEST LOG: steps 48000, episodes 1600, returns 7.80/7.00/5.00/11.00/5 (mean/median/min/max/num), 278.04 steps/s
+2022-08-04 16:13:40,767 | TRAIN LOG: steps 48000, Overestimation: 0.71780902/0.34036738/1.00858736 (mean/min/max)
+2022-08-04 16:13:40,767 | TRAIN LOG: steps 48000, OverestimationCurrentPi: -0.12386842/-0.18364530/0.00281143 (mean/min/max)
+2022-08-04 16:13:41,285 | TRAIN LOG: steps 48000, RepRank: 101.00000000
+2022-08-04 16:13:43,896 | TRAIN LOG: steps 49000, episodes 1633, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 278.54 steps/s
+2022-08-04 16:13:43,907 | TEST LOG: steps 49000, episodes 1633, returns 6.60/5.00/3.00/13.00/5 (mean/median/min/max/num), 278.54 steps/s
+2022-08-04 16:13:44,696 | TRAIN LOG: steps 49000, Overestimation: 0.72563580/0.38500220/1.00718057 (mean/min/max)
+2022-08-04 16:13:44,697 | TRAIN LOG: steps 49000, OverestimationCurrentPi: -0.12761399/-0.22272965/-0.02295041 (mean/min/max)
+2022-08-04 16:13:45,194 | TRAIN LOG: steps 49000, RepRank: 101.00000000
+2022-08-04 16:13:47,825 | TRAIN LOG: steps 50000, episodes 1666, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 255.25 steps/s
+2022-08-04 16:13:47,842 | TEST LOG: steps 50000, episodes 1666, returns 10.40/10.00/7.00/14.00/5 (mean/median/min/max/num), 255.25 steps/s
+2022-08-04 16:13:48,307 | TRAIN LOG: steps 50000, Overestimation: 0.69734418/0.34175992/1.00548267 (mean/min/max)
+2022-08-04 16:13:48,308 | TRAIN LOG: steps 50000, OverestimationCurrentPi: -0.15507055/-0.22720968/-0.01757807 (mean/min/max)
+2022-08-04 16:13:48,826 | TRAIN LOG: steps 50000, RepRank: 101.00000000
+2022-08-04 16:13:51,468 | TRAIN LOG: steps 51000, episodes 1700, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 275.85 steps/s
+2022-08-04 16:13:51,488 | TEST LOG: steps 51000, episodes 1700, returns 11.80/12.00/6.00/16.00/5 (mean/median/min/max/num), 275.85 steps/s
+2022-08-04 16:13:51,996 | TRAIN LOG: steps 51000, Overestimation: 0.70135963/0.35471773/1.03468788 (mean/min/max)
+2022-08-04 16:13:51,997 | TRAIN LOG: steps 51000, OverestimationCurrentPi: -0.14722184/-0.24546730/-0.00022453 (mean/min/max)
+2022-08-04 16:13:52,510 | TRAIN LOG: steps 51000, RepRank: 101.00000000
+2022-08-04 16:13:55,265 | TRAIN LOG: steps 52000, episodes 1733, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 264.80 steps/s
+2022-08-04 16:13:55,280 | TEST LOG: steps 52000, episodes 1733, returns 8.80/9.00/5.00/14.00/5 (mean/median/min/max/num), 264.80 steps/s
+2022-08-04 16:13:55,760 | TRAIN LOG: steps 52000, Overestimation: 0.71373308/0.35947746/1.01923227 (mean/min/max)
+2022-08-04 16:13:55,761 | TRAIN LOG: steps 52000, OverestimationCurrentPi: -0.13732478/-0.20435973/-0.02732211 (mean/min/max)
+2022-08-04 16:13:56,318 | TRAIN LOG: steps 52000, RepRank: 101.00000000
+2022-08-04 16:13:59,375 | TRAIN LOG: steps 53000, episodes 1766, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 244.22 steps/s
+2022-08-04 16:13:59,392 | TEST LOG: steps 53000, episodes 1766, returns 10.20/9.00/7.00/17.00/5 (mean/median/min/max/num), 244.22 steps/s
+2022-08-04 16:13:59,857 | TRAIN LOG: steps 53000, Overestimation: 0.73182828/0.35283172/1.06081736 (mean/min/max)
+2022-08-04 16:13:59,857 | TRAIN LOG: steps 53000, OverestimationCurrentPi: -0.10342459/-0.16331982/0.04236197 (mean/min/max)
+2022-08-04 16:14:00,392 | TRAIN LOG: steps 53000, RepRank: 101.00000000
+2022-08-04 16:14:03,105 | TRAIN LOG: steps 54000, episodes 1800, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 269.30 steps/s
+2022-08-04 16:14:03,119 | TEST LOG: steps 54000, episodes 1800, returns 8.40/10.00/3.00/15.00/5 (mean/median/min/max/num), 269.30 steps/s
+2022-08-04 16:14:03,584 | TRAIN LOG: steps 54000, Overestimation: 0.71191920/0.34843761/0.99555075 (mean/min/max)
+2022-08-04 16:14:03,585 | TRAIN LOG: steps 54000, OverestimationCurrentPi: -0.12759802/-0.19488340/-0.00444925 (mean/min/max)
+2022-08-04 16:14:04,098 | TRAIN LOG: steps 54000, RepRank: 101.00000000
+2022-08-04 16:14:06,834 | TRAIN LOG: steps 55000, episodes 1833, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 269.23 steps/s
+2022-08-04 16:14:06,850 | TEST LOG: steps 55000, episodes 1833, returns 9.00/10.00/4.00/15.00/5 (mean/median/min/max/num), 269.23 steps/s
+2022-08-04 16:14:07,340 | TRAIN LOG: steps 55000, Overestimation: 0.72405322/0.37923962/1.00066972 (mean/min/max)
+2022-08-04 16:14:07,341 | TRAIN LOG: steps 55000, OverestimationCurrentPi: -0.11868953/-0.18468478/-0.00513872 (mean/min/max)
+2022-08-04 16:14:07,887 | TRAIN LOG: steps 55000, RepRank: 101.00000000
+2022-08-04 16:14:10,848 | TRAIN LOG: steps 56000, episodes 1866, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 250.13 steps/s
+2022-08-04 16:14:10,867 | TEST LOG: steps 56000, episodes 1866, returns 11.60/10.00/8.00/17.00/5 (mean/median/min/max/num), 250.13 steps/s
+2022-08-04 16:14:11,359 | TRAIN LOG: steps 56000, Overestimation: 0.69830506/0.34640270/1.00778866 (mean/min/max)
+2022-08-04 16:14:11,359 | TRAIN LOG: steps 56000, OverestimationCurrentPi: -0.14946899/-0.21920376/-0.02435625 (mean/min/max)
+2022-08-04 16:14:11,910 | TRAIN LOG: steps 56000, RepRank: 101.00000000
+2022-08-04 16:14:14,585 | TRAIN LOG: steps 57000, episodes 1900, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 268.97 steps/s
+2022-08-04 16:14:14,600 | TEST LOG: steps 57000, episodes 1900, returns 9.20/10.00/2.00/15.00/5 (mean/median/min/max/num), 268.97 steps/s
+2022-08-04 16:14:15,061 | TRAIN LOG: steps 57000, Overestimation: 0.70612471/0.34576136/0.99553227 (mean/min/max)
+2022-08-04 16:14:15,061 | TRAIN LOG: steps 57000, OverestimationCurrentPi: -0.13099237/-0.22716211/-0.00446773 (mean/min/max)
+2022-08-04 16:14:15,581 | TRAIN LOG: steps 57000, RepRank: 101.00000000
+2022-08-04 16:14:18,182 | TRAIN LOG: steps 58000, episodes 1933, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 279.22 steps/s
+2022-08-04 16:14:18,200 | TEST LOG: steps 58000, episodes 1933, returns 11.20/11.00/6.00/15.00/5 (mean/median/min/max/num), 279.22 steps/s
+2022-08-04 16:14:18,661 | TRAIN LOG: steps 58000, Overestimation: 0.71234921/0.35429752/0.99597913 (mean/min/max)
+2022-08-04 16:14:18,661 | TRAIN LOG: steps 58000, OverestimationCurrentPi: -0.13258750/-0.20663594/-0.01808673 (mean/min/max)
+2022-08-04 16:14:19,159 | TRAIN LOG: steps 58000, RepRank: 101.00000000
+2022-08-04 16:14:21,909 | TRAIN LOG: steps 59000, episodes 1966, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 269.63 steps/s
+2022-08-04 16:14:21,914 | TEST LOG: steps 59000, episodes 1966, returns 3.00/2.00/1.00/6.00/5 (mean/median/min/max/num), 269.63 steps/s
+2022-08-04 16:14:22,378 | TRAIN LOG: steps 59000, Overestimation: 0.70436974/0.35152292/0.99660194 (mean/min/max)
+2022-08-04 16:14:22,379 | TRAIN LOG: steps 59000, OverestimationCurrentPi: -0.12762799/-0.22535806/-0.00339806 (mean/min/max)
+2022-08-04 16:14:22,869 | TRAIN LOG: steps 59000, RepRank: 101.00000000
+2022-08-04 16:14:25,488 | TRAIN LOG: steps 60000, episodes 2000, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 279.84 steps/s
+2022-08-04 16:14:25,506 | TEST LOG: steps 60000, episodes 2000, returns 11.20/9.00/6.00/16.00/5 (mean/median/min/max/num), 279.84 steps/s
+2022-08-04 16:14:25,969 | TRAIN LOG: steps 60000, Overestimation: 0.71986134/0.35125583/1.00511122 (mean/min/max)
+2022-08-04 16:14:25,970 | TRAIN LOG: steps 60000, OverestimationCurrentPi: -0.11641627/-0.18831583/0.00425231 (mean/min/max)
+2022-08-04 16:14:26,464 | TRAIN LOG: steps 60000, RepRank: 101.00000000
+2022-08-04 16:14:29,060 | TRAIN LOG: steps 61000, episodes 2033, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 281.41 steps/s
+2022-08-04 16:14:29,080 | TEST LOG: steps 61000, episodes 2033, returns 12.60/14.00/8.00/15.00/5 (mean/median/min/max/num), 281.41 steps/s
+2022-08-04 16:14:29,547 | TRAIN LOG: steps 61000, Overestimation: 0.71325574/0.33909535/1.00314367 (mean/min/max)
+2022-08-04 16:14:29,547 | TRAIN LOG: steps 61000, OverestimationCurrentPi: -0.12251726/-0.18639307/0.00314367 (mean/min/max)
+2022-08-04 16:14:30,038 | TRAIN LOG: steps 61000, RepRank: 101.00000000
+2022-08-04 16:14:32,639 | TRAIN LOG: steps 62000, episodes 2066, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 281.04 steps/s
+2022-08-04 16:14:32,655 | TEST LOG: steps 62000, episodes 2066, returns 10.00/9.00/3.00/16.00/5 (mean/median/min/max/num), 281.04 steps/s
+2022-08-04 16:14:33,122 | TRAIN LOG: steps 62000, Overestimation: 0.71066643/0.31790286/1.00900590 (mean/min/max)
+2022-08-04 16:14:33,123 | TRAIN LOG: steps 62000, OverestimationCurrentPi: -0.12091664/-0.18373963/0.00900590 (mean/min/max)
+2022-08-04 16:14:33,614 | TRAIN LOG: steps 62000, RepRank: 101.00000000
+2022-08-04 16:14:36,222 | TRAIN LOG: steps 63000, episodes 2100, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 280.42 steps/s
+2022-08-04 16:14:36,242 | TEST LOG: steps 63000, episodes 2100, returns 12.20/13.00/9.00/14.00/5 (mean/median/min/max/num), 280.42 steps/s
+2022-08-04 16:14:36,714 | TRAIN LOG: steps 63000, Overestimation: 0.70860919/0.33564037/1.00892687 (mean/min/max)
+2022-08-04 16:14:36,715 | TRAIN LOG: steps 63000, OverestimationCurrentPi: -0.12551665/-0.18996828/0.00339997 (mean/min/max)
+2022-08-04 16:14:37,205 | TRAIN LOG: steps 63000, RepRank: 101.00000000
+2022-08-04 16:14:39,814 | TRAIN LOG: steps 64000, episodes 2133, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 279.91 steps/s
+2022-08-04 16:14:39,824 | TEST LOG: steps 64000, episodes 2133, returns 5.60/5.00/1.00/12.00/5 (mean/median/min/max/num), 279.91 steps/s
+2022-08-04 16:14:40,698 | TRAIN LOG: steps 64000, Overestimation: 0.71652964/0.33870119/1.01198983 (mean/min/max)
+2022-08-04 16:14:40,698 | TRAIN LOG: steps 64000, OverestimationCurrentPi: -0.12504995/-0.19403713/0.01198983 (mean/min/max)
+2022-08-04 16:14:41,187 | TRAIN LOG: steps 64000, RepRank: 101.00000000
+2022-08-04 16:14:43,805 | TRAIN LOG: steps 65000, episodes 2166, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 251.22 steps/s
+2022-08-04 16:14:43,819 | TEST LOG: steps 65000, episodes 2166, returns 8.40/11.00/1.00/16.00/5 (mean/median/min/max/num), 251.22 steps/s
+2022-08-04 16:14:44,287 | TRAIN LOG: steps 65000, Overestimation: 0.72459674/0.34875369/1.02840424 (mean/min/max)
+2022-08-04 16:14:44,287 | TRAIN LOG: steps 65000, OverestimationCurrentPi: -0.10638394/-0.18414556/0.02840424 (mean/min/max)
+2022-08-04 16:14:44,914 | TRAIN LOG: steps 65000, RepRank: 101.00000000
+2022-08-04 16:14:47,554 | TRAIN LOG: steps 66000, episodes 2200, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 267.72 steps/s
+2022-08-04 16:14:47,567 | TEST LOG: steps 66000, episodes 2200, returns 7.60/9.00/4.00/12.00/5 (mean/median/min/max/num), 267.72 steps/s
+2022-08-04 16:14:48,036 | TRAIN LOG: steps 66000, Overestimation: 0.72195726/0.35413414/1.02978289 (mean/min/max)
+2022-08-04 16:14:48,037 | TRAIN LOG: steps 66000, OverestimationCurrentPi: -0.12022643/-0.18975352/-0.00107455 (mean/min/max)
+2022-08-04 16:14:48,530 | TRAIN LOG: steps 66000, RepRank: 101.00000000
+2022-08-04 16:14:51,178 | TRAIN LOG: steps 67000, episodes 2233, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 276.92 steps/s
+2022-08-04 16:14:51,197 | TEST LOG: steps 67000, episodes 2233, returns 11.60/12.00/5.00/17.00/5 (mean/median/min/max/num), 276.92 steps/s
+2022-08-04 16:14:51,675 | TRAIN LOG: steps 67000, Overestimation: 0.72376315/0.36611742/1.00456429 (mean/min/max)
+2022-08-04 16:14:51,675 | TRAIN LOG: steps 67000, OverestimationCurrentPi: -0.10843225/-0.16871606/0.02142243 (mean/min/max)
+2022-08-04 16:14:52,168 | TRAIN LOG: steps 67000, RepRank: 101.00000000
+2022-08-04 16:14:54,816 | TRAIN LOG: steps 68000, episodes 2266, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 276.36 steps/s
+2022-08-04 16:14:54,833 | TEST LOG: steps 68000, episodes 2266, returns 10.40/11.00/8.00/13.00/5 (mean/median/min/max/num), 276.36 steps/s
+2022-08-04 16:14:55,310 | TRAIN LOG: steps 68000, Overestimation: 0.71990485/0.34895533/1.01305985 (mean/min/max)
+2022-08-04 16:14:55,311 | TRAIN LOG: steps 68000, OverestimationCurrentPi: -0.11816580/-0.17601924/-0.00401523 (mean/min/max)
+2022-08-04 16:14:55,800 | TRAIN LOG: steps 68000, RepRank: 101.00000000
+2022-08-04 16:14:58,457 | TRAIN LOG: steps 69000, episodes 2300, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 275.96 steps/s
+2022-08-04 16:14:58,470 | TEST LOG: steps 69000, episodes 2300, returns 7.60/8.00/4.00/11.00/5 (mean/median/min/max/num), 275.96 steps/s
+2022-08-04 16:14:58,947 | TRAIN LOG: steps 69000, Overestimation: 0.71615795/0.34185266/1.00460541 (mean/min/max)
+2022-08-04 16:14:58,947 | TRAIN LOG: steps 69000, OverestimationCurrentPi: -0.13313930/-0.22161614/0.00460541 (mean/min/max)
+2022-08-04 16:14:59,439 | TRAIN LOG: steps 69000, RepRank: 101.00000000
+2022-08-04 16:15:02,090 | TRAIN LOG: steps 70000, episodes 2333, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 276.21 steps/s
+2022-08-04 16:15:02,107 | TEST LOG: steps 70000, episodes 2333, returns 9.40/9.00/4.00/16.00/5 (mean/median/min/max/num), 276.21 steps/s
+2022-08-04 16:15:02,581 | TRAIN LOG: steps 70000, Overestimation: 0.68641202/0.31500620/0.97882468 (mean/min/max)
+2022-08-04 16:15:02,581 | TRAIN LOG: steps 70000, OverestimationCurrentPi: -0.15239450/-0.24481877/-0.01621402 (mean/min/max)
+2022-08-04 16:15:03,071 | TRAIN LOG: steps 70000, RepRank: 101.00000000
+2022-08-04 16:15:05,756 | TRAIN LOG: steps 71000, episodes 2366, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 274.07 steps/s
+2022-08-04 16:15:05,773 | TEST LOG: steps 71000, episodes 2366, returns 10.00/11.00/4.00/16.00/5 (mean/median/min/max/num), 274.07 steps/s
+2022-08-04 16:15:06,251 | TRAIN LOG: steps 71000, Overestimation: 0.72367793/0.35796750/1.00231612 (mean/min/max)
+2022-08-04 16:15:06,251 | TRAIN LOG: steps 71000, OverestimationCurrentPi: -0.11084859/-0.17367445/-0.00729728 (mean/min/max)
+2022-08-04 16:15:06,744 | TRAIN LOG: steps 71000, RepRank: 101.00000000
+2022-08-04 16:15:09,391 | TRAIN LOG: steps 72000, episodes 2400, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 276.37 steps/s
+2022-08-04 16:15:09,407 | TEST LOG: steps 72000, episodes 2400, returns 9.40/10.00/4.00/15.00/5 (mean/median/min/max/num), 276.37 steps/s
+2022-08-04 16:15:09,884 | TRAIN LOG: steps 72000, Overestimation: 0.72164129/0.34972179/1.01418138 (mean/min/max)
+2022-08-04 16:15:09,884 | TRAIN LOG: steps 72000, OverestimationCurrentPi: -0.11726614/-0.18063902/0.00503528 (mean/min/max)
+2022-08-04 16:15:10,378 | TRAIN LOG: steps 72000, RepRank: 101.00000000
+2022-08-04 16:15:13,021 | TRAIN LOG: steps 73000, episodes 2433, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 276.72 steps/s
+2022-08-04 16:15:13,037 | TEST LOG: steps 73000, episodes 2433, returns 9.80/9.00/3.00/17.00/5 (mean/median/min/max/num), 276.72 steps/s
+2022-08-04 16:15:13,514 | TRAIN LOG: steps 73000, Overestimation: 0.72803053/0.34875202/1.01646769 (mean/min/max)
+2022-08-04 16:15:13,515 | TRAIN LOG: steps 73000, OverestimationCurrentPi: -0.10156092/-0.18262975/0.01646769 (mean/min/max)
+2022-08-04 16:15:14,000 | TRAIN LOG: steps 73000, RepRank: 101.00000000
+2022-08-04 16:15:16,659 | TRAIN LOG: steps 74000, episodes 2466, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 276.14 steps/s
+2022-08-04 16:15:16,672 | TEST LOG: steps 74000, episodes 2466, returns 7.80/7.00/3.00/14.00/5 (mean/median/min/max/num), 276.14 steps/s
+2022-08-04 16:15:17,147 | TRAIN LOG: steps 74000, Overestimation: 0.70885540/0.32456410/0.98271310 (mean/min/max)
+2022-08-04 16:15:17,148 | TRAIN LOG: steps 74000, OverestimationCurrentPi: -0.13426733/-0.20809226/-0.01728690 (mean/min/max)
+2022-08-04 16:15:17,644 | TRAIN LOG: steps 74000, RepRank: 101.00000000
+2022-08-04 16:15:20,372 | TRAIN LOG: steps 75000, episodes 2500, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 270.25 steps/s
+2022-08-04 16:15:20,387 | TEST LOG: steps 75000, episodes 2500, returns 9.20/7.00/5.00/16.00/5 (mean/median/min/max/num), 270.25 steps/s
+2022-08-04 16:15:20,865 | TRAIN LOG: steps 75000, Overestimation: 0.71929151/0.35095757/1.01920509 (mean/min/max)
+2022-08-04 16:15:20,866 | TRAIN LOG: steps 75000, OverestimationCurrentPi: -0.12192514/-0.19213962/0.00660706 (mean/min/max)
+2022-08-04 16:15:21,366 | TRAIN LOG: steps 75000, RepRank: 101.00000000
+2022-08-04 16:15:24,038 | TRAIN LOG: steps 76000, episodes 2533, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 273.92 steps/s
+2022-08-04 16:15:24,051 | TEST LOG: steps 76000, episodes 2533, returns 7.60/9.00/2.00/14.00/5 (mean/median/min/max/num), 273.92 steps/s
+2022-08-04 16:15:24,529 | TRAIN LOG: steps 76000, Overestimation: 0.71219396/0.34956235/1.01997054 (mean/min/max)
+2022-08-04 16:15:24,530 | TRAIN LOG: steps 76000, OverestimationCurrentPi: -0.12853842/-0.19605099/-0.01013470 (mean/min/max)
+2022-08-04 16:15:25,018 | TRAIN LOG: steps 76000, RepRank: 101.00000000
+2022-08-04 16:15:27,686 | TRAIN LOG: steps 77000, episodes 2566, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 275.13 steps/s
+2022-08-04 16:15:27,704 | TEST LOG: steps 77000, episodes 2566, returns 10.60/11.00/2.00/15.00/5 (mean/median/min/max/num), 275.13 steps/s
+2022-08-04 16:15:28,182 | TRAIN LOG: steps 77000, Overestimation: 0.71477097/0.33867687/1.00316525 (mean/min/max)
+2022-08-04 16:15:28,183 | TRAIN LOG: steps 77000, OverestimationCurrentPi: -0.11458462/-0.17915182/0.00316525 (mean/min/max)
+2022-08-04 16:15:28,673 | TRAIN LOG: steps 77000, RepRank: 101.00000000
+2022-08-04 16:15:31,343 | TRAIN LOG: steps 78000, episodes 2600, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 274.81 steps/s
+2022-08-04 16:15:31,362 | TEST LOG: steps 78000, episodes 2600, returns 11.20/11.00/8.00/16.00/5 (mean/median/min/max/num), 274.81 steps/s
+2022-08-04 16:15:31,841 | TRAIN LOG: steps 78000, Overestimation: 0.71737395/0.36473447/1.00946212 (mean/min/max)
+2022-08-04 16:15:31,841 | TRAIN LOG: steps 78000, OverestimationCurrentPi: -0.12145796/-0.18495678/0.00946212 (mean/min/max)
+2022-08-04 16:15:32,330 | TRAIN LOG: steps 78000, RepRank: 101.00000000
+2022-08-04 16:15:34,991 | TRAIN LOG: steps 79000, episodes 2633, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 275.63 steps/s
+2022-08-04 16:15:35,006 | TEST LOG: steps 79000, episodes 2633, returns 9.00/11.00/4.00/13.00/5 (mean/median/min/max/num), 275.63 steps/s
+2022-08-04 16:15:35,480 | TRAIN LOG: steps 79000, Overestimation: 0.71673449/0.35718995/1.01361895 (mean/min/max)
+2022-08-04 16:15:35,480 | TRAIN LOG: steps 79000, OverestimationCurrentPi: -0.13623125/-0.20686250/-0.02079248 (mean/min/max)
+2022-08-04 16:15:35,981 | TRAIN LOG: steps 79000, RepRank: 101.00000000
+2022-08-04 16:15:38,650 | TRAIN LOG: steps 80000, episodes 2666, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 274.42 steps/s
+2022-08-04 16:15:38,664 | TEST LOG: steps 80000, episodes 2666, returns 8.20/8.00/6.00/11.00/5 (mean/median/min/max/num), 274.42 steps/s
+2022-08-04 16:15:39,139 | TRAIN LOG: steps 80000, Overestimation: 0.74144262/0.36474615/1.02643704 (mean/min/max)
+2022-08-04 16:15:39,140 | TRAIN LOG: steps 80000, OverestimationCurrentPi: -0.10497162/-0.15470790/0.01360357 (mean/min/max)
+2022-08-04 16:15:39,633 | TRAIN LOG: steps 80000, RepRank: 101.00000000
+2022-08-04 16:15:42,313 | TRAIN LOG: steps 81000, episodes 2700, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 274.06 steps/s
+2022-08-04 16:15:42,329 | TEST LOG: steps 81000, episodes 2700, returns 9.80/10.00/3.00/16.00/5 (mean/median/min/max/num), 274.06 steps/s
+2022-08-04 16:15:42,802 | TRAIN LOG: steps 81000, Overestimation: 0.70601741/0.35825723/0.98456436 (mean/min/max)
+2022-08-04 16:15:42,803 | TRAIN LOG: steps 81000, OverestimationCurrentPi: -0.14107428/-0.22522121/-0.01543564 (mean/min/max)
+2022-08-04 16:15:43,289 | TRAIN LOG: steps 81000, RepRank: 101.00000000
+2022-08-04 16:15:45,975 | TRAIN LOG: steps 82000, episodes 2733, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 274.31 steps/s
+2022-08-04 16:15:45,990 | TEST LOG: steps 82000, episodes 2733, returns 9.20/5.00/4.00/16.00/5 (mean/median/min/max/num), 274.31 steps/s
+2022-08-04 16:15:47,006 | TRAIN LOG: steps 82000, Overestimation: 0.72801687/0.35845506/1.02180147 (mean/min/max)
+2022-08-04 16:15:47,006 | TRAIN LOG: steps 82000, OverestimationCurrentPi: -0.10165856/-0.17809471/0.02180147 (mean/min/max)
+2022-08-04 16:15:47,494 | TRAIN LOG: steps 82000, RepRank: 101.00000000
+2022-08-04 16:15:50,171 | TRAIN LOG: steps 83000, episodes 2766, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 239.22 steps/s
+2022-08-04 16:15:50,188 | TEST LOG: steps 83000, episodes 2766, returns 10.40/14.00/3.00/14.00/5 (mean/median/min/max/num), 239.22 steps/s
+2022-08-04 16:15:50,664 | TRAIN LOG: steps 83000, Overestimation: 0.71402116/0.35313696/1.01334977 (mean/min/max)
+2022-08-04 16:15:50,665 | TRAIN LOG: steps 83000, OverestimationCurrentPi: -0.12512397/-0.20802682/-0.00899923 (mean/min/max)
+2022-08-04 16:15:51,161 | TRAIN LOG: steps 83000, RepRank: 101.00000000
+2022-08-04 16:15:53,823 | TRAIN LOG: steps 84000, episodes 2800, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 275.12 steps/s
+2022-08-04 16:15:53,844 | TEST LOG: steps 84000, episodes 2800, returns 13.00/14.00/6.00/17.00/5 (mean/median/min/max/num), 275.12 steps/s
+2022-08-04 16:15:54,317 | TRAIN LOG: steps 84000, Overestimation: 0.71378067/0.33570665/0.99119562 (mean/min/max)
+2022-08-04 16:15:54,318 | TRAIN LOG: steps 84000, OverestimationCurrentPi: -0.11695114/-0.18796777/-0.00880438 (mean/min/max)
+2022-08-04 16:15:54,850 | TRAIN LOG: steps 84000, RepRank: 101.00000000
+2022-08-04 16:15:57,513 | TRAIN LOG: steps 85000, episodes 2833, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 272.59 steps/s
+2022-08-04 16:15:57,525 | TEST LOG: steps 85000, episodes 2833, returns 7.00/5.00/2.00/16.00/5 (mean/median/min/max/num), 272.59 steps/s
+2022-08-04 16:15:58,003 | TRAIN LOG: steps 85000, Overestimation: 0.71702703/0.33752888/0.99275196 (mean/min/max)
+2022-08-04 16:15:58,003 | TRAIN LOG: steps 85000, OverestimationCurrentPi: -0.11887218/-0.19039541/-0.00724804 (mean/min/max)
+2022-08-04 16:15:58,497 | TRAIN LOG: steps 85000, RepRank: 101.00000000
+2022-08-04 16:16:01,176 | TRAIN LOG: steps 86000, episodes 2866, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 273.91 steps/s
+2022-08-04 16:16:01,191 | TEST LOG: steps 86000, episodes 2866, returns 9.00/9.00/5.00/11.00/5 (mean/median/min/max/num), 273.91 steps/s
+2022-08-04 16:16:01,678 | TRAIN LOG: steps 86000, Overestimation: 0.71578273/0.34629297/1.00956762 (mean/min/max)
+2022-08-04 16:16:01,678 | TRAIN LOG: steps 86000, OverestimationCurrentPi: -0.13626544/-0.22617113/-0.01683176 (mean/min/max)
+2022-08-04 16:16:02,175 | TRAIN LOG: steps 86000, RepRank: 101.00000000
+2022-08-04 16:16:04,841 | TRAIN LOG: steps 87000, episodes 2900, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 273.99 steps/s
+2022-08-04 16:16:04,861 | TEST LOG: steps 87000, episodes 2900, returns 12.40/14.00/8.00/15.00/5 (mean/median/min/max/num), 273.99 steps/s
+2022-08-04 16:16:05,338 | TRAIN LOG: steps 87000, Overestimation: 0.71062402/0.36028856/1.00455415 (mean/min/max)
+2022-08-04 16:16:05,339 | TRAIN LOG: steps 87000, OverestimationCurrentPi: -0.13728911/-0.20358210/-0.04181433 (mean/min/max)
+2022-08-04 16:16:05,833 | TRAIN LOG: steps 87000, RepRank: 101.00000000
+2022-08-04 16:16:08,501 | TRAIN LOG: steps 88000, episodes 2933, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 274.80 steps/s
+2022-08-04 16:16:08,519 | TEST LOG: steps 88000, episodes 2933, returns 11.00/11.00/2.00/17.00/5 (mean/median/min/max/num), 274.80 steps/s
+2022-08-04 16:16:08,993 | TRAIN LOG: steps 88000, Overestimation: 0.71179223/0.35041612/0.99136835 (mean/min/max)
+2022-08-04 16:16:08,994 | TRAIN LOG: steps 88000, OverestimationCurrentPi: -0.12762127/-0.20120155/-0.01045823 (mean/min/max)
+2022-08-04 16:16:09,502 | TRAIN LOG: steps 88000, RepRank: 101.00000000
+2022-08-04 16:16:12,177 | TRAIN LOG: steps 89000, episodes 2966, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 273.37 steps/s
+2022-08-04 16:16:12,193 | TEST LOG: steps 89000, episodes 2966, returns 9.40/10.00/7.00/11.00/5 (mean/median/min/max/num), 273.37 steps/s
+2022-08-04 16:16:12,671 | TRAIN LOG: steps 89000, Overestimation: 0.71774562/0.34467983/0.99383569 (mean/min/max)
+2022-08-04 16:16:12,672 | TRAIN LOG: steps 89000, OverestimationCurrentPi: -0.13132645/-0.18371194/-0.02067244 (mean/min/max)
+2022-08-04 16:16:13,158 | TRAIN LOG: steps 89000, RepRank: 101.00000000
+2022-08-04 16:16:15,841 | TRAIN LOG: steps 90000, episodes 3000, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 274.17 steps/s
+2022-08-04 16:16:15,860 | TEST LOG: steps 90000, episodes 3000, returns 11.40/11.00/5.00/16.00/5 (mean/median/min/max/num), 274.17 steps/s
+2022-08-04 16:16:16,340 | TRAIN LOG: steps 90000, Overestimation: 0.72347118/0.35888088/1.02436888 (mean/min/max)
+2022-08-04 16:16:16,341 | TRAIN LOG: steps 90000, OverestimationCurrentPi: -0.10719636/-0.17697035/0.02436888 (mean/min/max)
+2022-08-04 16:16:16,835 | TRAIN LOG: steps 90000, RepRank: 101.00000000
+2022-08-04 16:16:19,546 | TRAIN LOG: steps 91000, episodes 3033, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 271.31 steps/s
+2022-08-04 16:16:19,561 | TEST LOG: steps 91000, episodes 3033, returns 8.80/8.00/3.00/18.00/5 (mean/median/min/max/num), 271.31 steps/s
+2022-08-04 16:16:20,038 | TRAIN LOG: steps 91000, Overestimation: 0.70930684/0.35404873/0.98159301 (mean/min/max)
+2022-08-04 16:16:20,039 | TRAIN LOG: steps 91000, OverestimationCurrentPi: -0.13842637/-0.21496108/-0.03154647 (mean/min/max)
+2022-08-04 16:16:20,534 | TRAIN LOG: steps 91000, RepRank: 101.00000000
+2022-08-04 16:16:23,209 | TRAIN LOG: steps 92000, episodes 3066, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 274.10 steps/s
+2022-08-04 16:16:23,225 | TEST LOG: steps 92000, episodes 3066, returns 9.20/10.00/2.00/15.00/5 (mean/median/min/max/num), 274.10 steps/s
+2022-08-04 16:16:23,704 | TRAIN LOG: steps 92000, Overestimation: 0.71617800/0.35787475/1.02071106 (mean/min/max)
+2022-08-04 16:16:23,704 | TRAIN LOG: steps 92000, OverestimationCurrentPi: -0.12354867/-0.19578891/-0.01806265 (mean/min/max)
+2022-08-04 16:16:24,190 | TRAIN LOG: steps 92000, RepRank: 101.00000000
+2022-08-04 16:16:26,872 | TRAIN LOG: steps 93000, episodes 3100, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 274.17 steps/s
+2022-08-04 16:16:26,891 | TEST LOG: steps 93000, episodes 3100, returns 11.60/14.00/6.00/16.00/5 (mean/median/min/max/num), 274.17 steps/s
+2022-08-04 16:16:27,367 | TRAIN LOG: steps 93000, Overestimation: 0.71620497/0.35503262/0.99662191 (mean/min/max)
+2022-08-04 16:16:27,367 | TRAIN LOG: steps 93000, OverestimationCurrentPi: -0.12342297/-0.19791644/-0.00762789 (mean/min/max)
+2022-08-04 16:16:27,853 | TRAIN LOG: steps 93000, RepRank: 101.00000000
+2022-08-04 16:16:30,551 | TRAIN LOG: steps 94000, episodes 3133, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 273.29 steps/s
+2022-08-04 16:16:30,567 | TEST LOG: steps 94000, episodes 3133, returns 9.80/11.00/3.00/15.00/5 (mean/median/min/max/num), 273.29 steps/s
+2022-08-04 16:16:31,044 | TRAIN LOG: steps 94000, Overestimation: 0.72114521/0.35837281/1.02153301 (mean/min/max)
+2022-08-04 16:16:31,044 | TRAIN LOG: steps 94000, OverestimationCurrentPi: -0.10983980/-0.25789788/0.02153301 (mean/min/max)
+2022-08-04 16:16:31,530 | TRAIN LOG: steps 94000, RepRank: 101.00000000
+2022-08-04 16:16:34,203 | TRAIN LOG: steps 95000, episodes 3166, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 275.07 steps/s
+2022-08-04 16:16:34,223 | TEST LOG: steps 95000, episodes 3166, returns 12.20/14.00/4.00/17.00/5 (mean/median/min/max/num), 275.07 steps/s
+2022-08-04 16:16:34,699 | TRAIN LOG: steps 95000, Overestimation: 0.73078035/0.36396182/1.01864886 (mean/min/max)
+2022-08-04 16:16:34,700 | TRAIN LOG: steps 95000, OverestimationCurrentPi: -0.10162647/-0.17080610/-0.00608207 (mean/min/max)
+2022-08-04 16:16:35,187 | TRAIN LOG: steps 95000, RepRank: 101.00000000
+2022-08-04 16:16:37,901 | TRAIN LOG: steps 96000, episodes 3200, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 271.89 steps/s
+2022-08-04 16:16:37,915 | TEST LOG: steps 96000, episodes 3200, returns 8.40/6.00/2.00/14.00/5 (mean/median/min/max/num), 271.89 steps/s
+2022-08-04 16:16:38,391 | TRAIN LOG: steps 96000, Overestimation: 0.71935384/0.37429112/0.99864089 (mean/min/max)
+2022-08-04 16:16:38,391 | TRAIN LOG: steps 96000, OverestimationCurrentPi: -0.12424631/-0.20126175/-0.00193131 (mean/min/max)
+2022-08-04 16:16:38,872 | TRAIN LOG: steps 96000, RepRank: 101.00000000
+2022-08-04 16:16:41,550 | TRAIN LOG: steps 97000, episodes 3233, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 275.09 steps/s
+2022-08-04 16:16:41,562 | TEST LOG: steps 97000, episodes 3233, returns 7.00/8.00/2.00/11.00/5 (mean/median/min/max/num), 275.09 steps/s
+2022-08-04 16:16:42,040 | TRAIN LOG: steps 97000, Overestimation: 0.73024157/0.37865716/0.99995112 (mean/min/max)
+2022-08-04 16:16:42,040 | TRAIN LOG: steps 97000, OverestimationCurrentPi: -0.12325312/-0.18451940/-0.00004888 (mean/min/max)
+2022-08-04 16:16:42,530 | TRAIN LOG: steps 97000, RepRank: 101.00000000
+2022-08-04 16:16:45,269 | TRAIN LOG: steps 98000, episodes 3266, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 269.79 steps/s
+2022-08-04 16:16:45,282 | TEST LOG: steps 98000, episodes 3266, returns 7.80/6.00/4.00/15.00/5 (mean/median/min/max/num), 269.79 steps/s
+2022-08-04 16:16:45,781 | TRAIN LOG: steps 98000, Overestimation: 0.71680548/0.35289657/1.02082479 (mean/min/max)
+2022-08-04 16:16:45,781 | TRAIN LOG: steps 98000, OverestimationCurrentPi: -0.12597578/-0.21796565/0.02082479 (mean/min/max)
+2022-08-04 16:16:46,263 | TRAIN LOG: steps 98000, RepRank: 101.00000000
+2022-08-04 16:16:48,956 | TRAIN LOG: steps 99000, episodes 3300, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 272.17 steps/s
+2022-08-04 16:16:48,970 | TEST LOG: steps 99000, episodes 3300, returns 8.40/10.00/3.00/12.00/5 (mean/median/min/max/num), 272.17 steps/s
+2022-08-04 16:16:49,452 | TRAIN LOG: steps 99000, Overestimation: 0.73378131/0.34731644/1.02952290 (mean/min/max)
+2022-08-04 16:16:49,453 | TRAIN LOG: steps 99000, OverestimationCurrentPi: -0.10344218/-0.16937366/0.02952290 (mean/min/max)
+2022-08-04 16:16:49,946 | TRAIN LOG: steps 99000, RepRank: 101.00000000
+2022-08-04 16:16:52,628 | TRAIN LOG: steps 100000, episodes 3333, returns 30.00/30.00/30.00/30.00/5 (mean/median/min/max/num), 273.43 steps/s
+2022-08-04 16:16:52,642 | TEST LOG: steps 100000, episodes 3333, returns 8.60/7.00/5.00/15.00/5 (mean/median/min/max/num), 273.43 steps/s
+2022-08-04 16:16:53,123 | TRAIN LOG: steps 100000, Overestimation: 0.73541355/0.37030935/1.04648840 (mean/min/max)
+2022-08-04 16:16:53,123 | TRAIN LOG: steps 100000, OverestimationCurrentPi: -0.11003268/-0.17987417/0.00770855 (mean/min/max)
+2022-08-04 16:16:53,621 | TRAIN LOG: steps 100000, RepRank: 101.00000000
