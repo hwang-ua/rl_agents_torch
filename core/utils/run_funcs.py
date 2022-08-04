@@ -50,17 +50,8 @@ def run_steps(agent):
             t0 = time.time()
 
         if agent.cfg.eval_interval and not agent.total_steps % agent.cfg.eval_interval:
-            # agent.eval_episodes(elapsed_time=agent.cfg.log_interval / (time.time() - t0))
-            # agent.eval_episodes()
-            if agent.cfg.visualize and agent.total_steps > 1:
-                agent.visualize()
             if agent.cfg.evaluate_action_value and agent.total_steps > 1:
                 agent.draw_action_value()
-            if agent.cfg.evaluate_overestimation:
-                agent.log_overestimation()
-                agent.log_overestimation_current_pi()
-            if agent.cfg.evaluate_rep_rank:
-                agent.log_rep_rank()
             agent.reset_population_flag() # Done evaluation, regenerate data next time
             # t0 = time.time()
         if agent.cfg.max_steps and agent.total_steps >= agent.cfg.max_steps:

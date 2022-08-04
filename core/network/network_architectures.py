@@ -38,11 +38,6 @@ class FCNetwork(nn.Module):
         y = self.head_activation(y)
         return y
 
-    def compute_lipschitz_upper(self):
-        lips = self.body.compute_lipschitz_upper()
-        lips.append(np.linalg.norm(self.fc_head.weight.detach().cpu().numpy(), ord=2))
-        return lips
-
 
 class DoubleCriticDiscrete(nn.Module):
     def __init__(self, device, input_units, hidden_units, output_units, head_activation=lambda x: x, init_type='xavier', rep=None):

@@ -58,8 +58,6 @@
         "tensorboard_logs": false,
         "save_params": true,
         "visualize": false,
-        "evaluate_overestimation": true,
-        "evaluate_rep_rank": true,
         "evaluate_action_value": true,
 
         "offline_data_path": {

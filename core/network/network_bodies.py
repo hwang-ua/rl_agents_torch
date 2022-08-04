@@ -29,7 +29,3 @@ class FCBody(nn.Module):
             x = self.activation(layer(x))
         return x
 
-    def compute_lipschitz_upper(self):
-        return [np.linalg.norm(layer.weight.detach().cpu().numpy(), ord=2) for layer in self.layers]
-
-
