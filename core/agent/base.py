@@ -109,7 +109,7 @@ class Agent:
     def step(self):
         self.feed_data()
         data = self.get_data()
-        if self.check_update():#self.cfg.policy_fn_config["train_params"] and self.cfg.critic_fn_config["train_params"]:
+        if self.check_update():
             self.update(data)
     
     def check_update(self):
@@ -127,7 +127,6 @@ class Agent:
         self.episode_reward += reward
         self.total_steps += 1
         self.ep_steps += 1
-        # print(self.ep_steps, self.total_steps, done)
         if done or self.ep_steps == self.timeout:
             self.episode_rewards.append(self.episode_reward)
             self.num_episodes += 1
@@ -197,7 +196,6 @@ class Agent:
             self.replay.feed([last_state, action, reward, state, int(done)])
             if done:
                 state = self.eval_env.reset()
-                # print("Done")
 
     def eval_episode(self, log_traj=False):
         ep_traj = []
@@ -220,12 +218,6 @@ class Agent:
         actions = []
         rets = []
         if log_traj:
-            # s, a, r = ep_traj[len(ep_traj)-1]
-            # ret = r if done else self.true_q_predictor(self.cfg.state_normalizer(s))[a]
-            # states = [s]
-            # actions = [a]
-            # rets = [ret]
-            # for i in range(len(ep_traj)-2, -1, -1):
             ret = 0
             for i in range(len(ep_traj)-1, -1, -1):
                 s, a, r = ep_traj[i]
@@ -296,57 +288,9 @@ class Agent:
                                         elapsed_time))
         return mean, median, min_, max_
 
-    # def log_offline_training(self, elapsed_time):
-    #     if len(self.training_loss) > 0:
-    #         training_loss = np.array(self.training_loss)
-    #         self.training_loss = []
-    #         mean, median, min_, max_ = np.mean(training_loss), np.median(training_loss), np.min(training_loss), np.max(training_loss)
-    #
-    #         if len(self.test_loss) == 0:
-    #             self.test_fn()
-    #         test_loss = np.array(self.test_loss)
-    #         self.test_loss = []
-    #         tmean, tmedian, tmin_, tmax_ = np.mean(test_loss), np.median(test_loss), np.min(test_loss), np.max(test_loss)
-    #
-    #         log_str = 'TRAIN LOG: epoch %d, ' \
-    #                   'training loss %.4f/%.4f/%.4f/%.4f/%d (mean/median/min/max/num), ' \
-    #                   'test loss %.4f/%.4f/%.4f/%.4f/%d (mean/median/min/max/num), %.4f steps/s'
-    #         self.cfg.logger.info(log_str % (self.total_steps,
-    #                                         mean, median, min_, max_, len(training_loss),
-    #                                         tmean, tmedian, tmin_, tmax_, len(test_loss),
-    #                                         elapsed_time))
-    #         self.populate_states, self.populate_actions, self.populate_true_qs = self.populate_returns(log_traj=True)
-    #         self.populate_latest = True
-    #         mean, median, min_, max_ = self.log_return(self.ep_returns_queue_test, "TEST", elapsed_time)
-    #         return tmean, tmedian, tmin_, tmax_
-    #     else:
-    #         log_str = 'TRAIN LOG: epoch %d, ' \
-    #                   'training loss %.2f/%.2f/%.2f/%.2f/%d (mean/median/min/max/num), ' \
-    #                   'test loss %.2f/%.2f/%.2f/%.2f/%d (mean/median/min/max/num), %.2f steps/s'
-    #         self.cfg.logger.info(log_str % (self.total_steps,
-    #                                         np.nan, np.nan, np.nan, np.nan, 0,
-    #                                         np.nan, np.nan, np.nan, np.nan, 0,
-    #                                         elapsed_time))
-    #         self.populate_states, self.populate_actions, self.populate_true_qs = self.populate_returns(log_traj=True)
-    #         self.populate_latest = True
-    #         mean, median, min_, max_ = self.log_return(self.ep_returns_queue_test, "TEST", elapsed_time)
-    #         return [None] * 4
 
     def log_file(self, elapsed_time=-1):
         mean, median, min_, max_ = self.log_return(self.ep_returns_queue_train, "TRAIN", elapsed_time)
-        ##Check bug
-        # if self.total_steps > 0:
-        #     print(self.env.reset())
-        #     print(self.env.state)
-        #     print(self.env.step([0]))
-        #     print("Right before", self.env.state)
-        #     self.populate_returns()
-        #     print("Right after", self.env.state)
-        #     print("Right after", self.eval_env.state)
-        #     print(self.env.step([0]))
-        #     exit()
-
-        # self.populate_returns()
         self.populate_states, self.populate_actions, self.populate_true_qs = self.populate_returns(log_traj=True)
         self.populate_latest = True
         mean, median, min_, max_ = self.log_return(self.ep_returns_queue_test, "TEST", elapsed_time)
@@ -356,8 +300,6 @@ class Agent:
         raise NotImplementedError
 
     def eval_step(self, state):
-        # action = self.policy(state, 0)
-        # return action
         raise NotImplementedError
 
     def save(self, filename):
@@ -407,11 +349,6 @@ class Agent:
         next_actions = np.concatenate(next_actions)
         if len(qmaxs) > 0:
             qmaxs = np.concatenate(qmaxs)
-        
-        # for i in range(len(states)):
-        #     states[i] = self.cfg.state_normalizer(states[i])
-        #     next_states[i] = self.cfg.state_normalizer(next_states[i])
-        #     # print(next_states[i])
         
         pred_returns = np.zeros(len(states))
         true_returns = np.zeros(len(states))
@@ -480,64 +417,6 @@ class Agent:
             returns = np.concatenate(returns)
         return [states, actions, returns]
 
-    def log_overestimation(self):
-        # def get_true_q_value(states, actions):
-        #     all_returns = np.zeros((len(states)))
-        #     for i, (state, action) in enumerate(zip(states, actions)):
-        #         _, _, returns = self.populate_returns_random_start(state, lambda x: action, total_ep=5)
-        #         all_returns[i] = np.array(returns).mean()
-        #     return all_returns
-    
-        # true_qs = get_true_q_value(test_s, test_a)
-        test_s, test_a, true_ret = self.eval_set
-        with torch.no_grad():
-            # q_values = self.val_net(self.rep_net(torch_utils.tensor(self.cfg.state_normalizer(test_s), self.cfg.device)))
-            q_values = self.default_value_predictor()(torch_utils.tensor(self.cfg.state_normalizer(test_s), self.cfg.device))
-            q_values = torch_utils.to_np(q_values)
-        onpolicy_q = q_values[np.arange(len(q_values)), test_a]
-        all_diff = onpolicy_q - true_ret
-        log_str = 'TRAIN LOG: steps %d, ' \
-                  'Overestimation: %.8f/%.8f/%.8f (mean/min/max)'
-        self.cfg.logger.info(log_str % (self.total_steps, all_diff.mean(), all_diff.min(), all_diff.max()))
-        
-    def log_overestimation_current_pi(self):
-        if not self.populate_latest:
-            self.populate_states, self.populate_actions, self.populate_true_qs = self.populate_returns(log_traj=True)
-        states = np.array(self.populate_states)
-        true_qs = np.array(self.populate_true_qs)
-        with torch.no_grad():
-            # phis = self.rep_net(self.cfg.state_normalizer(states))
-            # q_values = self.val_net(phis)
-            q_values = self.default_value_predictor()(self.cfg.state_normalizer(states))
-            q_values = torch_utils.to_np(q_values)
-        onpolicy_q = q_values[np.arange(len(q_values)), self.populate_actions]
-        all_diff = onpolicy_q - true_qs
-        log_str = 'TRAIN LOG: steps %d, ' \
-                  'OverestimationCurrentPi: %.8f/%.8f/%.8f (mean/min/max)'
-        self.cfg.logger.info(log_str % (self.total_steps, all_diff.mean(), all_diff.min(), all_diff.max()))
-
-    def log_rep_rank(self):
-        """ From https://arxiv.org/pdf/2207.02099.pdf Appendix A.11"""
-        test_s, _, _ = self.eval_set
-
-        def compute_rank_from_features(feature_matrix, rank_delta=0.01):
-            sing_values = np.linalg.svd(feature_matrix, compute_uv=False)
-            cumsum = np.cumsum(sing_values)
-            nuclear_norm = np.sum(sing_values)
-            approximate_rank_threshold = 1.0 - rank_delta
-            threshold_crossed = (
-                cumsum >= approximate_rank_threshold * nuclear_norm)
-            effective_rank = sing_values.shape[0] - np.sum(threshold_crossed) + 1
-            return effective_rank
-    
-        states = torch_utils.tensor(self.cfg.state_normalizer(test_s), self.cfg.device)
-        with torch.no_grad():
-            phi_s = torch_utils.to_np(self.default_rep_predictor()(states))
-        erank = compute_rank_from_features(phi_s)
-        log_str = 'TRAIN LOG: steps %d, ' \
-                  'RepRank: %.8f'
-        self.cfg.logger.info(log_str % (self.total_steps, erank))
-
     def draw_action_value(self):
         # test_s, _, _ = self.eval_set
         states, obstacles = self.eval_env.get_state_space()
@@ -545,20 +424,6 @@ class Agent:
         with torch.no_grad():
             qs = self.default_value_predictor()(torch_utils.tensor(self.cfg.state_normalizer(states), self.cfg.device))
             torch_utils.to_np(qs)
-
-        # fig, axs = plt.subplots(1, self.cfg.action_dim, figsize=(13, 5))
-        # for a in range(self.cfg.action_dim):
-        #     template = np.zeros((states[:, 0].max()+1, states[:, 0].max()+1))
-        #     for idx, s in enumerate(states):
-        #         template[s[0], s[1]] = qs[idx, a]
-        #     img = axs[a].imshow(template, cmap="Blues", vmin=qs.min()-1, vmax=qs.max())
-        #     axs[a].set_title("Action{}".format(self.eval_env.action_explaination[a]))
-        #     for obs in obstacles:
-        #         axs[a].text(obs[1], obs[0], "X", color="black")
-        #     axs[a].text(goal[1], goal[0], "G", color="black")
-        # fig.subplots_adjust(right=0.95)
-        # cbar_ax = fig.add_axes([0.98, 0.1, 0.01, 0.7])
-        # fig.colorbar(img, cax = cbar_ax)
 
         fig, axs = plt.subplots(1, 1, figsize=(3,3))
         template = np.zeros((states[:, 0].max()+1, states[:, 1].max()+1))
@@ -779,56 +644,34 @@ class ActorCritic(Agent):
         q1, q2 = self.ac.q1q2(o)
         q1, q2 = q1[np.arange(len(a)), a], q2[np.arange(len(a)), a]
 
-        # Bellman backup for Q functions
         with torch.no_grad():
-            # Target actions come from *current* policy
             a2, logp_a2 = self.ac.pi(op)
 
-            # Target Q-values
             q1_pi_targ, q2_pi_targ = self.ac_targ.q1q2(op)
             q1_pi_targ, q2_pi_targ = q1_pi_targ[np.arange(len(a2)), a2], q2_pi_targ[np.arange(len(a2)), a2]
             q_pi_targ = torch.min(q1_pi_targ, q2_pi_targ)
             backup = r + self.gamma * (1 - d) * (q_pi_targ)# - self.alpha * logp_a2)
 
-        # MSE loss against Bellman backup
         loss_q1 = ((q1 - backup) ** 2).mean()
         loss_q2 = ((q2 - backup) ** 2).mean()
         loss_q = loss_q1 + loss_q2
 
-        # Useful info for logging
         q_info = dict(Q1Vals=q1.detach().numpy(),
                       Q2Vals=q2.detach().numpy())
 
         return loss_q, q_info
 
     def update(self, data):
-        # First run one gradient descent step for Q1 and Q2
         self.q_optimizer.zero_grad()
         loss_q, q_info = self.compute_loss_q(data)
         loss_q.backward()
         self.q_optimizer.step()
 
-        # Record things
-        # self.logger.store(LossQ=loss_q.item(), **q_info)
-        # Freeze Q-networks so you don't waste computational effort
-        # computing gradients for them during the policy learning step.
-        # for p in self.q_params:
-        #     p.requires_grad = False
-
-        # Next run one gradient descent step for pi.
         self.pi_optimizer.zero_grad()
         loss_pi, log_prob = self.compute_loss_pi(data)
         loss_pi.backward()
         self.pi_optimizer.step()
 
-        # Unfreeze Q-networks so you can optimize it at next step.
-        # for p in self.q_params:
-        #     p.requires_grad = True
-
-        # # Record things
-        # self.logger.store(LossPi=loss_pi.item(), **pi_info)
-
-        # Finally, update target networks by polyak averaging.
         if self.cfg.use_target_network and self.total_steps % self.cfg.target_network_update_freq == 0:
             self.sync_target()
             
