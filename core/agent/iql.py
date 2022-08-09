@@ -30,7 +30,7 @@ class IQLOnline(base.ActorCritic):
             self.load_state_value_fn(cfg.val_fn_config['path'])
         self.value_optimizer = cfg.vs_optimizer_fn(list(self.value_net.parameters()))
 
-        if cfg.agent_name == 'DQNAgent' and cfg.load_offline_data:
+        if cfg.agent_name == 'IQLOnline' and cfg.load_offline_data:
             self.fill_offline_data_to_buffer()
 
     def load_state_value_fn(self, parameters_dir):
