@@ -6,6 +6,26 @@ from core.network import network_utils, network_bodies
 from core.utils import torch_utils
 
 
+class LinearNetwork(nn.Module):
+    def __init__(self, device, input_units, output_units, init_type='uniform', bias=True):
+        super().__init__()
+
+        if init_type == 'xavier':
+            self.fc_head = network_utils.layer_init_xavier(nn.Linear(input_units, output_units, bias=bias))
+        elif init_type == 'uniform':
+            self.fc_head = network_utils.layer_init_uniform(nn.Linear(input_units, output_units, bias=bias), bias=bias)
+        else:
+            raise ValueError('init_type is not defined: {}'.format(init_type))
+
+        self.to(device)
+        self.device = device
+
+    def forward(self, x):
+        if not isinstance(x, torch.Tensor): x = torch_utils.tensor(x, self.device)
+        if len(x.shape) > 2: x = x.view(x.shape[0], -1)
+        y = self.fc_head(x)
+        return y
+
 
 class FCNetwork(nn.Module):
     def __init__(self, device, input_units, hidden_units, output_units, head_activation=lambda x:x, init_type='xavier', rep=None):

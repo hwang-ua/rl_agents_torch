@@ -46,13 +46,14 @@ class OneHotRepresentation(RawSA):
 
     def __call__(self, x):
         reshaped = False
+        if isinstance(x, torch.Tensor): x = torch_utils.to_np(x)
         if len(x.shape) == 1:
             x = x.reshape((1, -1))
             reshaped = True
         r = np.zeros((len(x), self.output_dim))
         idxs = np.zeros(len(x))
         for d in range(len(self.ranges)):
-            v = torch_utils.to_np(x[:, d])
+            v = x[:, d]
             idxs += v * np.prod(self.ranges[d+1:])
         r[np.arange(len(x)), idxs.astype(int)] = 1
         if reshaped:

@@ -1,6 +1,7 @@
 import os
 
 from core.agent.iql import IQLOnline, IQLOffline
+from core.agent.cql import *
 
 
 class AgentFactory:
@@ -10,6 +11,8 @@ class AgentFactory:
             return lambda: IQLOnline(cfg)
         elif cfg.agent_name == 'IQLOffline':
             return lambda: IQLOffline(cfg)
+        elif cfg.agent_name == 'CQLAgentOffline':
+            return lambda: CQLAgentOffline(cfg)
         else:
             print(cfg.agent_name)
             raise NotImplementedError

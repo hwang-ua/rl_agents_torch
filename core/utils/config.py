@@ -218,3 +218,31 @@ class IQLOfflineConfig(IQLOnlineConfig):
         self.expectile = 0.7
         self.temperature = 3
 
+class MonteCarloOfflineConfig(Config):
+    def __init__(self):
+        super().__init__()
+        self.agent = 'MonteCarloOffline'
+        self.activation_config = {'name': 'None'}
+        self.constraint = None
+        self.vf_loss = "mse"
+        self.vf_loss_fn = None
+        self.batch_size = 32
+        self.early_cut_threshold = 3
+        self.tester_fn_config = []
+        self.epsilon = 0
+
+    def get_print_attrs(self):
+        attrs = dict(self.__dict__)
+        for k in ['logger', 'eps_schedule', 'optimizer_fn', 'constr_fn',
+                  'replay_fn', 'vf_loss_fn',
+                  '_Config__env_fn', 'state_normalizer',
+                  'reward_normalizer', 'rep_fn', 'val_fn', 'rep_activation_fn',
+                  'offline_data', 'tester_fn', 'eval_data']:
+            del attrs[k]
+        return attrs
+
+class CQLOfflineConfig(MonteCarloOfflineConfig):
+    def __init__(self):
+        super().__init__()
+        self.agent = 'CQLAgentOffline'
+        self.cql_alpha = 1.0
