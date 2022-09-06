@@ -48,8 +48,6 @@ class CQLAgentOffline(base.ValueBased):
         self.update_stats(0, None)
         if self.cfg.use_target_network and self.total_steps % self.cfg.target_network_update_freq == 0:
             self.sync_target()
-            # self.targets.rep_net.load_state_dict(self.rep_net.state_dict())
-            # self.targets.val_net.load_state_dict(self.val_net.state_dict())
         return
 
     # def epoch_step(self):

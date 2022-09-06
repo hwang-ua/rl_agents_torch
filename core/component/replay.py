@@ -393,4 +393,4 @@ class ReplayFactory:
             return lambda: Replay(memory_size=int(cfg.memory_size), batch_size=cfg.batch_size, seed=cfg.run)
             # return lambda: ReplayTrans(memory_size=int(cfg.memory_size), batch_size=cfg.batch_size, state_dim=cfg.rep_fn_config['in_dim'])
         else:
-            return None
+            return lambda: None

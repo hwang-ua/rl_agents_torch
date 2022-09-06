@@ -96,6 +96,7 @@ class Config(EmptyConfig):
         self.evaluate_action_value = False
         
         self.polyak = 0
+        self.discrete_control = True
 
     def get_log_dir(self):
         d = os.path.join(self.data_root, self.exp_name, "{}_run".format(self.run),
@@ -157,67 +158,8 @@ class Config(EmptyConfig):
                             "{}_run",
                             "{}_param_setting".format(self.param_setting))
 
-class AWACOnlineConfig(Config):
-    def __init__(self):
-        super().__init__()
-        self.agent = 'AWACOnline'
-        # self.update_after = 0
-        # self.update_every = 1
-        self.target_network_update_freq = 1
-        self.polyak = 0.995
-        self.awac_lambda = 1 # From the MuJoCo benchmark in AWAC paper
-        self.awac_remove_const = False
-        self.load_offline_data = True
 
-    def get_print_attrs(self):
-        attrs = dict(self.__dict__)
-        for k in ['logger', 'replay_fn',
-                  '_Config__env_fn', 'state_normalizer',
-                  'reward_normalizer', 'policy_fn', 'critic_fn',
-                  'policy_optimizer_fn', 'critic_optimizer_fn', 'alpha_optimizer_fn',
-                  'offline_data', 'tester_fn', 'eval_data']:
-            del attrs[k]
-        return attrs
-
-class AWACOfflineConfig(AWACOnlineConfig):
-    def __init__(self):
-        super().__init__()
-        self.agent = 'AWACOffline'
-
-class IQLOnlineConfig(AWACOnlineConfig):
-    def __init__(self):
-        super().__init__()
-        self.agent = 'IQLOnline'
-        self.load_offline_data = True
-        # From the paper
-        self.target_network_update_freq = 1
-        self.polyak = 0.995
-        self.clip_grad_param = 100
-        # From the paper, Appendix C
-        self.expectile = 0.8
-        self.temperature = 3 #For smaller hyperparameter values, the objective behaves similarly to behavioral cloning, while for larger values, it attempts to recover the maximum of the Q-function
-
-    def get_print_attrs(self):
-        attrs = dict(self.__dict__)
-        for k in ['logger', 'replay_fn',
-                  '_Config__env_fn', 'state_normalizer',
-                  'reward_normalizer', 'policy_fn', 'critic_fn', 'state_value_fn',
-                  'policy_optimizer_fn', 'critic_optimizer_fn', 'alpha_optimizer_fn', 'vs_optimizer_fn',
-                  'offline_data', 'tester_fn', 'eval_data']:
-            del attrs[k]
-        return attrs
-
-class IQLOfflineConfig(IQLOnlineConfig):
-    def __init__(self):
-        super().__init__()
-        self.agent = 'IQLOffline'
-        # # From the paper, Appendix B Ant Maze task
-        # self.expectile = 0.9
-        # self.temperature = 10 #For smaller hyperparameter values, the objective behaves similarly to behavioral cloning, while for larger values, it attempts to recover the maximum of the Q-function
-        # From the paper, Appendix B MuJoCo task
-        self.expectile = 0.7
-        self.temperature = 3
-
+        
 class MonteCarloOfflineConfig(Config):
     def __init__(self):
         super().__init__()
@@ -241,8 +183,71 @@ class MonteCarloOfflineConfig(Config):
             del attrs[k]
         return attrs
 
+
 class CQLOfflineConfig(MonteCarloOfflineConfig):
     def __init__(self):
         super().__init__()
         self.agent = 'CQLAgentOffline'
         self.cql_alpha = 1.0
+
+
+
+class AWACOnlineConfig(Config):
+    def __init__(self):
+        super().__init__()
+        self.agent = 'AWACOnline'
+        # self.update_after = 0
+        # self.update_every = 1
+        self.target_network_update_freq = 1
+        self.polyak = 0.995
+        self.awac_lambda = 1 # From the MuJoCo benchmark in AWAC paper
+        self.awac_remove_const = False
+        self.load_offline_data = False
+
+    def get_print_attrs(self):
+        attrs = dict(self.__dict__)
+        for k in ['logger', 'replay_fn',
+                  '_Config__env_fn', 'state_normalizer',
+                  'reward_normalizer', 'policy_fn', 'critic_fn',
+                  'policy_optimizer_fn', 'critic_optimizer_fn', 'alpha_optimizer_fn',
+                  'offline_data', 'tester_fn', 'eval_data']:
+            del attrs[k]
+        return attrs
+
+
+class IQLOnlineConfig(AWACOnlineConfig):
+    def __init__(self):
+        super().__init__()
+        self.agent = 'IQLOnline'
+        self.load_offline_data = False
+        # From the paper
+        self.target_network_update_freq = 1
+        self.polyak = 0.995
+        self.clip_grad_param = 100
+        # From the paper, Appendix C
+        self.expectile = 0.8
+        self.temperature = 10 #For smaller hyperparameter values, the objective behaves similarly to behavioral cloning, while for larger values, it attempts to recover the maximum of the Q-function
+
+    def get_print_attrs(self):
+        attrs = dict(self.__dict__)
+        for k in ['logger', 'replay_fn',
+                  '_Config__env_fn', 'state_normalizer',
+                  'reward_normalizer', 'policy_fn', 'critic_fn', 'state_value_fn',
+                  'policy_optimizer_fn', 'critic_optimizer_fn', 'alpha_optimizer_fn', 'vs_optimizer_fn',
+                  'offline_data', 'tester_fn', 'eval_data']:
+            del attrs[k]
+        return attrs
+
+class IQLOfflineConfig(IQLOnlineConfig):
+    def __init__(self):
+        super().__init__()
+        self.agent = 'IQLOffline'
+        # # From the paper, Appendix B Ant Maze task
+        # self.expectile = 0.9
+        # self.temperature = 10 #For smaller hyperparameter values, the objective behaves similarly to behavioral cloning, while for larger values, it attempts to recover the maximum of the Q-function
+        # From the paper, Appendix B MuJoCo task
+        self.expectile = 0.7
+        self.temperature = 10
+
+
+

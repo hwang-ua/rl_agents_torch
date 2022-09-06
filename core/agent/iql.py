@@ -42,9 +42,10 @@ class IQLOnline(base.ActorCritic):
         states, actions = data['obs'], data['act']
         with torch.no_grad():
             v = self.value_net(states)
-            q1, q2 = self.ac_targ.q1q2(states)
-        q1_pi, q2_pi = q1[np.arange(len(actions)), actions], q2[np.arange(len(actions)), actions]
-        min_Q = torch.min(q1_pi, q2_pi)
+        #     q1, q2 = self.ac_targ.q1q2(states)
+        # q1_pi, q2_pi = q1[np.arange(len(actions)), actions], q2[np.arange(len(actions)), actions]
+        # min_Q = torch.min(q1_pi, q2_pi)
+        min_Q, _, _ = self.get_q_value_target(states, actions)
         
         exp_a = torch.exp((min_Q - v) * self.temperature)
         exp_a = torch.min(exp_a, torch.FloatTensor([100.0]).to(states.device)).squeeze(-1)
@@ -56,11 +57,12 @@ class IQLOnline(base.ActorCritic):
     
     def compute_loss_value(self, data):
         states, actions = data['obs'], data['act']
-        with torch.no_grad():
-            q1, q2 = self.ac_targ.q1q2(states)
-        q1_pi, q2_pi = q1[np.arange(len(actions)), actions], q2[np.arange(len(actions)), actions]
-        min_Q = torch.min(q1_pi, q2_pi)
-        
+        # with torch.no_grad():
+        #     q1, q2 = self.ac_targ.q1q2(states)
+        # q1_pi, q2_pi = q1[np.arange(len(actions)), actions], q2[np.arange(len(actions)), actions]
+        # min_Q = torch.min(q1_pi, q2_pi)
+        min_Q, _, _ = self.get_q_value_target(states, actions)
+
         value = self.value_net(states)
         value_loss = helpers.expectile_loss(min_Q - value, self.expectile).mean()
         return value_loss
@@ -71,12 +73,13 @@ class IQLOnline(base.ActorCritic):
             next_v = self.value_net(next_states)
             q_target = rewards + (self.gamma * (1 - dones) * next_v)
         
-        q1, q2 = self.ac.q1q2(states)
-        q1, q2 = q1[np.arange(len(actions)), actions], q2[np.arange(len(actions)), actions]
+        # q1, q2 = self.ac.q1q2(states)
+        # q1, q2 = q1[np.arange(len(actions)), actions], q2[np.arange(len(actions)), actions]
+        _, q1, q2 = self.get_q_value(states, actions, with_grad=True)
 
-        critic1_loss = ((q1 - q_target) ** 2).mean()
-        critic2_loss = ((q2 - q_target) ** 2).mean()
-        loss_q = critic1_loss + critic2_loss
+        critic1_loss = (0.5* (q_target - q1) ** 2).mean()
+        critic2_loss = (0.5* (q_target - q2) ** 2).mean()
+        loss_q = (critic1_loss + critic2_loss) * 0.5
         q_info = dict(Q1Vals=q1.detach().numpy(),
                       Q2Vals=q2.detach().numpy())
         return loss_q, q_info
@@ -140,3 +143,43 @@ class IQLOffline(IQLOnline):
         self.update_stats(0, None)
         return
 
+class IQLOfflineNoV(IQLOffline):
+    def __init__(self, cfg):
+        super(IQLOfflineNoV, self).__init__(cfg)
+        self.offline_param_init()
+
+    def compute_loss_q(self, data):
+        states, actions, rewards, next_states, dones = data['obs'], data['act'], data['reward'], data['obs2'], data['done']
+        with torch.no_grad():
+            q1_next, q2_next = self.ac_targ.q1q2(next_states)
+            q1_next, q2_next = q1_next.max(1)[0], q2_next.max(1)[0]
+            next_v = torch.min(q1_next, q2_next)
+            q_target = rewards + (self.gamma * (1 - dones) * next_v)
+    
+        q1, q2 = self.ac.q1q2(states)
+        q1, q2 = q1[np.arange(len(actions)), actions], q2[np.arange(len(actions)), actions]
+    
+        critic1_loss = helpers.expectile_loss(q1 - q_target, self.expectile).mean()
+        critic2_loss = helpers.expectile_loss(q2 - q_target, self.expectile).mean()
+        loss_q = (critic1_loss + critic2_loss) * 0.5
+        q_info = dict(Q1Vals=q1.detach().numpy(),
+                      Q2Vals=q2.detach().numpy())
+        return loss_q, q_info
+
+    def update(self, data):
+        loss_q, q_info = self.compute_loss_q(data)
+        self.q_optimizer.zero_grad()
+        loss_q.backward()
+        clip_grad_norm_(self.ac.q1q2.parameters(), self.clip_grad_param)
+        self.q_optimizer.step()
+    
+        if self.cfg.use_target_network and self.total_steps % self.cfg.target_network_update_freq == 0:
+            self.sync_target()
+        return loss_q.item()
+
+    def policy(self, state, placeholder):
+        with torch.no_grad():
+            q1, q2 = self.ac.q1q2(state)
+            q_values = torch_utils.to_np(torch.min(q1, q2))
+        action = self.agent_rng.choice(np.flatnonzero(q_values == q_values.max()))
+        return action

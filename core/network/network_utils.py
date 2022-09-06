@@ -8,14 +8,23 @@ def layer_init(layer, w_scale=1.0):
     return layer
 
 
-def layer_init_zero(layer):
+def layer_init_zero(layer, bias=True):
     nn.init.constant_(layer.weight, 0)
+    if bias:
+        nn.init.constant_(layer.bias.data, 0)
+    return layer
+
+def layer_init_constant(layer, const, bias=True):
+    nn.init.constant_(layer.weight, const)
+    if bias:
+        nn.init.constant_(layer.bias.data, const)
     return layer
 
 
-def layer_init_xavier(layer):
+def layer_init_xavier(layer, bias=True):
     nn.init.xavier_uniform_(layer.weight)
-    nn.init.constant_(layer.bias.data, 0)
+    if bias:
+        nn.init.constant_(layer.bias.data, 0)
     return layer
 
 def layer_init_uniform(layer, low=-0.003, high=0.003, bias=0):

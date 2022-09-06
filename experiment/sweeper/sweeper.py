@@ -10,10 +10,12 @@ class Sweeper(object):
     of hyper-parameters and create a Config object
     Important: parameters part of the sweep are provided in a list
     """
-    def __init__(self, project_root, config_file):
+    def __init__(self, project_root, config_file, extra_name=None):
         config_path = os.path.join(project_root, config_file)
         with open(config_path) as f:
             self.config_dict = json.load(f)
+        if extra_name:
+            self.config_dict['fixed_parameters']['exp_name'] = self.config_dict['fixed_parameters']['exp_name'].format(extra_name)
         self.total_combinations = 1
         self.seed = None
         self.set_total_combinations()

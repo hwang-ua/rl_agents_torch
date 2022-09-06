@@ -29,3 +29,7 @@ def copy_row(x, num_rows):
 def expectile_loss(diff, expectile=0.8):
     weight = torch.where(diff > 0, expectile, (1 - expectile))
     return weight * (diff ** 2)
+
+def search_same_row(matrix, target_row):
+    idx = np.where(np.all(matrix == target_row, axis=1))
+    return idx

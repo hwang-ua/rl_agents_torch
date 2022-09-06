@@ -7,7 +7,7 @@ import torch.nn.functional as functional
 from core.network import network_utils
 
 class FCBody(nn.Module):
-    def __init__(self, device, input_dim, hidden_units=(64, 64), activation=functional.relu, init_type='xavier'):
+    def __init__(self, device, input_dim, hidden_units=(64, 64), activation=functional.relu, init_type='xavier', info=None):
         super().__init__()
         self.to(device)
         self.device = device
@@ -18,6 +18,10 @@ class FCBody(nn.Module):
             self.layers = nn.ModuleList([network_utils.layer_init_xavier(nn.Linear(dim_in, dim_out).to(device)) for dim_in, dim_out in zip(dims[:-1], dims[1:])])
         elif init_type == "uniform":
             self.layers = nn.ModuleList([network_utils.layer_init_uniform(nn.Linear(dim_in, dim_out).to(device)) for dim_in, dim_out in zip(dims[:-1], dims[1:])])
+        elif init_type == "zeros":
+            self.layers = nn.ModuleList([network_utils.layer_init_zero(nn.Linear(dim_in, dim_out).to(device)) for dim_in, dim_out in zip(dims[:-1], dims[1:])])
+        elif init_type == "constant":
+            self.layers = nn.ModuleList([network_utils.layer_init_constant(nn.Linear(dim_in, dim_out).to(device), const=info) for dim_in, dim_out in zip(dims[:-1], dims[1:])])
         else:
             raise ValueError('init_type is not defined: {}'.format(init_type))
 
@@ -28,4 +32,8 @@ class FCBody(nn.Module):
         for layer in self.layers:
             x = self.activation(layer(x))
         return x
+
+    def compute_lipschitz_upper(self):
+        return [np.linalg.norm(layer.weight.detach().cpu().numpy(), ord=2) for layer in self.layers]
+
 

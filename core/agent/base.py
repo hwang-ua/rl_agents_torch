@@ -1,4 +1,5 @@
 import os
+
 import numpy as np
 import torch
 from collections import namedtuple
@@ -8,6 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 
 from core.utils import torch_utils
+from core.utils import helpers
 
 
 class Agent:
@@ -34,7 +36,7 @@ class Agent:
         self.agent_rng = np.random.RandomState(self.cfg.seed)
         self.test_rng = np.random.RandomState(self.cfg.seed)
         self.true_q_predictor = self.cfg.tester_fn.get('true_value_estimator', lambda x:None)
-        self.eval_set = self.property_evaluation_dataset(cfg.eval_data)
+        self.eval_set = self.property_evaluation_dataset(getattr(cfg, 'eval_data', None), getattr(cfg, 'qmax_table', None))
 
         self.populate_latest = False
         self.populate_states, self.populate_actions, self.populate_true_qs = None, None, None
@@ -42,6 +44,9 @@ class Agent:
         self.state = None
         self.action = None
         self.next_state = None
+        self.eps = 1e-8
+        
+        self.temp = 0
 
     def offline_param_init(self):
         self.trainset, self.testset = self.training_set_construction(self.cfg.offline_data)
@@ -82,7 +87,9 @@ class Agent:
 
     def get_offline_data(self):
         train_s, train_a, train_r, train_ns, train_t, train_na, _, _, _ = self.trainset
-        idxs = self.agent_rng.randint(0, len(train_s), size=self.cfg.batch_size)
+        idxs = self.agent_rng.randint(0, len(train_s), size=self.cfg.batch_size) \
+            if self.cfg.batch_size < len(train_s) else np.arange(len(train_s))
+
         in_ = torch_utils.tensor(self.cfg.state_normalizer(train_s[idxs]), self.cfg.device)
         act = train_a[idxs]
         r = torch_utils.tensor(train_r[idxs], self.cfg.device)
@@ -107,10 +114,11 @@ class Agent:
             self.replay.feed([train_s[idx], train_a[idx], train_r[idx], train_ns[idx], train_t[idx]])
 
     def step(self):
-        self.feed_data()
+        trans = self.feed_data()
         data = self.get_data()
-        if self.check_update():
+        if self.check_update():#self.cfg.policy_fn_config["train_params"] and self.cfg.critic_fn_config["train_params"]:
             self.update(data)
+        return trans
     
     def check_update(self):
         return NotImplementedError
@@ -127,6 +135,7 @@ class Agent:
         self.episode_reward += reward
         self.total_steps += 1
         self.ep_steps += 1
+        # print(self.ep_steps, self.total_steps, done)
         if done or self.ep_steps == self.timeout:
             self.episode_rewards.append(self.episode_reward)
             self.num_episodes += 1
@@ -196,6 +205,7 @@ class Agent:
             self.replay.feed([last_state, action, reward, state, int(done)])
             if done:
                 state = self.eval_env.reset()
+                # print("Done")
 
     def eval_episode(self, log_traj=False):
         ep_traj = []
@@ -218,6 +228,12 @@ class Agent:
         actions = []
         rets = []
         if log_traj:
+            # s, a, r = ep_traj[len(ep_traj)-1]
+            # ret = r if done else self.true_q_predictor(self.cfg.state_normalizer(s))[a]
+            # states = [s]
+            # actions = [a]
+            # rets = [ret]
+            # for i in range(len(ep_traj)-2, -1, -1):
             ret = 0
             for i in range(len(ep_traj)-1, -1, -1):
                 s, a, r = ep_traj[i]
@@ -288,9 +304,9 @@ class Agent:
                                         elapsed_time))
         return mean, median, min_, max_
 
-
     def log_file(self, elapsed_time=-1):
         mean, median, min_, max_ = self.log_return(self.ep_returns_queue_train, "TRAIN", elapsed_time)
+        # self.populate_returns()
         self.populate_states, self.populate_actions, self.populate_true_qs = self.populate_returns(log_traj=True)
         self.populate_latest = True
         mean, median, min_, max_ = self.log_return(self.ep_returns_queue_test, "TEST", elapsed_time)
@@ -300,6 +316,8 @@ class Agent:
         raise NotImplementedError
 
     def eval_step(self, state):
+        # action = self.policy(state, 0)
+        # return action
         raise NotImplementedError
 
     def save(self, filename):
@@ -337,7 +355,10 @@ class Agent:
             rewards.append(data_dict[name]['rewards'])
             next_states.append(data_dict[name]['next_states'])
             terminations.append(data_dict[name]['terminations'])
-            next_actions.append(np.concatenate([data_dict[name]['actions'][1:], [-1]]))  # Should not be used when using the current estimation in target construction
+            # print(data_dict[name]['actions'])
+            # print(data_dict[name]['actions'].shape)
+            # exit()
+            next_actions.append(np.concatenate([data_dict[name]['actions'][1:], data_dict[name]['actions'][-1:]]))  # Should not be used when using the current estimation in target construction
             if 'qmax' in data_dict[name].keys():
                 qmaxs.append(data_dict[name]['qmax'])
 
@@ -350,20 +371,25 @@ class Agent:
         if len(qmaxs) > 0:
             qmaxs = np.concatenate(qmaxs)
         
-        pred_returns = np.zeros(len(states))
+        # for i in range(len(states)):
+        #     states[i] = self.cfg.state_normalizer(states[i])
+        #     next_states[i] = self.cfg.state_normalizer(next_states[i])
+        #     # print(next_states[i])
+        
+        # pred_returns = np.zeros(len(states))
         true_returns = np.zeros(len(states))
         for i in range(len(states) - 1, -1, -1):
             if i == len(states) - 1 or (not np.array_equal(next_states[i], states[i + 1])):
-                pred_returns[i] = value_predictor(self.cfg.state_normalizer(states[i]))[actions[i]]
+                # pred_returns[i] = value_predictor(self.cfg.state_normalizer(states[i]))[actions[i]]
                 true_pred = self.true_q_predictor(self.cfg.state_normalizer(states[i]))
-                # print(self.cfg.state_normalizer(states[i]))
                 true_returns[i] = 0 if true_pred is None else true_pred[actions[i]]
             else:
                 end = 1.0 if terminations[i] else 0.0
-                pred_returns[i] = rewards[i] + (1 - end) * self.cfg.discount * pred_returns[i + 1]
+                # pred_returns[i] = rewards[i] + (1 - end) * self.cfg.discount * pred_returns[i + 1]
                 true_returns[i] = rewards[i] + (1 - end) * self.cfg.discount * true_returns[i + 1]
 
-        thrshd = int(len(states) * 0.8)
+        # thrshd = int(len(states) * 0.8)
+        thrshd = int(len(states))
     
         training_s = states[: thrshd]
         training_a = actions[: thrshd]
@@ -371,7 +397,7 @@ class Agent:
         training_ns = next_states[: thrshd]
         training_t = terminations[: thrshd]
         training_na = next_actions[: thrshd]
-        training_pred_ret = pred_returns[: thrshd]
+        # training_pred_ret = pred_returns[: thrshd]
         training_true_ret = true_returns[: thrshd]
         training_qmax = qmaxs[: thrshd]
 
@@ -381,22 +407,31 @@ class Agent:
         testing_ns = next_states[thrshd:]
         testing_t = terminations[thrshd:]
         testing_na = next_actions[thrshd:]
-        testing_pred_ret = pred_returns[thrshd:]
+        # testing_pred_ret = pred_returns[thrshd:]
         testing_true_ret = true_returns[thrshd:]
         testing_qmax = qmaxs[thrshd:]
 
-        return [np.array(training_s), training_a, np.array(training_r), np.array(training_ns), np.array(training_t), training_na, training_pred_ret, training_true_ret, training_qmax], \
-               [np.array(testing_s), testing_a, np.array(testing_r), np.array(testing_ns), np.array(testing_t), testing_na, testing_pred_ret, testing_true_ret, testing_qmax]
+        return [np.array(training_s), training_a, np.array(training_r), np.array(training_ns), np.array(training_t), training_na, None, training_true_ret, training_qmax], \
+               [np.array(testing_s), testing_a, np.array(testing_r), np.array(testing_ns), np.array(testing_t), testing_na, None, testing_true_ret, testing_qmax]
 
-    def property_evaluation_dataset(self, data_dict):
+    def property_evaluation_dataset(self, data_dict, qmax_table):
+        if data_dict is None:
+            return
         states = []
         actions = []
         returns = []
+        qtable = None
+        if self.cfg.evaluate_overestimation:
+            assert qmax_table is not None
+            qtable = torch.load(qmax_table)
+
         for name in data_dict:
             states.append(data_dict[name]['states'])
             actions.append(data_dict[name]['actions'])
-            if 'returns' in data_dict[name]:
-                returns.append(data_dict[name]['returns'])
+            # if 'returns' in data_dict[name]:
+            #     returns.append(data_dict[name]['returns'])
+            if 'qmax' in data_dict[name]:
+                returns.append(data_dict[name]['qmax'])
             else:
                 true_returns = np.zeros(len(data_dict[name]['states']))
                 rewards = data_dict[name]['rewards']
@@ -415,32 +450,103 @@ class Agent:
             states = np.concatenate(states)
             actions = np.concatenate(actions)
             returns = np.concatenate(returns)
-        return [states, actions, returns]
+        return states, actions, returns, qtable
+
+    def log_overestimation(self):
+        test_s, _, _, qmax_table = self.eval_set
+        # _, _, _, qmax_table = self.eval_set
+        # test_s, _, _, _, _, _, _, _, _ = self.trainset
+        test_s = [tuple(row) for row in test_s]
+        test_s = np.unique(test_s, axis=0)
+ 
+        with torch.no_grad():
+            q_values = self.default_value_predictor()(torch_utils.tensor(self.cfg.state_normalizer(test_s), self.cfg.device))
+            q_values = torch_utils.to_np(q_values)
+        onpolicy_a = np.argmax(q_values, axis=1)
+        onpolicy_q = q_values[np.arange(len(q_values)), onpolicy_a]
+        qmax = qmax_table[tuple(test_s.T)][np.arange(len(test_s)), onpolicy_a]
+        all_diff = onpolicy_q - qmax
+        # abs_diff = np.abs(onpolicy_q - qmax)
+        log_str = 'TRAIN LOG: steps %d, ' \
+                  'Overestimation: %.8f/%.8f/%.8f (mean/min/max)'
+        self.cfg.logger.info(log_str % (self.total_steps, all_diff.mean(), all_diff.min(), all_diff.max()))
+        # log_str = 'TRAIN LOG: steps %d, ' \
+        #           'EstimationAbsError: %.8f/%.8f/%.8f (mean/min/max)'
+        # self.cfg.logger.info(log_str % (self.total_steps, abs_diff.mean(), abs_diff.min(), abs_diff.max()))
+        
+    def log_overestimation_current_pi(self):
+        if not self.populate_latest:
+            self.populate_states, self.populate_actions, self.populate_true_qs = self.populate_returns(log_traj=True)
+        states = np.array(self.populate_states)
+        true_qs = np.array(self.populate_true_qs)
+        with torch.no_grad():
+            # phis = self.rep_net(self.cfg.state_normalizer(states))
+            # q_values = self.val_net(phis)
+            q_values = self.default_value_predictor()(self.cfg.state_normalizer(states))
+            q_values = torch_utils.to_np(q_values)
+        onpolicy_q = q_values[np.arange(len(q_values)), self.populate_actions]
+        all_diff = onpolicy_q - true_qs
+        log_str = 'TRAIN LOG: steps %d, ' \
+                  'OverestimationCurrentPi: %.8f/%.8f/%.8f (mean/min/max)'
+        self.cfg.logger.info(log_str % (self.total_steps, all_diff.mean(), all_diff.min(), all_diff.max()))
+
+    def log_rep_rank(self):
+        """ From https://arxiv.org/pdf/2207.02099.pdf Appendix A.11"""
+        test_s, _, _, _ = self.eval_set
+
+        def compute_rank_from_features(feature_matrix, rank_delta=0.01):
+            sing_values = np.linalg.svd(feature_matrix, compute_uv=False)
+            cumsum = np.cumsum(sing_values)
+            nuclear_norm = np.sum(sing_values)
+            approximate_rank_threshold = 1.0 - rank_delta
+            threshold_crossed = (
+                cumsum >= approximate_rank_threshold * nuclear_norm)
+            effective_rank = sing_values.shape[0] - np.sum(threshold_crossed) + 1
+            return effective_rank
+    
+        states = torch_utils.tensor(self.cfg.state_normalizer(test_s), self.cfg.device)
+        with torch.no_grad():
+            phi_s = torch_utils.to_np(self.default_rep_predictor()(states))
+        erank = compute_rank_from_features(phi_s)
+        log_str = 'TRAIN LOG: steps %d, ' \
+                  'RepRank: %.8f'
+        self.cfg.logger.info(log_str % (self.total_steps, erank))
 
     def draw_action_value(self):
-        # test_s, _, _ = self.eval_set
+        # test_s, _, _, _ = self.eval_set
         states, obstacles = self.eval_env.get_state_space()
         goal = self.eval_env.get_goal_coord()
         with torch.no_grad():
             qs = self.default_value_predictor()(torch_utils.tensor(self.cfg.state_normalizer(states), self.cfg.device))
             torch_utils.to_np(qs)
 
-        fig, axs = plt.subplots(1, 1, figsize=(3,3))
-        template = np.zeros((states[:, 0].max()+1, states[:, 1].max()+1))
-        policy = np.zeros((states[:, 0].max()+1, states[:, 1].max()+1), dtype=str)
-        action_list = [">", "<", "V", "A"]
+        fig, axs = plt.subplots(1, self.cfg.action_dim+1, figsize=(13, 5))
+        for a in range(self.cfg.action_dim):
+            template = np.zeros((self.eval_env.num_cols, self.eval_env.num_rows))
+            for idx, s in enumerate(states):
+                template[s[0], s[1]] = qs[idx, a]
+            img = axs[a].imshow(template, cmap="Blues", vmin=qs[:, a].min(), vmax=qs[:, a].max())
+            axs[a].set_title("Action{}".format(self.eval_env.actions[a]))
+            for obs in obstacles:
+                axs[a].text(obs[1]-0.3, obs[0]+0.3, "X", color="orange", fontsize=7)
+            axs[a].text(goal[1]-0.3, goal[0]+0.3, "G", color="orange", fontsize=7)
+            plt.colorbar(img, ax=axs[a], shrink=0.5)
+
+        template = np.zeros((self.eval_env.num_cols, self.eval_env.num_rows))
+        policy = np.zeros((self.eval_env.num_cols, self.eval_env.num_rows), dtype=str)
+        action_list = self.eval_env.directions
         for idx, s in enumerate(states):
             template[s[0], s[1]] = qs[idx].max()
             policy[s[0], s[1]] = action_list[self.policy(s, 0)]
-        img = axs.imshow(template, cmap="Blues", vmin=qs.min(), vmax=qs.max())
-        axs.set_title("Action{}".format(self.eval_env.action_explaination))
+        img = axs[-1].imshow(template, cmap="Blues", vmin=qs.min(), vmax=qs.max())
+        axs[-1].set_title("{}".format(self.eval_env.actions))
         for obs in obstacles:
-            axs.text(obs[1]-0.25, obs[0]+0.25, "X", color="orange")
+            axs[-1].text(obs[1]-0.3, obs[0]+0.3, "X", color="orange", fontsize=7)
         for idx, s in enumerate(states):
-            axs.text(s[1]-0.25, s[0]+0.25, policy[s[0], s[1]], color="black")
-        axs.text(goal[1]-0.25, goal[0]+0.25, "G", color="orange")
-        fig.colorbar(img, ax=axs)
-        
+            axs[-1].text(s[1]-0.3, s[0]+0.3, policy[s[0], s[1]], color="black", fontsize=7)
+        axs[-1].text(goal[1]-0.3, goal[0]+0.3, "G", color="orange", fontsize=7)
+        plt.colorbar(img, ax=axs[-1], shrink=0.5)
+        plt.tight_layout()
         pth = self.cfg.get_visualization_dir()
         plt.savefig("{}/action_values.png".format(pth), dpi=300, bbox_inches='tight')
         # plt.savefig("{}/action_values_{}.png".format(pth, self.total_steps), dpi=300, bbox_inches='tight')
@@ -473,7 +579,11 @@ class ValueBased(Agent):
         self.constr_fn = cfg.constr_fn()
 
     def default_value_predictor(self):
-        return lambda x: self.val_net(self.rep_net(x))
+        def vp(x):
+            with torch.no_grad():
+                q = self.val_net(self.rep_net(x))
+            return q
+        return vp
 
     def default_rep_predictor(self):
         return lambda x: self.rep_net(x)
@@ -523,10 +633,11 @@ class ValueBased(Agent):
         torch.save(self.val_net.state_dict(), path)
 
     def eval_step(self, state):
-        with torch.no_grad():
-            q_values = self.val_net(self.rep_net(torch_utils.tensor(self.cfg.state_normalizer(state), self.cfg.device)))
-            q_values = torch_utils.to_np(q_values).flatten()
-        return self.agent_rng.choice(np.flatnonzero(q_values == q_values.max()))
+        # with torch.no_grad():
+        #     q_values = self.val_net(self.rep_net(torch_utils.tensor(self.cfg.state_normalizer(state), self.cfg.device)))
+        #     q_values = torch_utils.to_np(q_values).flatten()
+        # return self.agent_rng.choice(np.flatnonzero(q_values == q_values.max()))
+        return self.policy(state, 0)
 
     def check_update(self):
         return self.cfg.rep_fn_config['train_params'] or self.cfg.val_fn_config['train_params']
@@ -569,6 +680,14 @@ class ActorCritic(Agent):
             self.load_actor_fn(cfg.policy_fn_config['path'])
         if 'load_params' in self.cfg.critic_fn_config and self.cfg.critic_fn_config['load_params']:
             self.load_critic_fn(cfg.critic_fn_config['path'])
+            
+        if self.cfg.discrete_control:
+            self.get_q_value = self.get_q_value_discrete
+            self.get_q_value_target = self.get_q_value_target_discrete
+        else:
+            self.get_q_value = self.get_q_value_cont
+            self.get_q_value_target = self.get_q_value_target_cont
+
 
     def default_value_predictor(self):
         def vp(x):
@@ -580,7 +699,7 @@ class ActorCritic(Agent):
     def default_rep_predictor(self):
         def rp(x):
             with torch.no_grad():
-                rep = self.ac.pi.body(x)
+                rep = self.ac.pi.body(self.ac.pi.rep(x))
             return rep
         return rp
     
@@ -641,37 +760,61 @@ class ActorCritic(Agent):
     def compute_loss_q(self, data):
         o, a, r, op, d = data['obs'], data['act'], data['reward'], data['obs2'], data['done']
 
-        q1, q2 = self.ac.q1q2(o)
-        q1, q2 = q1[np.arange(len(a)), a], q2[np.arange(len(a)), a]
+        # q1, q2 = self.ac.q1q2(o)
+        # q1, q2 = q1[np.arange(len(a)), a], q2[np.arange(len(a)), a]
+        _, q1, q2 = self.get_q_value(o, a, with_grad=True)
 
+        # Bellman backup for Q functions
         with torch.no_grad():
+            # Target actions come from *current* policy
             a2, logp_a2 = self.ac.pi(op)
 
-            q1_pi_targ, q2_pi_targ = self.ac_targ.q1q2(op)
-            q1_pi_targ, q2_pi_targ = q1_pi_targ[np.arange(len(a2)), a2], q2_pi_targ[np.arange(len(a2)), a2]
-            q_pi_targ = torch.min(q1_pi_targ, q2_pi_targ)
-            backup = r + self.gamma * (1 - d) * (q_pi_targ)# - self.alpha * logp_a2)
+            # Target Q-values
+            # q1_pi_targ, q2_pi_targ = self.ac_targ.q1q2(op)
+            # q1_pi_targ, q2_pi_targ = q1_pi_targ[np.arange(len(a2)), a2], q2_pi_targ[np.arange(len(a2)), a2]
+            # q_pi_targ = torch.min(q1_pi_targ, q2_pi_targ)
+        q_pi_targ, _, _ = self.get_q_value_target(op, a2)
+        backup = r + self.gamma * (1 - d) * (q_pi_targ)# - self.alpha * logp_a2)
 
+        # MSE loss against Bellman backup
         loss_q1 = ((q1 - backup) ** 2).mean()
         loss_q2 = ((q2 - backup) ** 2).mean()
         loss_q = loss_q1 + loss_q2
 
+        # Useful info for logging
         q_info = dict(Q1Vals=q1.detach().numpy(),
                       Q2Vals=q2.detach().numpy())
 
         return loss_q, q_info
 
     def update(self, data):
+        # First run one gradient descent step for Q1 and Q2
         self.q_optimizer.zero_grad()
         loss_q, q_info = self.compute_loss_q(data)
         loss_q.backward()
         self.q_optimizer.step()
 
+        # Record things
+        # self.logger.store(LossQ=loss_q.item(), **q_info)
+        # Freeze Q-networks so you don't waste computational effort
+        # computing gradients for them during the policy learning step.
+        # for p in self.q_params:
+        #     p.requires_grad = False
+
+        # Next run one gradient descent step for pi.
         self.pi_optimizer.zero_grad()
         loss_pi, log_prob = self.compute_loss_pi(data)
         loss_pi.backward()
         self.pi_optimizer.step()
 
+        # Unfreeze Q-networks so you can optimize it at next step.
+        # for p in self.q_params:
+        #     p.requires_grad = True
+
+        # # Record things
+        # self.logger.store(LossPi=loss_pi.item(), **pi_info)
+
+        # Finally, update target networks by polyak averaging.
         if self.cfg.use_target_network and self.total_steps % self.cfg.target_network_update_freq == 0:
             self.sync_target()
             
@@ -687,4 +830,43 @@ class ActorCritic(Agent):
                 p_targ.data.add_((1 - self.polyak) * p.data)
 
     def compute_loss_pi(self, data):
-        raise NotImplementedError
+        states, actions = data['obs'], data['act']
+        log_probs = self.ac.pi.get_logprob(states, actions)
+        actor_loss = -log_probs.mean()
+        return actor_loss, log_probs
+
+    def get_q_value_discrete(self, o, a, with_grad=False):
+        if with_grad:
+            q1_pi, q2_pi = self.ac.q1q2(o)
+            q1_pi, q2_pi = q1_pi[np.arange(len(a)), a], q2_pi[np.arange(len(a)), a]
+            q_pi = torch.min(q1_pi, q2_pi)
+        else:
+            with torch.no_grad():
+                q1_pi, q2_pi = self.ac.q1q2(o)
+                q1_pi, q2_pi = q1_pi[np.arange(len(a)), a], q2_pi[np.arange(len(a)), a]
+                q_pi = torch.min(q1_pi, q2_pi)
+        return q_pi, q1_pi, q2_pi
+
+    def get_q_value_target_discrete(self, o, a):
+        with torch.no_grad():
+            q1_pi, q2_pi = self.ac_targ.q1q2(o)
+            q1_pi, q2_pi = q1_pi[np.arange(len(a)), a], q2_pi[np.arange(len(a)), a]
+            q_pi = torch.min(q1_pi, q2_pi)
+        return q_pi, q1_pi, q2_pi
+
+    def get_q_value_cont(self, o, a, with_grad=False):
+        if with_grad:
+            q1_pi, q2_pi = self.ac.q1q2(o, a)
+            q_pi = torch.min(q1_pi, q2_pi)
+        else:
+            with torch.no_grad():
+                q1_pi, q2_pi = self.ac.q1q2(o, a)
+                q_pi = torch.min(q1_pi, q2_pi)
+        return q_pi, q1_pi, q2_pi
+
+    def get_q_value_target_cont(self, o, a):
+        with torch.no_grad():
+            q1_pi, q2_pi = self.ac_targ.q1q2(o, a)
+            q_pi = torch.min(q1_pi, q2_pi)
+        return q_pi, q1_pi, q2_pi
+

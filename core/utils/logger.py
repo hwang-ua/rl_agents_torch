@@ -3,7 +3,7 @@ import sys
 
 import logging
 
-from tensorboardX import SummaryWriter
+# from tensorboardX import SummaryWriter
 
 
 class Logger:
@@ -23,7 +23,7 @@ class Logger:
         self._logger.setLevel(level=logging.INFO)
 
         self.config = config
-        if config.tensorboard_logs: self.tensorboard_writer = SummaryWriter(config.get_log_dir())
+        # if config.tensorboard_logs: self.tensorboard_writer = SummaryWriter(config.get_log_dir())
 
     def info(self, log_msg):
         self._logger.info(log_msg)
