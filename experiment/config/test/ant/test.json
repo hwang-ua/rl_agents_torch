@@ -1,0 +1,72 @@
+{
+    "config_class": "IQLOfflineConfig",
+    "fixed_parameters": {
+        "exp_name": "test_v9/ant/iql_offline/test",
+        "env_name": "Ant",
+        "discrete_control": false,
+        "action_range": 1.0,
+        "discount": 0.99,
+
+        "agent_name": "IQLOffline",
+        "state_norm_coef": 0,
+
+        "rep_fn_config": {
+            "rep_type": "identity",
+            "out_dim": 111
+        },
+        "policy_fn_config": {
+            "policy_type": "policy-cont",
+            "network_type": "fc",
+            "in_dim": [111],
+            "hidden_units": [256, 256],
+            "load_params": false,
+            "train_params": true
+        },
+        "critic_fn_config": {
+            "network_type": "fc-insert-input",
+            "in_dim": [111],
+            "hidden_units": [256, 256],
+            "load_params": false,
+            "train_params": true
+        },
+        "val_fn_config": {
+            "network_type": "fc",
+            "in_dim": [111],
+            "hidden_units": [256, 256],
+            "load_params": false,
+            "train_params": true
+        },
+
+        "update_network": true,
+        "use_target_network": true,
+        "target_network_update_freq": 1,
+        "polyak": 0.995,
+        "batch_size": 100,
+        "optimizer_type": "Adam",
+
+        "replay": true,
+        "memory_size": 0,
+
+        "max_steps": 800000,
+        "log_interval": 10000,
+        "eval_interval": 10000,
+        "eval_episodes": 0,
+        "save_interval": 0,
+        "timeout": 500,
+        "stats_queue_size": 5,
+        "tensorboard_logs": false,
+        "save_params": true,
+        "visualize": false,
+        "evaluate_overestimation": false,
+        "evaluate_rep_rank": false,
+
+        "offline_data_path": {
+            "env": "ant-medium-v2"
+        }
+    },
+    "sweep_parameters": {
+        "learning_rate": [0.001],
+        "expectile": [0.7],
+        "temperature": [10]
+    }
+}
