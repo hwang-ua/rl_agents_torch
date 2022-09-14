@@ -845,14 +845,14 @@ class ActorCritic(Agent):
                 q1_pi, q2_pi = self.ac.q1q2(o)
                 q1_pi, q2_pi = q1_pi[np.arange(len(a)), a], q2_pi[np.arange(len(a)), a]
                 q_pi = torch.min(q1_pi, q2_pi)
-        return q_pi, q1_pi, q2_pi
+        return q_pi.squeeze(-1), q1_pi.squeeze(-1), q2_pi.squeeze(-1)
 
     def get_q_value_target_discrete(self, o, a):
         with torch.no_grad():
             q1_pi, q2_pi = self.ac_targ.q1q2(o)
             q1_pi, q2_pi = q1_pi[np.arange(len(a)), a], q2_pi[np.arange(len(a)), a]
             q_pi = torch.min(q1_pi, q2_pi)
-        return q_pi, q1_pi, q2_pi
+        return q_pi.squeeze(-1), q1_pi.squeeze(-1), q2_pi.squeeze(-1)
 
     def get_q_value_cont(self, o, a, with_grad=False):
         if with_grad:
@@ -862,11 +862,11 @@ class ActorCritic(Agent):
             with torch.no_grad():
                 q1_pi, q2_pi = self.ac.q1q2(o, a)
                 q_pi = torch.min(q1_pi, q2_pi)
-        return q_pi, q1_pi, q2_pi
+        return q_pi.squeeze(-1), q1_pi.squeeze(-1), q2_pi.squeeze(-1)
 
     def get_q_value_target_cont(self, o, a):
         with torch.no_grad():
             q1_pi, q2_pi = self.ac_targ.q1q2(o, a)
             q_pi = torch.min(q1_pi, q2_pi)
-        return q_pi, q1_pi, q2_pi
+        return q_pi.squeeze(-1), q1_pi.squeeze(-1), q2_pi.squeeze(-1)
 

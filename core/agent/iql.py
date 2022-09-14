@@ -41,7 +41,7 @@ class IQLOnline(base.ActorCritic):
     def compute_loss_pi(self, data):
         states, actions = data['obs'], data['act']
         with torch.no_grad():
-            v = self.value_net(states)
+            v = self.value_net(states).squeeze(-1)
         #     q1, q2 = self.ac_targ.q1q2(states)
         # q1_pi, q2_pi = q1[np.arange(len(actions)), actions], q2[np.arange(len(actions)), actions]
         # min_Q = torch.min(q1_pi, q2_pi)
@@ -63,14 +63,14 @@ class IQLOnline(base.ActorCritic):
         # min_Q = torch.min(q1_pi, q2_pi)
         min_Q, _, _ = self.get_q_value_target(states, actions)
 
-        value = self.value_net(states)
+        value = self.value_net(states).squeeze(-1)
         value_loss = helpers.expectile_loss(min_Q - value, self.expectile).mean()
         return value_loss
     
     def compute_loss_q(self, data):
         states, actions, rewards, next_states, dones = data['obs'], data['act'], data['reward'], data['obs2'], data['done']
         with torch.no_grad():
-            next_v = self.value_net(next_states)
+            next_v = self.value_net(next_states).squeeze(-1)
             q_target = rewards + (self.gamma * (1 - dones) * next_v)
         
         # q1, q2 = self.ac.q1q2(states)
